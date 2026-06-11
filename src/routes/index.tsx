@@ -107,7 +107,7 @@ function Index() {
                 maxWidth: "60vw",
               }}
             >
-              visual design
+              creating authenticity
             </motion.span>
             <motion.span
               initial={reduced ? false : { opacity: 0, y: 20 }}
@@ -125,7 +125,7 @@ function Index() {
                 textAlign: "right",
               }}
             >
-              for sport & culture
+              for sport & culture.
             </motion.span>
 
             {/* Descriptors */}
@@ -146,7 +146,7 @@ function Index() {
                   textTransform: "lowercase",
                 }}
               >
-                ▶ based in naples, italy.
+                ▶ based in italy.
               </p>
               <p
                 className="hero-descriptor"
