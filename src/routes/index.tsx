@@ -103,12 +103,11 @@ function Index() {
                 fontWeight: 300,
                 lineHeight: 0.95,
                 color: "#f5a623",
-                textTransform: "lowercase",
                 display: "block",
                 maxWidth: "60vw",
               }}
             >
-              creating authenticity
+              Creating Authenticity
             </motion.span>
             <motion.span
               initial={reduced ? false : { opacity: 0, y: 20 }}
@@ -120,14 +119,13 @@ function Index() {
                 fontWeight: 300,
                 lineHeight: 0.95,
                 color: "#f5a623",
-                textTransform: "lowercase",
                 display: "block",
                 maxWidth: "70vw",
                 marginLeft: "auto",
                 textAlign: "right",
               }}
             >
-              for sport & culture.
+              For Sport & Culture.
             </motion.span>
 
             {/* Descriptors */}
