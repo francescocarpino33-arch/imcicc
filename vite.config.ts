@@ -12,4 +12,9 @@ export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
   },
+  // Build a Netlify Functions bundle (in addition to the Cloudflare Worker
+  // entry above) so the app can also be deployed to Netlify.
+  nitro: {
+    preset: "netlify",
+  },
 });
