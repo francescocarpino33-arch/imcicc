@@ -101,6 +101,7 @@ function Index() {
               style={{
                 fontSize: "clamp(6vw, 8vw, 110px)",
                 fontWeight: 300,
+                lineHeight: 0.95,
                 color: "#f5a623",
                 textTransform: "lowercase",
                 display: "block",
@@ -117,6 +118,7 @@ function Index() {
               style={{
                 fontSize: "clamp(6vw, 8vw, 110px)",
                 fontWeight: 300,
+                lineHeight: 0.95,
                 color: "#f5a623",
                 textTransform: "lowercase",
                 display: "block",
