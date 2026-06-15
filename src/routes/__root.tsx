@@ -4,13 +4,16 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useLocation,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 
 import appCss from "../styles.css?url";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
+import { entranceTransition, pageEnter } from "@/lib/motion";
 
 function NotFoundComponent() {
   return (
@@ -23,7 +26,7 @@ function NotFoundComponent() {
         <p className="mt-6 text-sm text-muted-foreground">The page you're looking for has been substituted.</p>
         <Link
           to="/"
-          className="inline-block mt-10 font-display text-sm uppercase tracking-[0.2em] font-medium border-b border-primary pb-2 hover:text-primary transition-colors"
+          className="inline-block mt-10 font-display text-sm uppercase tracking-[0.2em] font-medium border-b border-primary pb-2 cursor-pointer hover:text-primary transition-colors transition-standard"
         >
           Return to home
         </Link>
@@ -52,13 +55,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center bg-primary px-6 py-3 font-display text-sm uppercase tracking-[0.2em] font-medium text-primary-foreground hover:brightness-110 transition-all"
+            className="inline-flex items-center justify-center bg-primary px-6 py-3 font-display text-sm uppercase tracking-[0.2em] font-medium text-primary-foreground cursor-pointer hover:brightness-110 hover:-translate-y-px transition-[filter,transform] transition-standard"
           >
             Try again
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center border border-border px-6 py-3 font-display text-sm uppercase tracking-[0.2em] font-medium hover:border-primary hover:text-primary transition-colors"
+            className="inline-flex items-center justify-center border border-border px-6 py-3 font-display text-sm uppercase tracking-[0.2em] font-medium cursor-pointer hover:border-primary hover:text-primary hover:-translate-y-px transition-[color,border-color,transform] transition-standard"
           >
             Go home
           </a>
@@ -119,14 +122,27 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SiteNav />
-      <main className="relative z-[2]">
-        <Outlet />
-      </main>
-      <SiteFooter />
+      <MotionConfig reducedMotion="user" transition={entranceTransition}>
+        <SiteNav />
+        <main className="relative z-[2]">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={location.pathname}
+              variants={pageEnter}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+            >
+              <Outlet />
+            </motion.div>
+          </AnimatePresence>
+        </main>
+        <SiteFooter />
+      </MotionConfig>
     </QueryClientProvider>
   );
 }

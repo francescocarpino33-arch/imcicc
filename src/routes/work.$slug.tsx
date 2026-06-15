@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { DURATION, EASE_STANDARD, STAGGER, fadeScaleIn, fadeUp, fadeUpContainer } from "@/lib/motion";
 import { supabase } from "@/integrations/supabase/client";
 
 type ProjectRow = {
@@ -36,6 +38,7 @@ function ProjectDetail() {
   const [project, setProject] = useState<ProjectRow | null>(null);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const reduced = useReducedMotion();
 
   useEffect(() => {
     let cancelled = false;
@@ -91,6 +94,7 @@ function ProjectDetail() {
       <div style={{ padding: "0 48px" }}>
         <Link
           to="/work"
+          className="nav-link"
           style={{
             fontSize: 14,
             color: "#f5a623",
@@ -102,8 +106,11 @@ function ProjectDetail() {
           ← Selected projects
         </Link>
 
-        <h1
+        <motion.h1
           className="font-display"
+          initial={reduced ? false : { opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: reduced ? 0 : DURATION.hero, ease: EASE_STANDARD }}
           style={{
             fontSize: "clamp(8vw, 10vw, 140px)",
             fontWeight: 300,
@@ -114,44 +121,53 @@ function ProjectDetail() {
           }}
         >
           {project.name}
-        </h1>
+        </motion.h1>
 
-        <div
-          style={{
-            marginTop: 40,
-            display: "flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-            gap: 20,
-            fontSize: 13,
-            color: "rgba(255,255,255,0.5)",
-            letterSpacing: "0.1em",
-          }}
+        <motion.div
+          initial={reduced ? "show" : "hidden"}
+          animate="show"
+          variants={fadeUpContainer}
+          transition={{ delayChildren: reduced ? 0 : 0.3 }}
         >
-          {[project.role, project.year, project.category].filter(Boolean).map((v, i, arr) => (
-            <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: 20 }}>
-              {v as string}
-              {i < arr.length - 1 && (
-                <span style={{ width: 1, height: 12, background: "rgba(255,255,255,0.2)" }} />
-              )}
-            </span>
-          ))}
-        </div>
-
-        {project.intro && (
-          <p
+          <motion.div
+            variants={fadeUp}
             style={{
-              marginTop: 48,
-              fontSize: 18,
-              fontWeight: 300,
-              color: "rgba(255,255,255,0.8)",
-              maxWidth: 640,
-              lineHeight: 1.8,
+              marginTop: 40,
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              gap: 20,
+              fontSize: 13,
+              color: "rgba(255,255,255,0.5)",
+              letterSpacing: "0.1em",
             }}
           >
-            {project.intro}
-          </p>
-        )}
+            {[project.role, project.year, project.category].filter(Boolean).map((v, i, arr) => (
+              <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: 20 }}>
+                {v as string}
+                {i < arr.length - 1 && (
+                  <span style={{ width: 1, height: 12, background: "rgba(255,255,255,0.2)" }} />
+                )}
+              </span>
+            ))}
+          </motion.div>
+
+          {project.intro && (
+            <motion.p
+              variants={fadeUp}
+              style={{
+                marginTop: 48,
+                fontSize: 18,
+                fontWeight: 300,
+                color: "rgba(255,255,255,0.8)",
+                maxWidth: 640,
+                lineHeight: 1.8,
+              }}
+            >
+              {project.intro}
+            </motion.p>
+          )}
+        </motion.div>
 
         <div
           style={{
@@ -163,8 +179,13 @@ function ProjectDetail() {
         >
           {imageUrls.length > 0
             ? imageUrls.map((url, i) => (
-                <div
+                <motion.div
                   key={i}
+                  initial={reduced ? false : "hidden"}
+                  whileInView="show"
+                  viewport={{ once: true, margin: "-80px" }}
+                  variants={fadeScaleIn}
+                  transition={{ delay: reduced ? 0 : (i % 3) * STAGGER }}
                   style={{
                     width: "100%",
                     borderRadius: 4,
@@ -178,7 +199,7 @@ function ProjectDetail() {
                     loading="lazy"
                     style={{ width: "100%", height: "auto", display: "block" }}
                   />
-                </div>
+                </motion.div>
               ))
             : (
                 <div

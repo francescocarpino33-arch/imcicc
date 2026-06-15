@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { fadeUp, fadeUpContainer } from "@/lib/motion";
 import logoAcMilan from "@/assets/clients/ac-milan.png";
 import logoAstonVilla from "@/assets/clients/aston-villa.png";
 import logoGiro from "@/assets/clients/giro.png";
@@ -48,6 +49,7 @@ const labelStyle = {
 };
 
 function ContactPage() {
+  const reduced = useReducedMotion();
   return (
     <section
       className="relative min-h-screen overflow-hidden"
@@ -55,26 +57,27 @@ function ContactPage() {
     >
       {/* Headline */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        initial={reduced ? "show" : "hidden"}
+        animate="show"
+        variants={fadeUpContainer}
         style={{ paddingTop: 140, paddingLeft: 48 }}
       >
-        <span style={headlineStyle}>Let's work</span>
-        <span style={headlineStyle}>together.</span>
+        <motion.span variants={fadeUp} style={headlineStyle}>Let's work</motion.span>
+        <motion.span variants={fadeUp} style={headlineStyle}>together.</motion.span>
       </motion.div>
 
       {/* Two columns */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.3 }}
+        initial={reduced ? "show" : "hidden"}
+        animate="show"
+        variants={fadeUpContainer}
+        transition={{ delayChildren: reduced ? 0 : 0.3 }}
         className="flex flex-col md:flex-row gap-12 md:gap-24"
         style={{ marginTop: 64, padding: "0 48px" }}
       >
         {/* Left column */}
         <div>
-          <p style={labelStyle}>Drop me a line:</p>
+          <motion.p variants={fadeUp} style={labelStyle}>Drop me a line:</motion.p>
           <ul
             style={{
               fontSize: 22,
@@ -83,38 +86,40 @@ function ContactPage() {
               lineHeight: 1.8,
             }}
           >
-            <li>
+            <motion.li variants={fadeUp}>
               <a className="glow-hover hover:text-primary-glow" href="mailto:francesco.carpino33@gmail.com">
                 Mail
               </a>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={fadeUp}>
               <a className="glow-hover hover:text-primary-glow" href="https://www.linkedin.com/in/francescocarpino">
                 Linkedin
               </a>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={fadeUp}>
               <a className="glow-hover hover:text-primary-glow" href="https://www.instagram.com/imcicc">
                 Instagram
               </a>
-            </li>
+            </motion.li>
           </ul>
         </div>
 
         {/* Right column */}
         <div>
-          <p style={labelStyle}>Clients & collaborations:</p>
+          <motion.p variants={fadeUp} style={labelStyle}>Clients & collaborations:</motion.p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "32px 40px" }}>
             {CLIENTS.map((c) => (
-              <Link key={c.slug} to="/work/$slug" params={{ slug: c.slug }} className="contact-logo-link" aria-label={c.name}>
-                <img
-                  src={c.logo}
-                  alt={c.name}
-                  loading="lazy"
-                  className="contact-logo-img"
-                  style={{ maxHeight: 56, maxWidth: 100, objectFit: "contain" }}
-                />
-              </Link>
+              <motion.div key={c.slug} variants={fadeUp} style={{ display: "inline-flex" }}>
+                <Link to="/work/$slug" params={{ slug: c.slug }} className="contact-logo-link" aria-label={c.name}>
+                  <img
+                    src={c.logo}
+                    alt={c.name}
+                    loading="lazy"
+                    className="contact-logo-img"
+                    style={{ maxHeight: 56, maxWidth: 100, objectFit: "contain" }}
+                  />
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>

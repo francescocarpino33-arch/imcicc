@@ -77,6 +77,13 @@
 
   --space-section: clamp(9rem, 16vw, 16rem);
 
+  /* ── Motion system ──────────────────────────────────────── */
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-hover: 0.3s;
+  --duration-entrance: 0.5s;
+  --duration-page: 0.6s;
+  --duration-hero: 0.8s;
+
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -171,7 +178,13 @@ html { scroll-behavior: smooth; }
 }
 
 /* ── Subtle hover glow on logos & links ───────────────────── */
-.glow-hover { transition: filter 250ms ease, opacity 250ms ease; }
+.glow-hover {
+  cursor: pointer;
+  transition:
+    filter var(--duration-hover) var(--ease-standard),
+    opacity var(--duration-hover) var(--ease-standard),
+    color var(--duration-hover) var(--ease-standard);
+}
 .glow-hover:hover {
   filter: drop-shadow(0 0 14px var(--primary-glow)) drop-shadow(0 0 4px var(--primary));
   opacity: 1;
@@ -182,6 +195,7 @@ html { scroll-behavior: smooth; }
   display: inline-block;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
   margin-top: 32px;
   padding: 16px 40px;
   border: none;
@@ -191,7 +205,10 @@ html { scroll-behavior: smooth; }
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  transition:
+    transform var(--duration-hover) var(--ease-standard),
+    box-shadow var(--duration-hover) var(--ease-standard),
+    background var(--duration-hover) var(--ease-standard);
 }
 .outline-cta-btn::before {
   content: "";
@@ -208,28 +225,37 @@ html { scroll-behavior: smooth; }
 }
 
 /* ── Brand logos in hero Zone C ───────────────────────────── */
-.brand-logo-link { display: inline-flex; }
+.brand-logo-link { display: inline-flex; cursor: pointer; }
 .brand-logo-img {
   opacity: 0.55;
   filter: brightness(0) invert(1);
-  transition: all 0.4s ease;
+  transform: scale(1);
+  transition:
+    opacity 0.4s var(--ease-standard),
+    filter 0.4s var(--ease-standard),
+    transform 0.4s var(--ease-standard);
 }
 .brand-logo-link:hover .brand-logo-img {
   opacity: 1;
   filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(230, 98, 26, 0.7));
+  transform: scale(1.04);
 }
 
 /* ── Brand logos on the Contact page ──────────────────────── */
-.contact-logo-link { display: inline-flex; }
+.contact-logo-link { display: inline-flex; cursor: pointer; }
 .contact-logo-img {
   opacity: 0.5;
   filter: brightness(0) invert(1);
-  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: scale(1);
+  transition:
+    opacity 0.4s var(--ease-standard),
+    filter 0.4s var(--ease-standard),
+    transform 0.4s var(--ease-standard);
 }
 .contact-logo-link:hover .contact-logo-img {
   opacity: 1;
   filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(230, 98, 26, 0.5));
-  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: scale(1.04);
 }
 
 /* ── Hero micro-interactions ──────────────────────────────── */
@@ -249,7 +275,10 @@ html { scroll-behavior: smooth; }
 }
 .hero-headline {
   display: inline-block;
-  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1), text-shadow 600ms ease;
+  cursor: pointer;
+  transition:
+    transform var(--duration-hover) var(--ease-standard),
+    text-shadow var(--duration-hover) var(--ease-standard);
 }
 .hero-headline:hover {
   transform: translateY(-2px);
@@ -257,12 +286,14 @@ html { scroll-behavior: smooth; }
 }
 
 .hero-descriptor {
-  transition: color 300ms ease, transform 300ms ease, letter-spacing 300ms ease;
+  cursor: default;
+  transition:
+    color var(--duration-hover) var(--ease-standard),
+    transform var(--duration-hover) var(--ease-standard);
 }
 .hero-descriptor:hover {
   color: var(--primary-glow);
   transform: translateX(6px);
-  letter-spacing: 0.12em;
 }
 
 /* Mobile: lighter Ken Burns to save GPU */
@@ -277,8 +308,69 @@ html { scroll-behavior: smooth; }
   }
 }
 
+/* ── Nav links — color shift + underline grow from left ───── */
+/* Uses a background-gradient "underline" so it works regardless of the
+   element's display type (inline, inline-flex, etc.) without affecting layout. */
+.nav-link {
+  cursor: pointer;
+  padding-bottom: 0.2em;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 0% 1px;
+  transition:
+    color var(--duration-hover) var(--ease-standard),
+    filter var(--duration-hover) var(--ease-standard),
+    background-size var(--duration-hover) var(--ease-standard);
+}
+.nav-link:hover {
+  filter: drop-shadow(0 0 14px var(--primary-glow)) drop-shadow(0 0 4px var(--primary));
+}
+.nav-link:hover,
+.nav-link.active {
+  background-size: 100% 1px;
+}
+
+/* ── Project cards — hover lift, warm glow, image brighten ── */
+.project-card {
+  display: block;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-standard);
+}
+.project-card:hover {
+  transform: scale(1.02);
+}
+.project-card-media {
+  transition: box-shadow 0.4s var(--ease-standard);
+}
+.project-card:hover .project-card-media {
+  box-shadow:
+    0 30px 80px -30px rgba(255, 106, 26, 0.45),
+    0 0 0 1px rgba(255, 106, 26, 0.12);
+}
+.project-card-media img {
+  transition:
+    transform 1.2s var(--ease-standard),
+    filter 0.4s var(--ease-standard);
+}
+.project-card:hover .project-card-media img {
+  filter: brightness(1.08);
+}
+
+/* ── Generic helper: apply the standard hover timing to any
+   element already using a Tailwind `transition-*` utility ── */
+.transition-standard {
+  transition-duration: var(--duration-hover);
+  transition-timing-function: var(--ease-standard);
+}
+
 @media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
   html { scroll-behavior: auto; }
   .hero-bg-kenburns { animation: none; }
-  .hero-headline, .hero-descriptor { transition: none; }
 }

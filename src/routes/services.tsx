@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "framer-motion";
+import { DURATION, EASE_STANDARD, STAGGER } from "@/lib/motion";
 
 const SERVICES = [
   {
@@ -60,16 +61,16 @@ function ServicesPage() {
         {SERVICES.map((s, i) => (
           <motion.article
             key={s.n}
-            initial={reduced ? false : { opacity: 0, y: 30 }}
+            initial={reduced ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: reduced ? 0 : 0.7, delay: reduced ? 0 : i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: reduced ? 0 : DURATION.entrance, delay: reduced ? 0 : i * STAGGER, ease: EASE_STANDARD }}
             className="group bg-background p-10 md:p-12 flex flex-col gap-8"
           >
             <span className="font-display text-xs uppercase tracking-[0.25em] font-medium text-muted-foreground">
               {s.n}
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-black uppercase tracking-tight group-hover:text-primary transition-colors">
+            <h2 className="font-display text-3xl md:text-4xl font-black uppercase tracking-tight group-hover:text-primary transition-colors transition-standard">
               {s.title}
             </h2>
             <p className="text-base text-muted-foreground leading-relaxed">{s.description}</p>
@@ -95,7 +96,7 @@ function ServicesPage() {
         </h2>
         <Link
           to="/contact"
-          className="inline-flex items-center gap-4 bg-primary text-primary-foreground px-8 py-5 font-display text-sm uppercase tracking-[0.2em] font-medium hover:brightness-110 transition-all"
+          className="inline-flex items-center gap-4 bg-primary text-primary-foreground px-8 py-5 font-display text-sm uppercase tracking-[0.2em] font-medium cursor-pointer hover:brightness-110 hover:-translate-y-px transition-[filter,transform] transition-standard"
         >
           Start a brief <span aria-hidden>→</span>
         </Link>

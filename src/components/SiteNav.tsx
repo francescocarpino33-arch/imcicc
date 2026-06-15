@@ -32,8 +32,8 @@ export function SiteNav() {
           <Link
             key={l.to}
             to={l.to}
-            className="glow-hover hover:text-primary-glow transition-colors"
-            activeProps={{ className: "text-primary-glow" }}
+            className="nav-link hover:text-primary-glow"
+            activeProps={{ className: "active text-primary-glow" }}
           >
             {l.label}
           </Link>
@@ -53,7 +53,7 @@ export function SiteNav() {
       </Link>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="md:hidden font-display text-sm tracking-wide font-light hover:text-primary-glow transition-colors ml-4"
+        className="nav-link md:hidden font-display text-sm tracking-wide font-light hover:text-primary-glow ml-4"
         aria-label="Toggle menu"
       >
         {open ? "Close" : "Menu"}
@@ -61,7 +61,13 @@ export function SiteNav() {
       {open && (
         <div className="md:hidden absolute left-0 right-0 top-20 bg-background/95 backdrop-blur-md border-t border-border px-6 py-8 flex flex-col gap-6 font-display text-base font-light">
           {LINKS.map((l) => (
-            <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="hover:text-primary-glow transition-colors">
+            <Link
+              key={l.to}
+              to={l.to}
+              onClick={() => setOpen(false)}
+              className="nav-link self-start hover:text-primary-glow"
+              activeProps={{ className: "active text-primary-glow" }}
+            >
               {l.label}
             </Link>
           ))}
