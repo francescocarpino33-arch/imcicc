@@ -71,7 +71,7 @@ function Index() {
             backgroundImage: "url('/hero-collage.png')",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: 0.19,
+            opacity: 0.5,
             filter: "blur(1.5px) saturate(0.4) contrast(0.85)",
             mixBlendMode: "overlay",
             maskImage:
