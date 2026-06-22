@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { DURATION, EASE_STANDARD, STAGGER, fadeUp, fadeUpContainer } from "@/lib/motion";
 import { projects, type Project } from "@/data/projects";
 import logoAcMilan from "@/assets/clients/ac-milan.png";
@@ -44,6 +44,8 @@ const CLIENT_SLUGS: Record<string, string> = {
 
 function Index() {
   const reduced = useReducedMotion();
+  const { scrollY } = useScroll();
+  const collageParallax = useTransform(scrollY, [0, 700], [0, -30]);
   return (
     <>
       {/* Hero — poster */}
@@ -59,6 +61,25 @@ function Index() {
             opacity: 0.45,
             filter: "saturate(0.75) contrast(1.05)",
             zIndex: 0,
+          }}
+        />
+        {/* Collage texture layer — melted into the background */}
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: "url('/hero-collage.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.19,
+            filter: "blur(1.5px) saturate(0.4) contrast(0.85)",
+            mixBlendMode: "overlay",
+            maskImage:
+              "radial-gradient(ellipse 90% 82% at 50% 48%, black 10%, rgba(0,0,0,0.55) 50%, transparent 88%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 90% 82% at 50% 48%, black 10%, rgba(0,0,0,0.55) 50%, transparent 88%)",
+            zIndex: 0,
+            y: reduced ? 0 : collageParallax,
           }}
         />
         <div
