@@ -71,8 +71,8 @@ function Index() {
             backgroundImage: "url('/hero-collage.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: 0.50,
-            filter: "blur(2px) saturate(0.65) contrast(0.9) sepia(0.3)",
+            opacity: 0.70,
+            filter: "blur(2px) saturate(0.8) contrast(0.9) sepia(0.3)",
             maskImage:
               "radial-gradient(ellipse 85% 78% at 50% 45%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.65) 38%, rgba(0,0,0,0.88) 62%, transparent 88%)",
             WebkitMaskImage:
