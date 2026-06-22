@@ -72,11 +72,11 @@ function Index() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             opacity: 1,
-            filter: "saturate(0.8) contrast(0.9) sepia(0.3)",
+            filter: "saturate(1.2) contrast(1.1)",
             maskImage:
-              "radial-gradient(ellipse 85% 78% at 50% 45%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.65) 38%, rgba(0,0,0,0.88) 62%, transparent 88%)",
+              "radial-gradient(ellipse 88% 82% at 50% 45%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,1) 68%, transparent 92%)",
             WebkitMaskImage:
-              "radial-gradient(ellipse 85% 78% at 50% 45%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.65) 38%, rgba(0,0,0,0.88) 62%, transparent 88%)",
+              "radial-gradient(ellipse 88% 82% at 50% 45%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,1) 68%, transparent 92%)",
             zIndex: 0,
             y: reduced ? 0 : collageParallax,
           }}
