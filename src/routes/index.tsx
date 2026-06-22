@@ -93,7 +93,7 @@ function Index() {
         {/* FOREGROUND */}
         <div className="relative z-10 h-full">
           {/* Headline */}
-          <div style={{ paddingTop: 120, paddingLeft: 48 }}>
+          <div style={{ paddingTop: 160, paddingLeft: 48, paddingRight: 48 }}>
             <motion.span
               initial={reduced ? false : { opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -105,7 +105,6 @@ function Index() {
                 lineHeight: 0.95,
                 color: "#f5a623",
                 display: "block",
-                maxWidth: "60vw",
               }}
             >
               Creating Authenticity
@@ -114,28 +113,26 @@ function Index() {
               initial={reduced ? false : { opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: reduced ? 0 : DURATION.hero, delay: reduced ? 0 : 0.15, ease: EASE_STANDARD }}
-              className="font-display hero-headline"
+              className="font-display hero-headline text-glow"
               style={{
                 fontSize: "clamp(6vw, 8vw, 110px)",
                 fontWeight: 300,
                 lineHeight: 0.95,
-                color: "#f5a623",
                 display: "block",
-                maxWidth: "70vw",
-                marginLeft: "auto",
                 textAlign: "right",
+                marginTop: 8,
               }}
             >
-              For Sport & Culture.
+              For Sports Culture.
             </motion.span>
 
-            {/* Descriptors */}
+            {/* Descriptors — right-anchored, below the glowing line */}
             <motion.div
               initial={reduced ? "show" : "hidden"}
               animate="show"
               variants={fadeUpContainer}
               transition={{ delayChildren: reduced ? 0 : 0.5 }}
-              style={{ marginTop: 32 }}
+              style={{ marginTop: 56, textAlign: "right" }}
             >
               <motion.p
                 variants={fadeUp}
@@ -149,7 +146,7 @@ function Index() {
                   textTransform: "lowercase",
                 }}
               >
-                ▶ based in italy.
+                based in italy. ▶
               </motion.p>
               <motion.p
                 variants={fadeUp}
@@ -163,7 +160,7 @@ function Index() {
                   textTransform: "lowercase",
                 }}
               >
-                ▶ specialised in sport visual design.
+                specialised in sport visual design. ▶
               </motion.p>
             </motion.div>
           </div>
