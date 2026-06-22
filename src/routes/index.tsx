@@ -63,6 +63,25 @@ function Index() {
             zIndex: 0,
           }}
         />
+        {/* Collage texture — sits above base bg, below all gradient overlays */}
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: "url('/hero-collage.webp')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.13,
+            filter: "blur(2px) saturate(0.25) contrast(0.9) sepia(0.3)",
+            maskImage:
+              "radial-gradient(ellipse 85% 78% at 50% 45%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.65) 38%, rgba(0,0,0,0.88) 62%, transparent 88%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 85% 78% at 50% 45%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.65) 38%, rgba(0,0,0,0.88) 62%, transparent 88%)",
+            zIndex: 0,
+            y: reduced ? 0 : collageParallax,
+          }}
+        />
+        {/* Orange gradient tint overlays — above collage, so brand color washes over it */}
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
@@ -89,19 +108,6 @@ function Index() {
             background:
               "linear-gradient(180deg, rgba(10,4,2,0.6) 0%, rgba(10,4,2,0) 18%, rgba(10,4,2,0) 78%, rgba(10,4,2,0.85) 100%)",
             zIndex: 0,
-          }}
-        />
-        {/* Collage texture layer — sits above all bg overlays so it's actually visible */}
-        <motion.div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: "url('/hero-collage.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            opacity: 0.6,
-            zIndex: 1,
-            y: reduced ? 0 : collageParallax,
           }}
         />
 
