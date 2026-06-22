@@ -71,20 +71,12 @@ function ProjectDetail() {
   if (!project) {
     return (
       <div className="pt-40 px-8">
-        <p style={{ color: "rgba(255,255,255,0.6)", marginBottom: 12 }}>
+        <p style={{ color: "rgba(255,255,255,0.6)", marginBottom: 24 }}>
           This project doesn't have any content yet.
         </p>
-        <p style={{ color: "rgba(255,255,255,0.4)", marginBottom: 24, fontSize: 13 }}>
-          Upload images from the admin panel to make it visible here.
-        </p>
-        <div style={{ display: "flex", gap: 24 }}>
-          <Link to="/work" style={{ color: "#f5a623", fontSize: 14 }}>
-            ← Selected projects
-          </Link>
-          <Link to="/admin" style={{ color: "#f5a623", fontSize: 14 }}>
-            Go to admin →
-          </Link>
-        </div>
+        <Link to="/work" style={{ color: "#f5a623", fontSize: 14 }}>
+          ← Selected projects
+        </Link>
       </div>
     );
   }
@@ -201,27 +193,84 @@ function ProjectDetail() {
                   />
                 </motion.div>
               ))
-            : (
-                <div
-                  style={{
-                    gridColumn: "1 / -1",
-                    padding: "64px 24px",
-                    border: "1px solid rgba(245,166,35,0.25)",
-                    borderRadius: 4,
-                    background: "rgba(245,166,35,0.03)",
-                    textAlign: "center",
-                    color: "rgba(245,166,35,0.7)",
-                    letterSpacing: "0.08em",
-                  }}
-                >
-                  <p style={{ fontSize: 14, marginBottom: 12 }}>
-                    No images uploaded yet for this project.
-                  </p>
-                  <Link to="/admin" style={{ fontSize: 13, color: "#f5a623" }}>
-                    Upload from admin →
-                  </Link>
-                </div>
-              )}
+            : slug === "ac-milan"
+              ? (
+                  <motion.div
+                    initial={reduced ? false : "hidden"}
+                    whileInView="show"
+                    viewport={{ once: true, margin: "-80px" }}
+                    variants={fadeUp}
+                    style={{
+                      gridColumn: "1 / -1",
+                      padding: "96px 24px",
+                      border: "1px solid rgba(245,166,35,0.18)",
+                      borderRadius: 4,
+                      background: "rgba(245,166,35,0.02)",
+                      boxShadow: "0 0 48px rgba(245,166,35,0.06)",
+                      textAlign: "center",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      gap: 20,
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: 12,
+                        letterSpacing: "0.2em",
+                        color: "rgba(255,255,255,0.4)",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      Confidential
+                    </span>
+                    <h2
+                      style={{
+                        fontSize: "clamp(28px, 4vw, 48px)",
+                        fontWeight: 300,
+                        color: "#f5a623",
+                        margin: 0,
+                        letterSpacing: "-0.01em",
+                      }}
+                    >
+                      This work is under NDA.
+                    </h2>
+                    <p
+                      style={{
+                        fontSize: 16,
+                        color: "rgba(255,255,255,0.7)",
+                        maxWidth: 520,
+                        lineHeight: 1.7,
+                        margin: 0,
+                      }}
+                    >
+                      Some of the work I create for clients is covered by confidentiality agreements and can't be shown publicly. I'd be happy to share the AC Milan projects privately — just reach out.
+                    </p>
+                    <a
+                      href="mailto:francesco.carpino33@gmail.com?subject=AC%20Milan%20%E2%80%94%20portfolio%20access%20request"
+                      className="outline-cta-btn font-display"
+                    >
+                      Request access
+                    </a>
+                  </motion.div>
+                )
+              : (
+                  <div
+                    style={{
+                      gridColumn: "1 / -1",
+                      padding: "64px 24px",
+                      border: "1px solid rgba(245,166,35,0.15)",
+                      borderRadius: 4,
+                      background: "rgba(245,166,35,0.02)",
+                      textAlign: "center",
+                      color: "rgba(255,255,255,0.35)",
+                      fontSize: 14,
+                      letterSpacing: "0.06em",
+                    }}
+                  >
+                    No images available for this project yet.
+                  </div>
+                )}
         </div>
       </div>
     </article>
