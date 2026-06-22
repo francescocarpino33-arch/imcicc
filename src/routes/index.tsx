@@ -63,25 +63,6 @@ function Index() {
             zIndex: 0,
           }}
         />
-        {/* Collage texture layer — melted into the background */}
-        <motion.div
-          aria-hidden="true"
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: "url('/hero-collage.png')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            opacity: 0.5,
-            filter: "blur(1.5px) saturate(0.4) contrast(0.85)",
-            mixBlendMode: "overlay",
-            maskImage:
-              "radial-gradient(ellipse 90% 82% at 50% 48%, black 10%, rgba(0,0,0,0.55) 50%, transparent 88%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse 90% 82% at 50% 48%, black 10%, rgba(0,0,0,0.55) 50%, transparent 88%)",
-            zIndex: 0,
-            y: reduced ? 0 : collageParallax,
-          }}
-        />
         <div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none"
@@ -108,6 +89,19 @@ function Index() {
             background:
               "linear-gradient(180deg, rgba(10,4,2,0.6) 0%, rgba(10,4,2,0) 18%, rgba(10,4,2,0) 78%, rgba(10,4,2,0.85) 100%)",
             zIndex: 0,
+          }}
+        />
+        {/* Collage texture layer — sits above all bg overlays so it's actually visible */}
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: "url('/hero-collage.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.6,
+            zIndex: 1,
+            y: reduced ? 0 : collageParallax,
           }}
         />
 
