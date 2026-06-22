@@ -61,9 +61,10 @@ function AboutPage() {
             style={{ width: "100%", maxWidth: 420, aspectRatio: "3 / 4" }}
           >
             <img
-              src="/imcicc.png"
+              src="/imcicc.webp"
               alt="Francesco Carpino"
               loading="lazy"
+              decoding="async"
               className="h-full w-full"
               style={{ objectFit: "cover", filter: "saturate(0.85) contrast(1.05)" }}
             />
