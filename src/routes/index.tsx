@@ -72,7 +72,7 @@ function Index() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             opacity: 1,
-            filter: "saturate(1.2) contrast(1.1)",
+            filter: "saturate(1.0) contrast(1.1)",
             maskImage:
               "radial-gradient(ellipse 88% 82% at 50% 45%, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.85) 40%, rgba(0,0,0,1) 68%, transparent 92%)",
             WebkitMaskImage:
