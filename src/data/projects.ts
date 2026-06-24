@@ -1,13 +1,7 @@
 const acMilan = "https://assets-eu-01.kc-usercontent.com/1293c890-579f-01b7-8480-902cca7de55e/b1ac1760-542b-411f-b1d5-9c60e098ab04/Comunicato-Ufficiale-19-20-WebHP.png";
-import giro from "@/assets/giro-new.png";
-import giroStage01 from "@/assets/giro-stage-01.png";
-import giroStage02 from "@/assets/giro-stage-02.png";
-import giroStage03 from "@/assets/giro-stage-03.png";
-import giroStage04 from "@/assets/giro-stage-04.png";
-import giroStage05 from "@/assets/giro-stage-05.png";
-import giroStage06 from "@/assets/giro-stage-06.png";
-import firs1 from "@/assets/firs1_new.png";
-import arenteiro from "@/assets/arenteiro-new.png";
+import giro from "@/assets/giro-new.webp";
+import firs1 from "@/assets/firs1_new.webp";
+import arenteiro from "@/assets/arenteiro-new.webp";
 
 export type Project = {
   slug: string;
@@ -19,7 +13,6 @@ export type Project = {
   tags: string[];
   role: string;
   cover: string;
-  gallery?: string[];
   aspect: "wide" | "tall" | "square" | "landscape";
   coverScale?: number;
   tagline: string;
@@ -65,7 +58,7 @@ export const projects: Project[] = [
     category: "Matchday Design",
     tags: ["Sports", "Branding", "Social"],
     role: "Visual Identity · Social System · Editorial",
-    cover: "/AVFC.png",
+    cover: "/AVFC.webp",
     aspect: "tall",
     coverScale: 1.15,
     tagline: "Creation of a Premier League matchday digital poster vs Brighton.",
@@ -90,7 +83,6 @@ export const projects: Project[] = [
     tags: ["Sports", "Editorial", "Campaign"],
     role: "Art Direction · Editorial Design · Motion",
     cover: giro,
-    gallery: [giroStage01, giroStage02, giroStage03, giroStage04, giroStage05, giroStage06],
     aspect: "tall",
     tagline: "Creation of 25 Giro d'Italia contextualized graphics, stage by stage.",
     accent: "Rosa",
@@ -159,7 +151,7 @@ export const projects: Project[] = [
     category: "Matchday & Editorial Visuals\n",
     tags: ["Sports", "Editorial", "Branding"],
     role: "Art Direction · Photography · Visual System",
-    cover: "/corgomo.png",
+    cover: "/corgomo.webp",
     aspect: "landscape",
     tagline: "Matchday & Editorial visuals for a little big club. ",
     accent: "Sodium Nights",

@@ -85,6 +85,7 @@ function WorkPage() {
                     src={p.cover}
                     alt={p.title}
                     loading="lazy"
+                    decoding="async"
                     className="h-full w-full object-cover group-hover:scale-[1.03]"
                   />
                 </div>

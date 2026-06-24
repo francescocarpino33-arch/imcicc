@@ -189,6 +189,7 @@ function ProjectDetail() {
                     src={url}
                     alt={`${project.name} ${i + 1}`}
                     loading="lazy"
+                    decoding="async"
                     style={{ width: "100%", height: "auto", display: "block" }}
                   />
                 </motion.div>

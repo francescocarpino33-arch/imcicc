@@ -3,11 +3,11 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { DURATION, EASE_STANDARD, STAGGER, fadeUp, fadeUpContainer } from "@/lib/motion";
 import { projects, type Project } from "@/data/projects";
 import logoAcMilan from "@/assets/clients/ac-milan.png";
-import logoAstonVilla from "@/assets/clients/aston-villa.png";
-import logoGiro from "@/assets/clients/giro.png";
-import logoFirs1 from "@/assets/clients/firs1.png";
-import logoArenteiro from "@/assets/clients/arenteiro.png";
-import logoCorgomo from "@/assets/clients/corgomo.png";
+import logoAstonVilla from "@/assets/clients/aston-villa.webp";
+import logoGiro from "@/assets/clients/giro.webp";
+import logoFirs1 from "@/assets/clients/firs1.webp";
+import logoArenteiro from "@/assets/clients/arenteiro.webp";
+import logoCorgomo from "@/assets/clients/corgomo.webp";
 import heroBg from "@/assets/hero-bg.png.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -219,6 +219,7 @@ function Index() {
                       src={logo}
                       alt={name}
                       loading="lazy"
+                      decoding="async"
                       className="brand-logo-img"
                       style={{ maxHeight: 44, maxWidth: 100, objectFit: "contain" }}
                     />
@@ -301,6 +302,7 @@ function ProjectCard({ project, index = 0 }: { project: Project; index?: number 
               src={project.cover}
               alt={project.title}
               loading="lazy"
+              decoding="async"
               className="h-full w-full object-cover group-hover:scale-[1.03]"
             />
           </div>

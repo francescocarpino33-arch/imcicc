@@ -45,8 +45,9 @@ export function SiteNav() {
         aria-label="IMCICC home"
       >
         <img
-          src="/logo.png"
+          src="/logo.webp"
           alt="IMCICC"
+          decoding="async"
           className="w-auto"
           style={{ maxHeight: "56px", width: "auto", objectFit: "contain" }}
         />

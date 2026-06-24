@@ -2,11 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "framer-motion";
 import { fadeUp, fadeUpContainer } from "@/lib/motion";
 import logoAcMilan from "@/assets/clients/ac-milan.png";
-import logoAstonVilla from "@/assets/clients/aston-villa.png";
-import logoGiro from "@/assets/clients/giro.png";
-import logoFirs1 from "@/assets/clients/firs1.png";
-import logoArenteiro from "@/assets/clients/arenteiro.png";
-import logoCorgomo from "@/assets/clients/corgomo.png";
+import logoAstonVilla from "@/assets/clients/aston-villa.webp";
+import logoGiro from "@/assets/clients/giro.webp";
+import logoFirs1 from "@/assets/clients/firs1.webp";
+import logoArenteiro from "@/assets/clients/arenteiro.webp";
+import logoCorgomo from "@/assets/clients/corgomo.webp";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -115,6 +115,7 @@ function ContactPage() {
                     src={c.logo}
                     alt={c.name}
                     loading="lazy"
+                    decoding="async"
                     className="contact-logo-img"
                     style={{ maxHeight: 56, maxWidth: 100, objectFit: "contain" }}
                   />
