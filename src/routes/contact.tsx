@@ -92,7 +92,7 @@ function ContactPage() {
               </a>
             </motion.li>
             <motion.li variants={fadeUp}>
-              <a className="glow-hover hover:text-primary-glow" href="https://www.linkedin.com/in/francescocarpino">
+              <a className="glow-hover hover:text-primary-glow" href="https://www.linkedin.com/in/francesco-carpino-b4852a1a4/">
                 Linkedin
               </a>
             </motion.li>
