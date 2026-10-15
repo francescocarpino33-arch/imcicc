@@ -66,7 +66,7 @@ function WorkPage() {
         </motion.div>
       </motion.section>
 
-      <section className="grid md:grid-cols-2 gap-x-10 md:gap-x-16 gap-y-24">
+      <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-10 gap-y-16 md:gap-y-20">
         {filtered.map((p, i) => (
           <motion.div
             key={p.slug}

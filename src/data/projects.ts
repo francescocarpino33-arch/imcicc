@@ -1,4 +1,4 @@
-const acMilan = "https://assets-eu-01.kc-usercontent.com/1293c890-579f-01b7-8480-902cca7de55e/b1ac1760-542b-411f-b1d5-9c60e098ab04/Comunicato-Ufficiale-19-20-WebHP.png";
+import acMilan from "@/assets/ac-milan-cover.webp";
 import giro from "@/assets/giro-new.webp";
 import firs1 from "@/assets/firs1_new.webp";
 import arenteiro from "@/assets/arenteiro-new.webp";

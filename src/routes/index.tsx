@@ -269,7 +269,7 @@ function Index() {
           </motion.div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-x-10 md:gap-x-16 gap-y-24 md:gap-y-32">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-10 gap-y-16 md:gap-y-20">
           {projects.map((p, i) => (
             <ProjectCard key={p.slug} project={p} index={i} />
           ))}
@@ -307,14 +307,14 @@ function ProjectCard({ project, index = 0 }: { project: Project; index?: number 
             />
           </div>
         </div>
-        <div className="mt-8 flex items-start justify-between gap-6">
+        <div className="mt-6 flex items-start justify-between gap-6">
           <div className="flex-1">
             <p className="font-display text-xs tracking-[0.25em] text-primary-glow/70 mb-4">
               {project.category}
             </p>
             <h3
               className="font-display font-light tracking-[-0.03em] leading-[0.9] text-foreground group-hover:text-primary-glow transition-colors transition-standard"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3.5rem)" }}
+              style={{ fontSize: "clamp(1.75rem, 2.4vw, 2.5rem)" }}
             >
               {project.title}
             </h3>
