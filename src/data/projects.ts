@@ -36,7 +36,7 @@ export const projects: Project[] = [
     role: "Art Direction · Photography Direction · Brand System",
     cover: acMilan,
     aspect: "wide",
-    tagline: "​Creation of digital & social AC Milan's brand assets.",
+    tagline: "Creation of digital & social AC Milan's brand assets.",
     accent: "Rossoneri",
     overview:
       "A campaign system designed for AC Milan's stadium-day rituals — translating a century of heritage into a stark, contemporary visual language that lives across kit reveals, matchday socials and physical print.",
