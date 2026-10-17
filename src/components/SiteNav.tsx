@@ -75,7 +75,7 @@ export function SiteNav() {
               <span className="block text-[0.9375rem] font-semibold wdth-voice tracking-[-0.01em]">
                 Francesco Carpino
               </span>
-              <span className="block label">Sports designer, Milan</span>
+              <span className="block label">Sports Designer</span>
             </span>
           </Link>
 
