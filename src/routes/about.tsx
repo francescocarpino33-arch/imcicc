@@ -167,9 +167,7 @@ function AboutPage() {
             </li>
           ))}
           <li className="rule pt-5">
-            <p className="label">
-              Specialisms: {CAPABILITIES.map((c) => c.title.toLowerCase()).join(", ")}.
-            </p>
+            <p className="label">Specialisms: {CAPABILITIES.map((c) => c.title).join(", ")}.</p>
           </li>
         </ul>
       </section>

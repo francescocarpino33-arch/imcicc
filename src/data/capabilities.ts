@@ -4,25 +4,25 @@
  */
 export const CAPABILITIES: { title: string; description: string; seenIn: string[] }[] = [
   {
-    title: "Art direction",
+    title: "Art Direction",
     description:
       "Setting the visual direction before anything is designed: the tone, the references and how the story should be told.",
     seenIn: ["giro-ditalia", "first"],
   },
   {
-    title: "Visual systems and series",
+    title: "Visual Systems and Series",
     description:
       "A consistent visual language that holds together across dozens of pieces, from a weekly series to a whole race.",
     seenIn: ["giro-ditalia", "first", "arenteiro"],
   },
   {
-    title: "Player storytelling",
+    title: "Player Storytelling",
     description:
       "Visuals built around athletes and the moments that define them: milestones, performances and celebrations.",
     seenIn: ["first"],
   },
   {
-    title: "Social and digital content",
+    title: "Social and Digital Content",
     description:
       "Content for club and competition channels, designed for the formats people actually see and share.",
     seenIn: ["ac-milan", "aston-villa", "arenteiro", "corgomo"],
