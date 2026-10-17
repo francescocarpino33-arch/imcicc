@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CONTACT } from "@/data/projects";
 import { CopyEmail } from "@/components/CopyEmail";
+import { ClientLogos } from "@/components/ClientLogos";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -113,6 +114,13 @@ function ContactPage() {
               </ul>
             </div>
           </div>
+        </div>
+
+        <div className="grid-12 gap-y-6 border-t border-night/25 pt-6 mt-16 md:mt-24">
+          <h2 className="text-[0.8125rem] font-medium wdth-label col-span-4 md:col-span-3 md:pt-1">
+            Clients and collaborations
+          </h2>
+          <ClientLogos tone="ink" className="col-span-4 md:col-span-9" />
         </div>
       </div>
     </section>

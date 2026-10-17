@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE_STANDARD } from "@/lib/motion";
-import { CLIENT_NAMES, CONTACT, projects, type Project } from "@/data/projects";
+import { CONTACT, projects, type Project } from "@/data/projects";
+import { ClientLogos } from "@/components/ClientLogos";
 import { useProjectCovers, useProjectRecords } from "@/lib/project-media";
 import { ProjectCover } from "@/components/ProjectCover";
 import { CAPABILITIES } from "@/data/capabilities";
@@ -130,15 +131,8 @@ function Index() {
 
           <div className="frame" style={{ marginTop: "var(--space-5)" }}>
             <div className="grid-12 gap-y-4 border-t border-night/25 pt-6">
-              <h2 className="label col-span-4 md:col-span-3">Clients and collaborations</h2>
-              <ul
-                className="col-span-4 md:col-span-9 flex flex-wrap gap-x-8 gap-y-2 voice"
-                style={{ fontSize: "var(--step-2)", lineHeight: 1.1 }}
-              >
-                {CLIENT_NAMES.map((c) => (
-                  <li key={c}>{c}</li>
-                ))}
-              </ul>
+              <h2 className="label col-span-4 md:col-span-3 md:pt-1">Clients and collaborations</h2>
+              <ClientLogos tone="ink" className="col-span-4 md:col-span-9" />
             </div>
           </div>
         </div>
