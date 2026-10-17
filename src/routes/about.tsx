@@ -24,9 +24,9 @@ export const Route = createFileRoute("/about")({
 });
 
 const WAYS_OF_WORKING = [
-  { title: "Single pieces", text: "A matchday poster, an announcement, a milestone graphic." },
+  { title: "Single Pieces", text: "A key poster, an announcement, a milestone graphic." },
   {
-    title: "Ongoing content",
+    title: "Ongoing Content",
     text: "Weekly graphics through a season, made to a consistent system.",
   },
   { title: "Series", text: "A set of pieces for a tournament, a race or a campaign." },
