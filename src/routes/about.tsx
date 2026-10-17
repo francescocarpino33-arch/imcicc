@@ -1,38 +1,30 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CONTACT, projects } from "@/data/projects";
-import { CAPABILITIES } from "@/data/capabilities";
+import { CONTACT, projectText, projects } from "@/data/projects";
+import { CAPABILITIES, capabilityText } from "@/data/capabilities";
+import { useCopy, useLang } from "@/i18n/lang";
+import { headCopy } from "@/i18n/head";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About | IMCICC, Francesco Carpino" },
-      {
-        name: "description",
-        content:
-          "Francesco Carpino is an Italian freelance sports designer based in Milan, working as IMCICC with clubs, competitions and brands.",
-      },
-      { property: "og:title", content: "About | IMCICC, Francesco Carpino" },
-      {
-        property: "og:description",
-        content: "Italian freelance sports designer based in Milan, working as IMCICC.",
-      },
-      { property: "og:url", content: "https://imcicc.com/about" },
-    ],
-    links: [{ rel: "canonical", href: "https://imcicc.com/about" }],
-  }),
+  head: ({ match }) => {
+    const t = headCopy(match).about;
+    return {
+      meta: [
+        { title: t.title },
+        { name: "description", content: t.description },
+        { property: "og:title", content: t.title },
+        { property: "og:description", content: t.ogDescription },
+        { property: "og:url", content: "https://imcicc.com/about" },
+      ],
+      links: [{ rel: "canonical", href: "https://imcicc.com/about" }],
+    };
+  },
   component: AboutPage,
 });
 
-const WAYS_OF_WORKING = [
-  { title: "Single Pieces", text: "A key poster, an announcement, a milestone graphic." },
-  {
-    title: "Ongoing Content",
-    text: "Weekly graphics through a season, made to a consistent system.",
-  },
-  { title: "Series", text: "A set of pieces for a tournament, a race or a campaign." },
-];
-
 function AboutPage() {
+  const copy = useCopy();
+  const t = copy.about;
+  const lang = useLang();
   return (
     <div
       style={{
@@ -47,30 +39,19 @@ function AboutPage() {
             className="voice"
             style={{ fontSize: "var(--step-4)", lineHeight: 0.86 }}
           >
-            About
+            {t.heading}
           </h1>
           <div className="mt-10 flex flex-col gap-5">
-            <p className="lead">
-              I'm Francesco Carpino, an Italian sports designer based in Milan. I work independently
-              under the name IMCICC.
-            </p>
-            <p className="body-copy">
-              Sport and design have always been my two constants, and my work sits where they meet.
-              I help clubs, competitions and brands decide how they want to look and what they want
-              to say, then design the visual systems and content that carry it.
-            </p>
-            <p className="body-copy">
-              I've been working independently since 2020, with AC Milan, Aston Villa, Giro d'Italia
-              and FIRS1 Sports, and with the Galician clubs CD Arenteiro and CD Córgomo.
-            </p>
-            <p className="body-copy">
-              I want every piece to feel like it belongs to its club and its moment: built around
-              the player, the story or the moment it was made for, rather than around a template.
-            </p>
+            <p className="lead">{t.lead}</p>
+            {t.body.map((para) => (
+              <p key={para} className="body-copy">
+                {para}
+              </p>
+            ))}
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
             <a href={`mailto:${CONTACT.email}`} className="btn">
-              Email me
+              {copy.emailMe}
             </a>
             <a
               href={CONTACT.linkedin}
@@ -87,7 +68,9 @@ function AboutPage() {
           <div className="well" style={{ aspectRatio: "840 / 1043" }}>
             <img
               src="/imcicc.webp"
-              alt="Portrait of Francesco Carpino"
+              srcSet="/imcicc.webp 840w, /francesco-portrait.webp 1200w"
+              sizes="(min-width: 768px) 40vw, 100vw"
+              alt={t.portraitAlt}
               width={840}
               height={1043}
               decoding="async"
@@ -95,7 +78,7 @@ function AboutPage() {
               className="h-full w-full object-cover"
             />
           </div>
-          <figcaption className="label mt-3">Francesco Carpino, Milan</figcaption>
+          <figcaption className="label mt-3">{t.portraitCaption}</figcaption>
         </figure>
       </section>
 
@@ -110,7 +93,7 @@ function AboutPage() {
             className="voice col-span-4 md:col-span-6"
             style={{ fontSize: "var(--step-3)" }}
           >
-            Clients and collaborations
+            {t.clients}
           </h2>
         </div>
         <ul>
@@ -128,10 +111,10 @@ function AboutPage() {
                   {p.client}
                 </span>
                 <span className="body-copy col-span-4 md:col-span-4 !text-chalk">
-                  {p.discipline}
+                  {projectText(p, lang).discipline}
                 </span>
                 <span className="label col-span-4 md:col-span-3 md:text-right">
-                  {p.nda ? "Under NDA, shared privately" : p.format}
+                  {p.nda ? t.ndaRow : projectText(p, lang).format}
                 </span>
               </Link>
             </li>
@@ -146,16 +129,12 @@ function AboutPage() {
       >
         <div className="col-span-4 md:col-span-5">
           <h2 id="how-title" className="voice" style={{ fontSize: "var(--step-3)" }}>
-            How we can work together
+            {t.howTitle}
           </h2>
-          <p className="body-copy mt-6">
-            I work with in-house club and competition teams, and with agencies that need a sports
-            specialist on a project. Based in Milan, on Central European Time, working remotely with
-            clients across Europe.
-          </p>
+          <p className="body-copy mt-6">{t.howBody}</p>
         </div>
         <ul className="col-span-4 md:col-span-6 md:col-start-7">
-          {WAYS_OF_WORKING.map((w) => (
+          {t.ways.map((w) => (
             <li
               key={w.title}
               className="rule py-5 grid grid-cols-1 sm:grid-cols-[13rem_1fr] gap-x-6 gap-y-1"
@@ -167,7 +146,9 @@ function AboutPage() {
             </li>
           ))}
           <li className="rule pt-5">
-            <p className="label">Specialisms: {CAPABILITIES.map((c) => c.title).join(", ")}.</p>
+            <p className="label">
+              {t.specialisms}: {CAPABILITIES.map((c) => capabilityText(c, lang).title).join(", ")}.
+            </p>
           </li>
         </ul>
       </section>

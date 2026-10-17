@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { useCopy } from "@/i18n/lang";
 import acMilan from "@/assets/clients/trimmed/ac-milan.webp";
 import astonVilla from "@/assets/clients/trimmed/aston-villa.webp";
 import giro from "@/assets/clients/trimmed/giro.webp";
@@ -22,6 +23,7 @@ const LOGOS = [
 ];
 
 export function ClientLogos({ className = "" }: { className?: string }) {
+  const t = useCopy();
   return (
     <ul
       className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px bg-night/25 border border-night/25 ${className}`}
@@ -31,7 +33,7 @@ export function ClientLogos({ className = "" }: { className?: string }) {
           <Link
             to="/work/$slug"
             params={{ slug: l.slug }}
-            aria-label={`${l.name}, view project`}
+            aria-label={t.viewProject(l.name)}
             className="group flex h-full flex-col justify-between gap-6 p-4 md:p-5 transition-colors duration-300 hover:bg-night"
             style={{ minHeight: "clamp(9.5rem, 13vw, 12.5rem)" }}
           >

@@ -1,30 +1,30 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { projects } from "@/data/projects";
+import { projectText, projects } from "@/data/projects";
+import { useCopy, useLang } from "@/i18n/lang";
+import { headCopy } from "@/i18n/head";
 import { useProjectCovers, useProjectRecords } from "@/lib/project-media";
 import { ProjectCover } from "@/components/ProjectCover";
 
 export const Route = createFileRoute("/work/")({
-  head: () => ({
-    meta: [
-      { title: "Work | IMCICC, Francesco Carpino" },
-      {
-        name: "description",
-        content:
-          "Sports design projects for Giro d'Italia, FIRS1 Sports, Aston Villa, CD Arenteiro, CD Córgomo and AC Milan: art direction, visual systems and player storytelling.",
-      },
-      { property: "og:title", content: "Work | IMCICC, Francesco Carpino" },
-      {
-        property: "og:description",
-        content: "Art direction, visual systems and content for clubs and competitions.",
-      },
-      { property: "og:url", content: "https://imcicc.com/work" },
-    ],
-    links: [{ rel: "canonical", href: "https://imcicc.com/work" }],
-  }),
+  head: ({ match }) => {
+    const t = headCopy(match).work;
+    return {
+      meta: [
+        { title: t.title },
+        { name: "description", content: t.description },
+        { property: "og:title", content: t.title },
+        { property: "og:description", content: t.ogDescription },
+        { property: "og:url", content: "https://imcicc.com/work" },
+      ],
+      links: [{ rel: "canonical", href: "https://imcicc.com/work" }],
+    };
+  },
   component: WorkPage,
 });
 
 function WorkPage() {
+  const t = useCopy().work;
+  const lang = useLang();
   const records = useProjectRecords();
   const covers = useProjectCovers();
   const pending = records.isPending || (!!records.data && covers.isPending);
@@ -41,12 +41,9 @@ function WorkPage() {
           className="voice col-span-4 md:col-span-7"
           style={{ fontSize: "var(--step-4)", lineHeight: 0.86 }}
         >
-          Work
+          {t.heading}
         </h1>
-        <p className="body-copy col-span-4 md:col-span-4 md:col-start-9 md:self-end">
-          Six projects across football and cycling, for clubs, a Grand Tour and FIRS1 Sports. Open
-          any of them to see the full set of graphics.
-        </p>
+        <p className="body-copy col-span-4 md:col-span-4 md:col-start-9 md:self-end">{t.intro}</p>
       </header>
 
       <ul
@@ -69,7 +66,7 @@ function WorkPage() {
                 {p.title}
               </h2>
               <p className="label mt-2">
-                {p.discipline}, {p.format.toLowerCase()}
+                {projectText(p, lang).discipline}, {projectText(p, lang).format.toLowerCase()}
               </p>
             </Link>
           </li>

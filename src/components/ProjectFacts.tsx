@@ -1,24 +1,30 @@
-import type { Project } from "@/data/projects";
+import { projectText, type Project } from "@/data/projects";
+import { useCopy, useLang } from "@/i18n/lang";
 
-/** Sport / discipline / format as a small definition list with hairlines. */
+/** Client / sport / discipline / format as a small definition list with hairlines. */
 export function ProjectFacts({
   project,
-  extra = [],
+  role,
+  year,
   withClient = true,
   className = "",
 }: {
   project: Project;
+  role?: string | null;
+  year?: string | null;
   withClient?: boolean;
-  extra?: [string, string | null | undefined][];
   className?: string;
 }) {
+  const f = useCopy().facts;
+  const text = projectText(project, useLang());
   const rows = (
     [
-      ["Client", withClient ? project.client : null],
-      ["Sport", project.sport],
-      ["Discipline", project.discipline],
-      ["Format", project.format],
-      ...extra,
+      [f.client, withClient ? project.client : null],
+      [f.sport, text.sport],
+      [f.discipline, text.discipline],
+      [f.format, text.format],
+      [f.role, role],
+      [f.year, year],
     ] as [string, string | null | undefined][]
   ).filter(([, v]) => !!v && v.trim().length > 0) as [string, string][];
 

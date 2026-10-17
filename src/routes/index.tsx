@@ -1,96 +1,106 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE_STANDARD } from "@/lib/motion";
-import { CONTACT, projects, type Project } from "@/data/projects";
+import { CONTACT, projectText, projects, type Project } from "@/data/projects";
 import { ClientLogos } from "@/components/ClientLogos";
 import { useProjectCovers, useProjectRecords } from "@/lib/project-media";
 import { ProjectCover } from "@/components/ProjectCover";
-import { CAPABILITIES } from "@/data/capabilities";
+import { CAPABILITIES, capabilityText } from "@/data/capabilities";
+import { useCopy, useLang } from "@/i18n/lang";
+import { headCopy } from "@/i18n/head";
 import { ProjectFacts } from "@/components/ProjectFacts";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "IMCICC | Francesco Carpino, freelance sports designer" },
-      {
-        name: "description",
-        content:
-          "Francesco Carpino (IMCICC) is a freelance sports designer in Milan, working on art direction, visual systems and content for clubs, competitions and brands.",
-      },
-      { property: "og:title", content: "IMCICC | Francesco Carpino, freelance sports designer" },
-      {
-        property: "og:description",
-        content:
-          "Art direction, visual systems and content for football, cycling and the brands around them.",
-      },
-      { property: "og:url", content: "https://imcicc.com/" },
-    ],
-    links: [{ rel: "canonical", href: "https://imcicc.com/" }],
-  }),
+  head: ({ match }) => {
+    const t = headCopy(match).home;
+    return {
+      meta: [
+        { title: t.title },
+        { name: "description", content: t.description },
+        { property: "og:title", content: t.title },
+        { property: "og:description", content: t.ogDescription },
+        { property: "og:url", content: "https://imcicc.com/" },
+      ],
+      links: [{ rel: "canonical", href: "https://imcicc.com/" }],
+    };
+  },
   component: Index,
 });
 
-const HEADLINE = "Sports design for clubs, competitions and the culture around them.";
-
 function Index() {
   const reduced = useReducedMotion();
-  const words = HEADLINE.split(" ");
+  const t = useCopy();
+  const lang = useLang();
+  const words = t.home.headline.split(" ");
 
   return (
     <>
-      {/* ── Hero ─────────────────────────────────────────── */}
+      {/* ── Hero: the statement, the person, the way in ───── */}
       <section
         aria-labelledby="hero-title"
-        style={{ paddingTop: "calc(var(--nav-h) + clamp(2.5rem, 7vw, 6.5rem))" }}
+        style={{ paddingTop: "calc(var(--nav-h) + clamp(2rem, 5vw, 5rem))" }}
       >
-        <div className="frame">
-          <h1
-            id="hero-title"
-            className="voice max-w-[14ch] md:max-w-[19ch]"
-            style={{
-              fontSize: "clamp(3.25rem, min(11.6vw, 21svh), 12.5rem)",
-              lineHeight: 0.86,
-              letterSpacing: "-0.03em",
-            }}
-          >
-            {words.map((w, i) => (
-              <span
-                key={i}
-                className="inline-block overflow-hidden align-top pb-[0.06em] -mb-[0.06em]"
-              >
-                <motion.span
-                  className="inline-block"
-                  initial={reduced ? false : { y: "105%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 0.9, delay: 0.1 + i * 0.045, ease: EASE_STANDARD }}
+        <div className="frame grid-12 gap-y-8 md:items-end">
+          <div className="col-span-4 md:col-span-8">
+            <h1
+              id="hero-title"
+              key={lang}
+              className="voice max-w-[15ch]"
+              style={{
+                fontSize: "clamp(3rem, min(7.6vw, 15svh), 9.25rem)",
+                lineHeight: 0.86,
+                letterSpacing: "-0.03em",
+              }}
+            >
+              {words.map((w, i) => (
+                <span
+                  key={i}
+                  className="inline-block overflow-hidden align-top pb-[0.06em] -mb-[0.06em]"
                 >
-                  {w}
-                  {i < words.length - 1 ? " " : ""}
-                </motion.span>
-                {i < words.length - 1 ? " " : ""}
-              </span>
-            ))}
-          </h1>
+                  <motion.span
+                    className="inline-block"
+                    initial={reduced ? false : { y: "105%" }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 0.9, delay: 0.1 + i * 0.045, ease: EASE_STANDARD }}
+                  >
+                    {w}
+                    {i < words.length - 1 ? "\u00a0" : ""}
+                  </motion.span>
+                  {i < words.length - 1 ? " " : ""}
+                </span>
+              ))}
+            </h1>
 
-          <div className="grid-12 gap-y-8 mt-10 md:mt-14">
-            <p className="lead col-span-4 md:col-span-6 lg:col-span-5">
-              I'm Francesco Carpino, a freelance sports designer. I work on art direction, visual
-              systems and content for clubs, competitions and the brands around them, from the first
-              idea to the finished series.
-            </p>
-            <div className="col-span-4 md:col-span-5 md:col-start-8 lg:col-start-9 lg:col-span-4 flex flex-col gap-5 md:items-start">
-              <p className="label flex items-center gap-2.5 !text-chalk">
-                <span className="live-dot" aria-hidden /> Available for freelance projects
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <a href="#work" className="btn">
-                  See selected work
-                </a>
-                <a href={`mailto:${CONTACT.email}`} className="btn btn-ghost">
-                  Email me
-                </a>
-              </div>
+            <p className="lead mt-8 md:mt-12 max-w-[34em] hidden md:block">{t.home.lead}</p>
+            <HeroActions className="mt-8 hidden md:flex" />
+          </div>
+
+          <motion.figure
+            className="col-span-4 md:col-span-4 md:col-start-9"
+            initial={reduced ? false : { clipPath: "inset(0% 0% 100% 0%)" }}
+            animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
+            transition={{ duration: 1, delay: 0.35, ease: EASE_STANDARD }}
+          >
+            <div className="well aspect-square md:aspect-[4/5]">
+              <img
+                src="/francesco-portrait.webp"
+                srcSet="/imcicc.webp 840w, /francesco-portrait.webp 1200w"
+                sizes="(min-width: 768px) 30vw, 100vw"
+                alt={t.home.portraitAlt}
+                width={1200}
+                height={1490}
+                fetchPriority="high"
+                decoding="async"
+                className="h-full w-full object-cover object-[50%_28%]"
+              />
             </div>
+            <figcaption className="label mt-3">{t.home.portraitCaption}</figcaption>
+          </motion.figure>
+
+          {/* On phones the introduction follows the portrait */}
+          <div className="col-span-4 md:hidden">
+            <p className="lead">{t.home.lead}</p>
+            <HeroActions className="mt-7 flex" />
           </div>
         </div>
 
@@ -111,11 +121,11 @@ function Index() {
               className="bg-night overflow-x-auto md:overflow-visible snap-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               tabIndex={0}
               role="region"
-              aria-label="Poster wall"
+              aria-label={t.home.wallLabel}
             >
               <img
                 src="/hero-collage.webp"
-                alt="A wall of Francesco's sports posters, including player milestones, Giro d'Italia stage graphics and club visuals."
+                alt={t.home.wallAlt}
                 width={1920}
                 height={1080}
                 fetchPriority="high"
@@ -124,14 +134,14 @@ function Index() {
               />
             </div>
             <figcaption className="label mt-3">
-              A selection of posters from the archive.
-              <span className="md:hidden"> Swipe to see more.</span>
+              {t.home.wallCaption}
+              <span className="md:hidden">{t.home.wallSwipe}</span>
             </figcaption>
           </motion.figure>
 
           <div className="frame" style={{ marginTop: "var(--space-5)" }}>
             <div className="grid-12 gap-y-4">
-              <h2 className="label col-span-4 md:col-span-12">Clients and collaborations</h2>
+              <h2 className="label col-span-4 md:col-span-12">{t.home.clients}</h2>
               <ClientLogos className="col-span-4 md:col-span-12" />
             </div>
           </div>
@@ -153,36 +163,40 @@ function Index() {
               className="voice col-span-4 md:col-span-6"
               style={{ fontSize: "var(--step-3)" }}
             >
-              What I do
+              {t.home.whatIDo}
             </h2>
             <p className="body-copy col-span-4 md:col-span-5 md:col-start-8 md:self-end">
-              The thinking matters as much as the making: understanding the brief, choosing a
-              direction and turning it into work that holds together.
+              {t.home.whatIDoIntro}
             </p>
           </div>
           <ul className="grid md:grid-cols-2 gap-x-[var(--gutter)]">
-            {CAPABILITIES.map((c) => (
-              <li key={c.title} className="rule py-8 md:py-10 grid grid-cols-1 gap-3">
-                <h3 className="voice" style={{ fontSize: "var(--step-2)" }}>
-                  {c.title}
-                </h3>
-                <p className="body-copy">{c.description}</p>
-                <p className="label">
-                  Seen in{" "}
-                  {c.seenIn.map((slug, i) => {
-                    const p = projects.find((x) => x.slug === slug)!;
-                    return (
-                      <span key={slug}>
-                        <Link to="/work/$slug" params={{ slug }} className="link project-name">
+            {CAPABILITIES.map((c) => {
+              const ct = capabilityText(c, lang);
+              const names = c.seenIn.map((slug) => projects.find((x) => x.slug === slug)!);
+              return (
+                <li key={c.title} className="rule py-8 md:py-10 grid grid-cols-1 gap-3">
+                  <h3 className="voice" style={{ fontSize: "var(--step-2)" }}>
+                    {ct.title}
+                  </h3>
+                  <p className="body-copy">{ct.description}</p>
+                  <p className="label">
+                    {t.home.seenIn}{" "}
+                    {names.map((p, i) => (
+                      <span key={p.slug}>
+                        <Link
+                          to="/work/$slug"
+                          params={{ slug: p.slug }}
+                          className="link project-name"
+                        >
                           {p.title}
                         </Link>
-                        {i < c.seenIn.length - 2 ? ", " : i === c.seenIn.length - 2 ? " and " : ""}
+                        {i < names.length - 2 ? ", " : i === names.length - 2 ? ` ${t.and} ` : ""}
                       </span>
-                    );
-                  })}
-                </p>
-              </li>
-            ))}
+                    ))}
+                  </p>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </section>
@@ -206,6 +220,7 @@ const LAYOUT = [
 ];
 
 function SelectedWork() {
+  const t = useCopy();
   const featured = projects.filter((p) => p.featured);
   const records = useProjectRecords();
   const covers = useProjectCovers();
@@ -220,10 +235,10 @@ function SelectedWork() {
       <div className="frame">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-14 md:mb-20">
           <h2 id="work-title" className="voice" style={{ fontSize: "var(--step-3)" }}>
-            Selected work
+            {t.home.selectedWork}
           </h2>
           <Link to="/work" className="link wdth-label font-medium">
-            All {projects.length} projects
+            {t.home.allProjects(projects.length)}
           </Link>
         </div>
 
@@ -257,13 +272,15 @@ function FeaturedRow({
   pending: boolean;
   eager?: boolean;
 }) {
+  const t = useCopy();
+  const text = projectText(project, useLang());
   return (
     <article className="grid-12 gap-y-6">
       <Link
         to="/work/$slug"
         params={{ slug: project.slug }}
         className={`tile block col-span-4 ${layout.media}`}
-        aria-label={`${project.title}, view project`}
+        aria-label={t.viewProject(project.title)}
       >
         <ProjectCover
           project={project}
@@ -280,9 +297,28 @@ function FeaturedRow({
             {project.title}
           </h3>
         </Link>
-        <p className="body-copy mt-4 max-w-[30em]">{project.summary}</p>
+        <p className="body-copy mt-4 max-w-[30em]">{text.summary}</p>
         <ProjectFacts project={project} withClient={false} className="mt-6" />
       </div>
     </article>
+  );
+}
+
+function HeroActions({ className = "" }: { className?: string }) {
+  const t = useCopy();
+  return (
+    <div className={`flex-col gap-5 items-start ${className}`}>
+      <p className="label flex items-center gap-2.5 !text-chalk">
+        <span className="live-dot" aria-hidden /> {t.available}
+      </p>
+      <div className="flex flex-wrap gap-3">
+        <a href="#work" className="btn">
+          {t.home.seeWork}
+        </a>
+        <a href={`mailto:${CONTACT.email}`} className="btn btn-ghost">
+          {t.emailMe}
+        </a>
+      </div>
+    </div>
   );
 }

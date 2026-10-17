@@ -18,12 +18,22 @@ deployed on Netlify from `main` (`bun run build`, publish `dist`). TanStack Star
 - One family: Archivo variable (self-hosted via `@fontsource-variable/archivo`). Condensed width
   (`.voice`, `--wdth-voice`) for headlines, expanded (`.label`, `--wdth-label`) for small labels.
   Labels are sentence case.
-- Orange is used as a full plate (footer CTA, contact page) and for the availability dot — not as
-  scattered accents.
+- Orange is structural: full plates (poster wall + client board, footer CTA, contact page), primary
+  buttons, link underlines, active nav and project names.
 - Artwork is never cropped on project pages; covers adapt to the artwork's proportions
   (`ProjectCover`), the gallery pairs portraits and gives landscapes a full row (`ProjectGallery`).
 - Motion: one hero sequence on the homepage, short cross-fade between pages, hover responses.
   No scroll-triggered fade-ups. `prefers-reduced-motion` is respected.
+
+## Languages (EN / IT)
+- All interface copy lives in `src/i18n/copy.ts` (one object per language, same shape). Project and
+  capability text has an `it` block in `src/data/projects.ts` / `src/data/capabilities.ts`.
+- The language is decided in the root route's `beforeLoad` (`detectLang` in `src/i18n/lang.tsx`):
+  the `lang` cookie if set, otherwise the browser's Accept-Language (Italian → `it`), otherwise `en`.
+  URLs are the same in both languages. Use `useCopy()` / `useLang()` in components and
+  `headCopy(match)` in route `head()`.
+- Project intros written in /admin are shown on the English page only; the Italian page uses the
+  Italian summary from `projects.ts`.
 
 ## Dev
 - `bun install`, `bun run dev`. `bunfig.toml` / `bun.lock` reference Lovable's npm cache; outside that

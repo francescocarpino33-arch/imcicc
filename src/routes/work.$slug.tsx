@@ -1,7 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "framer-motion";
 import { EASE_STANDARD } from "@/lib/motion";
-import { CONTACT, getAdjacentProjects, getProject, projects } from "@/data/projects";
+import { CONTACT, getAdjacentProjects, getProject, projectText, projects } from "@/data/projects";
+import { useCopy, useLang } from "@/i18n/lang";
+import { langOf } from "@/i18n/head";
 import { useProjectCovers, useProjectDetail, useProjectRecords } from "@/lib/project-media";
 import { ProjectFacts } from "@/components/ProjectFacts";
 import { ProjectGallery } from "@/components/ProjectGallery";
@@ -13,21 +15,22 @@ export const Route = createFileRoute("/work/$slug")({
     if (!project) throw notFound();
     return { project };
   },
-  head: ({ params }) => {
+  head: ({ params, match }) => {
     const p = getProject(params.slug);
     if (!p) return {};
-    const title = `${p.title}: ${p.discipline} | IMCICC`;
+    const text = projectText(p, langOf(match.context));
+    const title = `${p.title}: ${text.discipline} | IMCICC`;
     const url = `https://imcicc.com/work/${p.slug}`;
     return {
       meta: [
         { title },
-        { name: "description", content: p.summary },
+        { name: "description", content: text.summary },
         { property: "og:title", content: title },
-        { property: "og:description", content: p.summary },
+        { property: "og:description", content: text.summary },
         { property: "og:url", content: url },
         { property: "og:type", content: "article" },
         { name: "twitter:title", content: title },
-        { name: "twitter:description", content: p.summary },
+        { name: "twitter:description", content: text.summary },
       ],
       links: [{ rel: "canonical", href: url }],
     };
@@ -41,13 +44,18 @@ function ProjectPage() {
   const reduced = useReducedMotion();
   const { next } = getAdjacentProjects(project.slug);
   const position = projects.findIndex((p) => p.slug === project.slug) + 1;
+  const t = useCopy().project;
+  const lang = useLang();
+  const text = projectText(project, lang);
+  // Intros written in /admin are in one language; the Italian page uses the Italian summary.
+  const intro = lang === "it" ? text.summary : record?.intro?.trim() || text.summary;
 
   return (
     <article style={{ paddingTop: "calc(var(--nav-h) + clamp(2rem, 5vw, 4.5rem))" }}>
       <header className="frame">
         <nav aria-label="Breadcrumb" className="label mb-8 md:mb-12">
           <Link to="/work" className="link">
-            Work
+            {t.breadcrumb}
           </Link>
           <span aria-hidden className="mx-2">
             /
@@ -69,29 +77,19 @@ function ProjectPage() {
 
         <div className="grid-12 gap-y-10 mt-10 md:mt-14">
           <div className="col-span-4 md:col-span-6 lg:col-span-6">
-            <p className="lead">{record?.intro?.trim() || project.summary}</p>
-            {project.nda && (
-              <p className="body-copy mt-5">
-                This work is covered by a confidentiality agreement, so it isn't published here.
-              </p>
-            )}
+            <p className="lead">{intro}</p>
+            {project.nda && <p className="body-copy mt-5">{t.ndaNote}</p>}
           </div>
           <ProjectFacts
             project={project}
-            extra={[
-              ["Role", record?.role],
-              ["Year", record?.year],
-            ]}
+            role={record?.role}
+            year={record?.year}
             className="col-span-4 md:col-span-5 md:col-start-8 self-start"
           />
         </div>
       </header>
 
-      <section
-        aria-label="Project images"
-        className="frame"
-        style={{ marginTop: "var(--space-6)" }}
-      >
+      <section aria-label={t.imagesLabel} className="frame" style={{ marginTop: "var(--space-6)" }}>
         {loading ? (
           <GallerySkeleton />
         ) : images.length > 0 ? (
@@ -109,12 +107,13 @@ function ProjectPage() {
 }
 
 function GallerySkeleton() {
+  const t = useCopy().project;
   return (
     <div
       className="grid grid-cols-1 md:grid-cols-2"
       style={{ gap: "var(--gutter)" }}
       aria-busy="true"
-      aria-label="Loading images"
+      aria-label={t.loading}
     >
       {[0, 1].map((i) => (
         <div key={i} className="well animate-pulse" style={{ aspectRatio: "4 / 5" }} />
@@ -124,26 +123,24 @@ function GallerySkeleton() {
 }
 
 function NdaNotice({ title }: { title: string }) {
-  const subject = encodeURIComponent(`${title} work: private viewing`);
+  const t = useCopy().project;
+  const subject = encodeURIComponent(t.ndaSubject(title));
   return (
     <div
       className="well grid-12 gap-y-8"
       style={{ padding: "clamp(2rem, 6vw, 5.5rem) var(--gutter)" }}
     >
       <h2 className="voice col-span-4 md:col-span-6" style={{ fontSize: "var(--step-3)" }}>
-        Available to view privately.
+        {t.ndaTitle}
       </h2>
       <div className="col-span-4 md:col-span-5 md:col-start-8 flex flex-col gap-6">
-        <p className="body-copy">
-          Some client work can't be shown publicly. If you're considering working together, I'm
-          happy to walk you through the {title} work on a call or share it directly.
-        </p>
+        <p className="body-copy">{t.ndaBody(title)}</p>
         <div className="flex flex-wrap gap-3">
           <a className="btn" href={`mailto:${CONTACT.email}?subject=${subject}`}>
-            Request a private viewing
+            {t.ndaCta}
           </a>
           <Link to="/work" className="btn btn-ghost">
-            See other work
+            {t.otherWork}
           </Link>
         </div>
       </div>
@@ -152,18 +149,15 @@ function NdaNotice({ title }: { title: string }) {
 }
 
 function EmptyNotice({ failed }: { failed: boolean }) {
+  const t = useCopy().project;
   return (
     <div
       className="well flex flex-col items-start gap-5"
       style={{ padding: "clamp(2rem, 6vw, 5rem) var(--gutter)" }}
     >
-      <p className="lead">
-        {failed
-          ? "The images for this project couldn't be loaded. Refresh the page to try again."
-          : "Images for this project are being prepared."}
-      </p>
+      <p className="lead">{failed ? t.emptyFailed : t.emptyPending}</p>
       <Link to="/work" className="btn btn-ghost">
-        See other work
+        {t.otherWork}
       </Link>
     </div>
   );
@@ -173,22 +167,24 @@ function NextProject({ slug, position }: { slug: string; position: number }) {
   const next = getProject(slug)!;
   const records = useProjectRecords();
   const covers = useProjectCovers();
+  const t = useCopy().project;
+  const text = projectText(next, useLang());
 
   return (
     <nav
-      aria-label="Next project"
+      aria-label={t.nextLabel}
       className="frame"
       style={{ paddingBlock: "var(--space-section)" }}
     >
       <Link to="/work/$slug" params={{ slug }} className="tile grid-12 gap-y-6 rule pt-8 items-end">
         <div className="col-span-4 md:col-span-7">
           <p className="label mb-4 tabular-nums">
-            Next project, {position === projects.length ? 1 : position + 1} of {projects.length}
+            {t.next(position === projects.length ? 1 : position + 1, projects.length)}
           </p>
           <p className="tile-title voice" style={{ fontSize: "var(--step-4)", lineHeight: 0.86 }}>
             {next.title}
           </p>
-          <p className="body-copy mt-5">{next.summary}</p>
+          <p className="body-copy mt-5">{text.summary}</p>
         </div>
         <div className="col-span-2 md:col-span-3 md:col-start-10">
           <ProjectCover

@@ -32,7 +32,17 @@ export type Project = {
   fallbackScale?: number;
   featured?: boolean;
   nda?: boolean;
+  /** Italian version of the visible text. */
+  it: { discipline: string; format: string; summary: string };
 };
+
+/** Project text in the requested language. */
+export function projectText(p: Project, lang: "en" | "it") {
+  if (lang === "it") {
+    return { ...p.it, sport: p.sport === "Football" ? "Calcio" : "Ciclismo" };
+  }
+  return { discipline: p.discipline, format: p.format, summary: p.summary, sport: p.sport };
+}
 
 export const projects: Project[] = [
   {
@@ -46,6 +56,12 @@ export const projects: Project[] = [
       "A series of 25 graphics that follows the race stage by stage, each one built around that day's context.",
     fallbackCover: giro,
     fallbackTone: "#ff266e",
+    it: {
+      discipline: "Grafiche Editoriali",
+      format: "Serie di 25 grafiche",
+      summary:
+        "Una serie di 25 grafiche che segue la corsa tappa dopo tappa, ognuna costruita sul contesto di quel giorno.",
+    },
     featured: true,
   },
   {
@@ -59,6 +75,12 @@ export const projects: Project[] = [
       "A weekly content series built around players and the moments that define them, across the Champions League, Europa League and FIFA World Cup.",
     fallbackCover: firs1,
     fallbackTone: "#151515",
+    it: {
+      discipline: "Storytelling degli Atleti",
+      format: "Serie settimanale",
+      summary:
+        "Una serie settimanale di contenuti costruita attorno ai giocatori e ai momenti che li definiscono, tra Champions League, Europa League e Mondiali FIFA.",
+    },
     featured: true,
   },
   {
@@ -72,6 +94,12 @@ export const projects: Project[] = [
     fallbackCover: "/AVFC.webp",
     fallbackTone: "#490024",
     fallbackScale: 1.15,
+    it: {
+      discipline: "Key Visual",
+      format: "Poster singolo",
+      summary:
+        "Un key visual di Premier League per la partita dell'Aston Villa contro il Brighton.",
+    },
     featured: true,
   },
   {
@@ -85,6 +113,12 @@ export const projects: Project[] = [
       "Editorial and club content for a Galician football club, designed as one consistent series.",
     fallbackCover: arenteiro,
     fallbackTone: "#1f8d44",
+    it: {
+      discipline: "Contenuti Editoriali e per il Club",
+      format: "Serie",
+      summary:
+        "Contenuti editoriali e per il club di una squadra di calcio galiziana, pensati come un'unica serie coerente.",
+    },
     featured: true,
   },
   {
@@ -97,6 +131,11 @@ export const projects: Project[] = [
     summary: "Editorial and club content for a little big club.",
     fallbackCover: "/corgomo.webp",
     fallbackTone: "#30b15f",
+    it: {
+      discipline: "Contenuti Editoriali e per il Club",
+      format: "Serie",
+      summary: "Contenuti editoriali e per il club di un piccolo grande club.",
+    },
   },
   {
     slug: "ac-milan",
@@ -105,10 +144,14 @@ export const projects: Project[] = [
     sport: "Football",
     discipline: "Digital and Social Design",
     format: "Brand assets",
-    summary:
-      "Digital and social brand assets for the club. The work is under NDA and can be shared privately.",
+    summary: "Digital and social brand assets for the club.",
     fallbackCover: acMilan,
     fallbackTone: "#000000",
+    it: {
+      discipline: "Design Digitale e Social",
+      format: "Asset di brand",
+      summary: "Asset digitali e social per il club.",
+    },
     nda: true,
   },
 ];

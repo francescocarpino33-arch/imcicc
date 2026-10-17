@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { CONTACT } from "@/data/projects";
+import { useCopy } from "@/i18n/lang";
 
 /** Copies the contact email; useful when someone's default mail app isn't set up. */
 export function CopyEmail({ className = "" }: { className?: string }) {
   const [copied, setCopied] = useState(false);
+  const t = useCopy().copyEmail;
 
   useEffect(() => {
     if (!copied) return;
@@ -22,7 +24,7 @@ export function CopyEmail({ className = "" }: { className?: string }) {
 
   return (
     <button type="button" onClick={copy} className={className}>
-      <span aria-live="polite">{copied ? "Email copied" : "Copy email address"}</span>
+      <span aria-live="polite">{copied ? t.done : t.idle}</span>
     </button>
   );
 }

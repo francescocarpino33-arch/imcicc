@@ -1,5 +1,6 @@
 import { useState } from "react";
-import type { Project } from "@/data/projects";
+import { projectText, type Project } from "@/data/projects";
+import { useCopy, useLang } from "@/i18n/lang";
 
 type Props = {
   project: Project;
@@ -36,6 +37,8 @@ export function ProjectCover({
   adapt = true,
   className = "",
 }: Props) {
+  const t = useCopy().project;
+  const text = projectText(project, useLang());
   const [frame, setFrame] = useState(ratio);
   const [fit, setFit] = useState<"cover" | "contain">("cover");
   const [loaded, setLoaded] = useState(false);
@@ -45,7 +48,7 @@ export function ProjectCover({
       {src ? (
         <img
           src={src}
-          alt={`${project.title}: ${project.discipline.toLowerCase()}`}
+          alt={`${project.title}: ${text.discipline}`}
           sizes={sizes}
           loading={eager ? "eager" : "lazy"}
           fetchPriority={eager ? "high" : undefined}
@@ -76,7 +79,7 @@ export function ProjectCover({
         >
           <img
             src={project.fallbackCover}
-            alt={`${project.client} crest`}
+            alt={t.crest(project.client)}
             loading={eager ? "eager" : "lazy"}
             decoding="async"
             className="h-full w-full object-contain"
@@ -86,7 +89,7 @@ export function ProjectCover({
       )}
       {project.nda && (
         <span className="absolute left-3 top-3 bg-night/85 px-2.5 py-1.5 label !text-chalk backdrop-blur">
-          Under NDA
+          {t.underNda}
         </span>
       )}
     </div>

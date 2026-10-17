@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCopy } from "@/i18n/lang";
 
 type Props = {
   images: string[];
@@ -20,6 +21,7 @@ const LANDSCAPE = 1.25;
  * treated as portrait, the most common format for this work.
  */
 export function ProjectGallery({ images, title }: Props) {
+  const t = useCopy().project;
   const [ratios, setRatios] = useState<Record<number, number>>({});
   const [open, setOpen] = useState<number | null>(null);
 
@@ -50,7 +52,7 @@ export function ProjectGallery({ images, title }: Props) {
 
   const total = images.length;
   const caption = (i: number) =>
-    `${String(i + 1).padStart(2, "0")} of ${String(total).padStart(2, "0")}`;
+    `${String(i + 1).padStart(2, "0")} ${t.of} ${String(total).padStart(2, "0")}`;
 
   const figure = (i: number, extra = "") => (
     <figure key={i} className={extra}>
@@ -58,11 +60,11 @@ export function ProjectGallery({ images, title }: Props) {
         type="button"
         onClick={() => setOpen(i)}
         className="group block w-full cursor-zoom-in well"
-        aria-label={`View ${title}, image ${i + 1} of ${total}, full size`}
+        aria-label={t.viewFull(title, i + 1, total)}
       >
         <img
           src={images[i]}
-          alt={`${title}, image ${i + 1} of ${total}`}
+          alt={t.imageAlt(title, i + 1, total)}
           loading={i < 2 ? "eager" : "lazy"}
           decoding="async"
           onLoad={(e) => {
@@ -126,6 +128,7 @@ function Lightbox({
 }) {
   const ref = useRef<HTMLDialogElement>(null);
   const total = images.length;
+  const t = useCopy().project;
 
   useEffect(() => {
     const d = ref.current;
@@ -160,7 +163,7 @@ function Lightbox({
         if (e.target === e.currentTarget) onIndex(null);
       }}
       className="m-0 h-[100dvh] max-h-none w-screen max-w-none bg-night/95 p-0 text-chalk backdrop:bg-night/80"
-      aria-label={`${title}, full-size view`}
+      aria-label={t.fullView(title)}
     >
       {index !== null && (
         <div className="flex h-full flex-col">
@@ -171,11 +174,11 @@ function Lightbox({
             <p className="label tabular-nums !text-chalk">
               {title}{" "}
               <span className="text-concrete">
-                {index + 1} of {total}
+                {index + 1} {t.of} {total}
               </span>
             </p>
             <button type="button" onClick={() => onIndex(null)} className="btn btn-ghost !min-h-10">
-              Close
+              {t.close}
             </button>
           </div>
           <div
@@ -187,17 +190,17 @@ function Lightbox({
             <img
               key={index}
               src={images[index]}
-              alt={`${title}, image ${index + 1} of ${total}`}
+              alt={t.imageAlt(title, index + 1, total)}
               className="max-h-full max-w-full object-contain"
             />
           </div>
           {total > 1 && (
             <div className="frame flex justify-between pb-5">
               <button type="button" onClick={() => step(-1)} className="btn btn-ghost !min-h-10">
-                Previous
+                {t.previous}
               </button>
               <button type="button" onClick={() => step(1)} className="btn btn-ghost !min-h-10">
-                Next
+                {t.nextImage}
               </button>
             </div>
           )}

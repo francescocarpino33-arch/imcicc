@@ -1,14 +1,16 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { CONTACT } from "@/data/projects";
-
-const LINKS = [
-  { to: "/work", label: "Work" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
-] as const;
+import { useCopy } from "@/i18n/lang";
+import { LangSwitch } from "@/components/LangSwitch";
 
 export function SiteNav() {
+  const t = useCopy();
+  const LINKS = [
+    { to: "/work", label: t.nav.work },
+    { to: "/about", label: t.nav.about },
+    { to: "/contact", label: t.nav.contact },
+  ] as const;
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -50,7 +52,7 @@ export function SiteNav() {
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-chalk focus:px-4 focus:py-2 focus:text-night"
       >
-        Skip to content
+        {t.nav.skip}
       </a>
       <header
         data-tone={onSignal ? "signal" : undefined}
@@ -61,7 +63,7 @@ export function SiteNav() {
         <div className="frame flex items-center justify-between" style={{ height: "var(--nav-h)" }}>
           <Link
             to="/"
-            aria-label="IMCICC, home"
+            aria-label={t.nav.homeLabel}
             className="inline-flex items-center gap-3 shrink-0"
           >
             <img
@@ -75,12 +77,12 @@ export function SiteNav() {
               <span className="block text-[0.9375rem] font-semibold wdth-voice tracking-[-0.01em]">
                 Francesco Carpino
               </span>
-              <span className="block label">Sports Designer</span>
+              <span className="block label">{t.nav.role}</span>
             </span>
           </Link>
 
           <nav
-            aria-label="Main"
+            aria-label={t.nav.mainLabel}
             className="hidden md:flex items-center gap-9 text-[0.9375rem] wdth-label font-medium"
           >
             {LINKS.map((l) => (
@@ -93,10 +95,13 @@ export function SiteNav() {
                 {l.label}
               </Link>
             ))}
+            <LangSwitch />
             <a href={`mailto:${CONTACT.email}`} className="btn !min-h-10 !px-4">
-              Start a project
+              {t.nav.cta}
             </a>
           </nav>
+
+          <LangSwitch className="md:hidden ml-auto mr-5" />
 
           <button
             ref={toggleRef}
@@ -114,7 +119,7 @@ export function SiteNav() {
                 className={`absolute left-0 right-0 h-px bg-chalk transition-transform duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`}
               />
             </span>
-            {open ? "Close" : "Menu"}
+            {open ? t.nav.close : t.nav.menu}
           </button>
         </div>
       </header>
@@ -127,12 +132,12 @@ export function SiteNav() {
         aria-hidden={!open}
       >
         <nav
-          aria-label="Mobile"
+          aria-label={t.nav.mobileLabel}
           className="frame flex h-full flex-col justify-between"
           style={{ paddingTop: "calc(var(--nav-h) + 2rem)", paddingBottom: "2rem" }}
         >
           <ul className="flex flex-col gap-1">
-            {[{ to: "/", label: "Home" }, ...LINKS].map((l) => (
+            {[{ to: "/", label: t.nav.home }, ...LINKS].map((l) => (
               <li key={l.to}>
                 <Link
                   to={l.to}
@@ -149,14 +154,14 @@ export function SiteNav() {
           </ul>
           <div className="flex flex-col gap-4">
             <p className="label flex items-center gap-2.5">
-              <span className="live-dot" aria-hidden /> Available for freelance projects
+              <span className="live-dot" aria-hidden /> {t.available}
             </p>
             <a
               href={`mailto:${CONTACT.email}`}
               tabIndex={open ? 0 : -1}
               className="btn justify-center"
             >
-              Start a project
+              {t.nav.cta}
             </a>
           </div>
         </nav>

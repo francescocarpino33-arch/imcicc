@@ -2,35 +2,29 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CONTACT } from "@/data/projects";
 import { CopyEmail } from "@/components/CopyEmail";
 import { ClientLogos } from "@/components/ClientLogos";
+import { useCopy } from "@/i18n/lang";
+import { headCopy } from "@/i18n/head";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact | IMCICC, Francesco Carpino" },
-      {
-        name: "description",
-        content:
-          "Start a project with Francesco Carpino (IMCICC), freelance sports designer in Milan. Email, LinkedIn and Instagram.",
-      },
-      { property: "og:title", content: "Contact | IMCICC, Francesco Carpino" },
-      {
-        property: "og:description",
-        content: "Start a project with Francesco Carpino, freelance sports designer in Milan.",
-      },
-      { property: "og:url", content: "https://imcicc.com/contact" },
-    ],
-    links: [{ rel: "canonical", href: "https://imcicc.com/contact" }],
-  }),
+  head: ({ match }) => {
+    const t = headCopy(match).contact;
+    return {
+      meta: [
+        { title: t.title },
+        { name: "description", content: t.description },
+        { property: "og:title", content: t.title },
+        { property: "og:description", content: t.ogDescription },
+        { property: "og:url", content: "https://imcicc.com/contact" },
+      ],
+      links: [{ rel: "canonical", href: "https://imcicc.com/contact" }],
+    };
+  },
   component: ContactPage,
 });
 
-const BRIEF = [
-  "Who it's for: the club, competition or brand",
-  "What you need: a single piece, ongoing content or a series",
-  "When you need it, and how often",
-];
-
 function ContactPage() {
+  const copy = useCopy();
+  const t = copy.contact;
   return (
     <section
       aria-labelledby="contact-title"
@@ -42,20 +36,20 @@ function ContactPage() {
     >
       <div className="frame">
         <p className="flex items-center gap-2.5 font-medium wdth-label text-[0.8125rem] mb-8">
-          <span className="inline-block h-2 w-2 rounded-full bg-night" aria-hidden /> Available for
-          freelance projects
+          <span className="inline-block h-2 w-2 rounded-full bg-night" aria-hidden />{" "}
+          {copy.available}
         </p>
         <h1
           id="contact-title"
           className="voice max-w-[13ch]"
           style={{ fontSize: "var(--step-4)", lineHeight: 0.86 }}
         >
-          Tell me about your project.
+          {t.heading}
         </h1>
 
         <div className="grid-12 gap-y-14 mt-14 md:mt-20">
           <div className="col-span-4 md:col-span-7">
-            <p className="text-[0.8125rem] font-medium wdth-label mb-3">Email</p>
+            <p className="text-[0.8125rem] font-medium wdth-label mb-3">{t.email}</p>
             <a
               href={`mailto:${CONTACT.email}`}
               className="voice block break-all underline decoration-1 underline-offset-[0.12em] decoration-night/40 hover:decoration-night"
@@ -68,7 +62,7 @@ function ContactPage() {
                 href={`mailto:${CONTACT.email}`}
                 className="btn !bg-night !text-chalk hover:!bg-chalk hover:!text-night"
               >
-                Email me
+                {copy.emailMe}
               </a>
               <CopyEmail className="btn !bg-transparent !text-night shadow-[inset_0_0_0_1px_rgba(0,0,0,0.35)] hover:shadow-[inset_0_0_0_1px_#000]" />
             </div>
@@ -76,9 +70,9 @@ function ContactPage() {
 
           <div className="col-span-4 md:col-span-4 md:col-start-9 flex flex-col gap-10">
             <div>
-              <p className="text-[0.8125rem] font-medium wdth-label mb-3">Useful to include</p>
+              <p className="text-[0.8125rem] font-medium wdth-label mb-3">{t.usefulTitle}</p>
               <ul className="flex flex-col">
-                {BRIEF.map((b) => (
+                {t.useful.map((b) => (
                   <li key={b} className="border-t border-night/25 py-3 leading-snug">
                     {b}
                   </li>
@@ -86,7 +80,7 @@ function ContactPage() {
               </ul>
             </div>
             <div>
-              <p className="text-[0.8125rem] font-medium wdth-label mb-3">Elsewhere</p>
+              <p className="text-[0.8125rem] font-medium wdth-label mb-3">{t.elsewhere}</p>
               <ul className="flex flex-col">
                 <li className="border-t border-night/25 py-3">
                   <a
@@ -108,9 +102,7 @@ function ContactPage() {
                     Instagram
                   </a>
                 </li>
-                <li className="border-t border-night/25 py-3">
-                  Milan, Italy (Central European Time)
-                </li>
+                <li className="border-t border-night/25 py-3">{t.location}</li>
               </ul>
             </div>
           </div>
@@ -118,7 +110,7 @@ function ContactPage() {
 
         <div className="grid-12 gap-y-4 mt-16 md:mt-24">
           <h2 className="text-[0.8125rem] font-medium wdth-label col-span-4 md:col-span-12">
-            Clients and collaborations
+            {t.clients}
           </h2>
           <ClientLogos className="col-span-4 md:col-span-12" />
         </div>
