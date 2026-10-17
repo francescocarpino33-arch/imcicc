@@ -41,13 +41,13 @@ function Index() {
         style={{ paddingTop: "calc(var(--nav-h) + clamp(2rem, 5vw, 5rem))" }}
       >
         <div className="frame grid-12 gap-y-8 md:items-end">
-          <div className="col-span-4 md:col-span-8">
+          <div className="col-span-4 md:col-span-7">
             <h1
               id="hero-title"
               key={lang}
               className="voice max-w-[15ch]"
               style={{
-                fontSize: "clamp(3rem, min(7.6vw, 15svh), 9.25rem)",
+                fontSize: "clamp(3rem, min(6.9vw, 14svh), 8.5rem)",
                 lineHeight: 0.86,
                 letterSpacing: "-0.03em",
               }}
@@ -76,16 +76,19 @@ function Index() {
           </div>
 
           <motion.figure
-            className="col-span-4 md:col-span-4 md:col-start-9"
+            className="col-span-4 md:col-span-5 md:col-start-8"
             initial={reduced ? false : { clipPath: "inset(0% 0% 100% 0%)" }}
             animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
             transition={{ duration: 1, delay: 0.35, ease: EASE_STANDARD }}
           >
-            <div className="well aspect-square md:aspect-[4/5]">
+            <div
+              className="well aspect-[4/5]"
+              style={{ maxHeight: "calc(100svh - var(--nav-h) - 4rem)", width: "100%" }}
+            >
               <img
                 src="/francesco-portrait.webp"
                 srcSet="/imcicc.webp 840w, /francesco-portrait.webp 1200w"
-                sizes="(min-width: 768px) 30vw, 100vw"
+                sizes="(min-width: 768px) 42vw, 100vw"
                 alt={t.home.portraitAlt}
                 width={1200}
                 height={1490}
