@@ -1,28 +1,9 @@
 import { useLocation } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import { CONTACT } from "@/data/projects";
 import { CopyEmail } from "@/components/CopyEmail";
 
-function useMilanTime() {
-  const [time, setTime] = useState<string | null>(null);
-  useEffect(() => {
-    const fmt = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Europe/Rome",
-      hour: "2-digit",
-      minute: "2-digit",
-      timeZoneName: "short",
-    });
-    const tick = () => setTime(fmt.format(new Date()));
-    tick();
-    const id = window.setInterval(tick, 30_000);
-    return () => window.clearInterval(id);
-  }, []);
-  return time;
-}
-
 export function SiteFooter() {
   const { pathname } = useLocation();
-  const time = useMilanTime();
   const year = new Date().getFullYear();
   // The contact page already is the contact plate; admin/auth don't need it.
   const showPlate = !["/contact", "/admin", "/auth"].includes(pathname);
@@ -90,7 +71,7 @@ export function SiteFooter() {
               Milan, Italy.
             </p>
           </div>
-          <div className="col-span-2 md:col-span-3 md:col-start-7">
+          <div className="col-span-4 md:col-span-3 md:col-start-10">
             <p className="label mb-3">Elsewhere</p>
             <ul className="flex flex-col gap-1.5">
               <li>
@@ -119,12 +100,6 @@ export function SiteFooter() {
                 </a>
               </li>
             </ul>
-          </div>
-          <div className="col-span-2 md:col-span-3 md:col-start-10">
-            <p className="label mb-3">In Milan it's</p>
-            <p className="tabular-nums" suppressHydrationWarning>
-              {time ?? " "}
-            </p>
           </div>
         </div>
         <div className="mt-14 pt-5 rule flex flex-wrap justify-between gap-4 label">

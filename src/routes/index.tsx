@@ -158,11 +158,11 @@ function Index() {
               className="voice col-span-4 md:col-span-6"
               style={{ fontSize: "var(--step-3)" }}
             >
-              What I make
+              What I do
             </h2>
             <p className="body-copy col-span-4 md:col-span-5 md:col-start-8 md:self-end">
-              Most of my work happens around the fixture list: before, during and after the game,
-              and across a whole season or race.
+              The thinking matters as much as the making: understanding the brief, choosing a
+              direction and turning it into work that holds together.
             </p>
           </div>
           <ul className="grid md:grid-cols-2 gap-x-[var(--gutter)]">
