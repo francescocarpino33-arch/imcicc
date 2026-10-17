@@ -37,14 +37,13 @@ export function SiteFooter() {
               className="voice col-span-4 md:col-span-8"
               style={{ fontSize: "var(--step-4)" }}
             >
-              <span className="block">Bring the brief.</span>
-              <span className="block">I'll bring the system.</span>
+              Every project starts with a conversation.
             </h2>
             <div className="col-span-4 md:col-span-4 md:self-end flex flex-col gap-6">
               <p className="text-[1.0625rem] leading-relaxed max-w-[30em]">
-                Every project starts from your goals and the people you're speaking to. From there I
-                set a visual direction and build it into a system, so every piece feels part of the
-                same story.
+                First I get to know your goals and the people you're speaking to. Then I set a
+                visual direction and build it into a system, so every piece feels part of the same
+                story.
               </p>
               <ol className="grid grid-cols-3 border-t border-night/25">
                 {["Brief", "Direction", "System"].map((step, i) => (
@@ -63,7 +62,7 @@ export function SiteFooter() {
                   href={`mailto:${CONTACT.email}`}
                   className="btn !bg-night !text-chalk hover:!bg-chalk hover:!text-night"
                 >
-                  Send me your brief
+                  Get in touch
                 </a>
                 <CopyEmail className="btn !bg-transparent !text-night shadow-[inset_0_0_0_1px_rgba(0,0,0,0.35)] hover:shadow-[inset_0_0_0_1px_#000]" />
               </div>
