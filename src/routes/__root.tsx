@@ -11,27 +11,34 @@ import {
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 
 import appCss from "../styles.css?url";
+import archivoLatin from "@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { entranceTransition, pageEnter } from "@/lib/motion";
+import { CONTACT } from "@/data/projects";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-6 text-center">
-      <div className="max-w-md">
-        <p className="font-display text-xs uppercase tracking-[0.25em] text-primary mb-6">404</p>
-        <h1 className="font-display text-7xl md:text-9xl font-black uppercase tracking-tight">
-          Off<br /><span className="text-primary">pitch.</span>
-        </h1>
-        <p className="mt-6 text-sm text-muted-foreground">The page you're looking for has been substituted.</p>
-        <Link
-          to="/"
-          className="inline-block mt-10 font-display text-sm uppercase tracking-[0.2em] font-medium border-b border-primary pb-2 cursor-pointer hover:text-primary transition-colors transition-standard"
-        >
-          Return to home
+    <section
+      className="frame flex min-h-[80svh] flex-col justify-end"
+      style={{ paddingTop: "calc(var(--nav-h) + 4rem)", paddingBottom: "var(--space-6)" }}
+    >
+      <p className="label mb-6">Error 404</p>
+      <h1 className="voice max-w-[12ch]" style={{ fontSize: "var(--step-4)" }}>
+        This page has been substituted.
+      </h1>
+      <p className="body-copy mt-6">
+        The link may be old, or the page has moved. The work is still here.
+      </p>
+      <div className="mt-10 flex flex-wrap gap-3">
+        <Link to="/work" className="btn">
+          See the work
+        </Link>
+        <Link to="/" className="btn btn-ghost">
+          Go to the homepage
         </Link>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -40,34 +47,37 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   const router = useRouter();
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-6">
-      <div className="max-w-md text-center">
-        <p className="font-display text-xs uppercase tracking-[0.25em] text-primary mb-6">System Error</p>
-        <h1 className="font-display text-3xl md:text-4xl font-black uppercase tracking-tight text-foreground">
-          This page didn't load
-        </h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
-        </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
-            onClick={() => {
-              router.invalidate();
-              reset();
-            }}
-            className="inline-flex items-center justify-center bg-primary px-6 py-3 font-display text-sm uppercase tracking-[0.2em] font-medium text-primary-foreground cursor-pointer hover:brightness-110 hover:-translate-y-px transition-[filter,transform] transition-standard"
-          >
-            Try again
-          </button>
-          <a
-            href="/"
-            className="inline-flex items-center justify-center border border-border px-6 py-3 font-display text-sm uppercase tracking-[0.2em] font-medium cursor-pointer hover:border-primary hover:text-primary hover:-translate-y-px transition-[color,border-color,transform] transition-standard"
-          >
-            Go home
-          </a>
-        </div>
+    <section
+      className="frame flex min-h-[80svh] flex-col justify-end"
+      style={{ paddingTop: "calc(var(--nav-h) + 4rem)", paddingBottom: "var(--space-6)" }}
+    >
+      <p className="label mb-6">Something went wrong</p>
+      <h1 className="voice max-w-[14ch]" style={{ fontSize: "var(--step-4)" }}>
+        This page didn't load.
+      </h1>
+      <p className="body-copy mt-6">
+        Try again, or write to{" "}
+        <a className="link !text-chalk" href={`mailto:${CONTACT.email}`}>
+          {CONTACT.email}
+        </a>{" "}
+        if it keeps happening.
+      </p>
+      <div className="mt-10 flex flex-wrap gap-3">
+        <button
+          type="button"
+          onClick={() => {
+            router.invalidate();
+            reset();
+          }}
+          className="btn"
+        >
+          Try again
+        </button>
+        <a href="/" className="btn btn-ghost">
+          Go to the homepage
+        </a>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -75,29 +85,63 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "IMCICC — Sports Visual Design" },
-      { name: "description", content: "Visual design for sports culture — identities, campaigns and matchday graphics for football, cycling and beyond." },
-      { name: "author", content: "IMCICC" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
+      { title: "IMCICC | Francesco Carpino, freelance sports designer" },
+      {
+        name: "description",
+        content:
+          "Francesco Carpino (IMCICC) is a freelance sports designer in Milan, making matchday graphics, player content, social series and campaign artwork.",
+      },
+      { name: "author", content: "Francesco Carpino" },
+      { name: "theme-color", content: "#000000" },
+      { name: "color-scheme", content: "dark" },
       { property: "og:site_name", content: "IMCICC" },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_GB" },
       { property: "og:url", content: "https://imcicc.com" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#050505" },
-      { property: "og:title", content: "IMCICC — Sports Visual Design" },
-      { name: "twitter:title", content: "IMCICC — Sports Visual Design" },
-      { property: "og:description", content: "Visual design for sports culture — identities, campaigns and matchday graphics for football, cycling and beyond." },
-      { name: "twitter:description", content: "Visual design for sports culture — identities, campaigns and matchday graphics for football, cycling and beyond." },
+      { property: "og:title", content: "IMCICC | Francesco Carpino, freelance sports designer" },
+      {
+        property: "og:description",
+        content:
+          "Matchday graphics, player content, social series and campaign artwork for football, cycling and the brands around them.",
+      },
       { property: "og:image", content: "https://imcicc.com/og-image.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "IMCICC | Francesco Carpino, freelance sports designer" },
+      {
+        name: "twitter:description",
+        content:
+          "Matchday graphics, player content, social series and campaign artwork for football, cycling and the brands around them.",
+      },
       { name: "twitter:image", content: "https://imcicc.com/og-image.jpg" },
     ],
     links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@200;300;400;500&family=Barlow:wght@300;400;500&display=swap" },
       {
-        rel: "stylesheet",
-        href: appCss,
+        rel: "preload",
+        href: archivoLatin,
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.ico" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Francesco Carpino",
+          alternateName: "IMCICC",
+          jobTitle: "Freelance sports designer",
+          url: "https://imcicc.com",
+          email: `mailto:${CONTACT.email}`,
+          address: { "@type": "PostalAddress", addressLocality: "Milan", addressCountry: "IT" },
+          sameAs: [CONTACT.linkedin, CONTACT.instagram],
+        }),
       },
     ],
   }),
@@ -113,7 +157,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="bg-background text-foreground grain">
+      <body className="bg-background text-foreground">
         {children}
         <Scripts />
       </body>
@@ -129,7 +173,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <MotionConfig reducedMotion="user" transition={entranceTransition}>
         <SiteNav />
-        <main className="relative z-[2]">
+        <main id="main" tabIndex={-1} className="relative z-[2] outline-none">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={location.pathname}

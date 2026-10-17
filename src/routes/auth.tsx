@@ -47,7 +47,7 @@ function AuthPage() {
   const input: React.CSSProperties = {
     width: "100%",
     background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(245,166,35,0.2)",
+    border: "1px solid rgba(255,106,26,0.2)",
     color: "#fff",
     padding: "12px 14px",
     fontSize: 14,
@@ -64,7 +64,7 @@ function AuthPage() {
           style={{
             fontSize: "clamp(2.5rem, 5vw, 4rem)",
             fontWeight: 300,
-            color: "#f5a623",
+            color: "#ff6a1a",
             letterSpacing: "-0.02em",
             marginBottom: 32,
           }}
@@ -94,8 +94,8 @@ function AuthPage() {
           style={{
             marginTop: 20,
             width: "100%",
-            background: "#f5a623",
-            color: "#0a0503",
+            background: "#ff6a1a",
+            color: "#000",
             border: "none",
             padding: "14px 28px",
             fontSize: 13,
@@ -115,7 +115,7 @@ function AuthPage() {
             marginTop: 20,
             background: "transparent",
             border: "none",
-            color: "rgba(245,166,35,0.7)",
+            color: "rgba(255,106,26,0.7)",
             fontSize: 13,
             letterSpacing: "0.05em",
             cursor: "pointer",
