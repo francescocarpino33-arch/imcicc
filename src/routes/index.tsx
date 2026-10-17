@@ -130,9 +130,9 @@ function Index() {
           </motion.figure>
 
           <div className="frame" style={{ marginTop: "var(--space-5)" }}>
-            <div className="grid-12 gap-y-4 border-t border-night/25 pt-6">
-              <h2 className="label col-span-4 md:col-span-3 md:pt-1">Clients and collaborations</h2>
-              <ClientLogos tone="ink" className="col-span-4 md:col-span-9" />
+            <div className="grid-12 gap-y-4">
+              <h2 className="label col-span-4 md:col-span-12">Clients and collaborations</h2>
+              <ClientLogos className="col-span-4 md:col-span-12" />
             </div>
           </div>
         </div>

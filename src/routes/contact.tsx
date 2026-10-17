@@ -116,11 +116,11 @@ function ContactPage() {
           </div>
         </div>
 
-        <div className="grid-12 gap-y-6 border-t border-night/25 pt-6 mt-16 md:mt-24">
-          <h2 className="text-[0.8125rem] font-medium wdth-label col-span-4 md:col-span-3 md:pt-1">
+        <div className="grid-12 gap-y-4 mt-16 md:mt-24">
+          <h2 className="text-[0.8125rem] font-medium wdth-label col-span-4 md:col-span-12">
             Clients and collaborations
           </h2>
-          <ClientLogos tone="ink" className="col-span-4 md:col-span-9" />
+          <ClientLogos className="col-span-4 md:col-span-12" />
         </div>
       </div>
     </section>
