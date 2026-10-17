@@ -105,9 +105,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Art direction, visual systems and content for football, cycling and the brands around them.",
       },
-      { property: "og:image", content: "https://imcicc.com/og-image.jpg" },
+      { property: "og:image", content: "https://imcicc.com/og-image-2026.jpg" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
+      {
+        property: "og:image:alt",
+        content:
+          "Posters by Francesco Carpino on IMCICC orange, with his name and the title Sports Designer.",
+      },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "IMCICC | Francesco Carpino, freelance sports designer" },
       {
@@ -115,7 +120,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Art direction, visual systems and content for football, cycling and the brands around them.",
       },
-      { name: "twitter:image", content: "https://imcicc.com/og-image.jpg" },
+      { name: "twitter:image", content: "https://imcicc.com/og-image-2026.jpg" },
     ],
     links: [
       {
