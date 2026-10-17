@@ -90,7 +90,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Francesco Carpino (IMCICC) is a freelance sports designer in Milan, making matchday graphics, player content, social series and campaign artwork.",
+          "Francesco Carpino (IMCICC) is a freelance sports designer in Milan, working on art direction, visual systems and content for clubs, competitions and brands.",
       },
       { name: "author", content: "Francesco Carpino" },
       { name: "theme-color", content: "#000000" },
@@ -103,7 +103,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         property: "og:description",
         content:
-          "Matchday graphics, player content, social series and campaign artwork for football, cycling and the brands around them.",
+          "Art direction, visual systems and content for football, cycling and the brands around them.",
       },
       { property: "og:image", content: "https://imcicc.com/og-image.jpg" },
       { property: "og:image:width", content: "1200" },
@@ -113,7 +113,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "twitter:description",
         content:
-          "Matchday graphics, player content, social series and campaign artwork for football, cycling and the brands around them.",
+          "Art direction, visual systems and content for football, cycling and the brands around them.",
       },
       { name: "twitter:image", content: "https://imcicc.com/og-image.jpg" },
     ],

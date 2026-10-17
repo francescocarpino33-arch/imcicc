@@ -55,9 +55,9 @@ function AboutPage() {
               under the name IMCICC.
             </p>
             <p className="body-copy">
-              Sport and design have always been my two constants, and my work sits where they meet:
-              matchday graphics, player-focused content, social series and campaign artwork for
-              clubs, competitions and the brands around them.
+              Sport and design have always been my two constants, and my work sits where they meet.
+              I help clubs, competitions and brands decide how they want to look and what they want
+              to say, then design the visual systems and content that carry it.
             </p>
             <p className="body-copy">
               I've been working independently since 2020, with AC Milan, Aston Villa, Giro d'Italia
@@ -65,7 +65,7 @@ function AboutPage() {
             </p>
             <p className="body-copy">
               I want every piece to feel like it belongs to its club and its moment: built around
-              the player, the stage or the fixture it was made for, rather than around a template.
+              the player, the story or the moment it was made for, rather than around a template.
             </p>
           </div>
           <div className="mt-10 flex flex-wrap gap-3">
@@ -158,7 +158,7 @@ function AboutPage() {
           {WAYS_OF_WORKING.map((w) => (
             <li
               key={w.title}
-              className="rule py-5 grid grid-cols-1 sm:grid-cols-[11rem_1fr] gap-x-6 gap-y-1"
+              className="rule py-5 grid grid-cols-1 sm:grid-cols-[13rem_1fr] gap-x-6 gap-y-1"
             >
               <h3 className="voice" style={{ fontSize: "var(--step-2)", lineHeight: 1 }}>
                 {w.title}

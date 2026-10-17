@@ -14,13 +14,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Francesco Carpino (IMCICC) is a freelance sports designer in Milan, making matchday graphics, player content, social series and campaign artwork for clubs, competitions and brands.",
+          "Francesco Carpino (IMCICC) is a freelance sports designer in Milan, working on art direction, visual systems and content for clubs, competitions and brands.",
       },
       { property: "og:title", content: "IMCICC | Francesco Carpino, freelance sports designer" },
       {
         property: "og:description",
         content:
-          "Matchday graphics, player content, social series and campaign artwork for football, cycling and the brands around them.",
+          "Art direction, visual systems and content for football, cycling and the brands around them.",
       },
       { property: "og:url", content: "https://imcicc.com/" },
     ],
@@ -73,8 +73,9 @@ function Index() {
 
           <div className="grid-12 gap-y-8 mt-10 md:mt-14">
             <p className="lead col-span-4 md:col-span-6 lg:col-span-5">
-              I'm Francesco Carpino, a freelance designer making matchday graphics, player content,
-              social series and campaign artwork for football, cycling and the brands around them.
+              I'm Francesco Carpino, a freelance sports designer. I work on art direction, visual
+              systems and content for clubs, competitions and the brands around them, from the first
+              idea to the finished series.
             </p>
             <div className="col-span-4 md:col-span-5 md:col-start-8 lg:col-start-9 lg:col-span-4 flex flex-col gap-5 md:items-start">
               <p className="label flex items-center gap-2.5 !text-chalk">
@@ -113,7 +114,7 @@ function Index() {
             >
               <img
                 src="/hero-collage.webp"
-                alt="A wall of Francesco's sports posters, including player milestones, Giro d'Italia stage graphics and matchday visuals."
+                alt="A wall of Francesco's sports posters, including player milestones, Giro d'Italia stage graphics and club visuals."
                 width={1920}
                 height={1080}
                 fetchPriority="high"

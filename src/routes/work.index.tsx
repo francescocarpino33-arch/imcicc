@@ -10,12 +10,12 @@ export const Route = createFileRoute("/work/")({
       {
         name: "description",
         content:
-          "Sports design projects for Giro d'Italia, FIRS1 Sports, Aston Villa, CD Arenteiro, CD Córgomo and AC Milan: matchday graphics, player content and series.",
+          "Sports design projects for Giro d'Italia, FIRS1 Sports, Aston Villa, CD Arenteiro, CD Córgomo and AC Milan: art direction, visual systems and player storytelling.",
       },
       { property: "og:title", content: "Work | IMCICC, Francesco Carpino" },
       {
         property: "og:description",
-        content: "Matchday graphics, player content and series for clubs and competitions.",
+        content: "Art direction, visual systems and content for clubs and competitions.",
       },
       { property: "og:url", content: "https://imcicc.com/work" },
     ],
