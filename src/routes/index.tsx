@@ -47,7 +47,7 @@ function Index() {
             id="hero-title"
             className="voice max-w-[14ch] md:max-w-[19ch]"
             style={{
-              fontSize: "clamp(3.25rem, 11.6vw, 14rem)",
+              fontSize: "clamp(3.25rem, min(11.6vw, 21svh), 12.5rem)",
               lineHeight: 0.86,
               letterSpacing: "-0.03em",
             }}
