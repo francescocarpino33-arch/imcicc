@@ -102,7 +102,7 @@ function AdminPage() {
           style={{
             fontSize: "clamp(2.5rem, 5vw, 4rem)",
             fontWeight: 300,
-            color: "#f5a623",
+            color: "#ff6a1a",
             letterSpacing: "-0.02em",
             marginBottom: 16,
           }}
@@ -117,8 +117,8 @@ function AdminPage() {
           onClick={signOut}
           style={{
             background: "transparent",
-            color: "#f5a623",
-            border: "1px solid rgba(245,166,35,0.5)",
+            color: "#ff6a1a",
+            border: "1px solid rgba(255,106,26,0.5)",
             padding: "10px 20px",
             fontSize: 13,
             letterSpacing: "0.15em",
@@ -175,6 +175,19 @@ function AdminPage() {
     await loadProjects();
   }
 
+  /** Reorder images. The first image is the project's cover on the homepage and work index. */
+  async function moveImage(path: string, to: number) {
+    if (!selected) return;
+    const list = [...(selected.images ?? [])];
+    const from = list.indexOf(path);
+    if (from < 0 || to < 0 || to >= list.length || from === to) return;
+    list.splice(from, 1);
+    list.splice(to, 0, path);
+    const { error } = await supabase.from("projects").update({ images: list }).eq("id", selected.id);
+    setStatus(error ? `Error: ${error.message}` : to === 0 ? "Cover updated." : "Order saved.");
+    await loadProjects();
+  }
+
   async function saveMeta() {
     if (!selected) return;
     setStatus("");
@@ -189,7 +202,7 @@ function AdminPage() {
   const inputStyle: React.CSSProperties = {
     width: "100%",
     background: "rgba(255,255,255,0.04)",
-    border: "1px solid rgba(245,166,35,0.2)",
+    border: "1px solid rgba(255,106,26,0.2)",
     color: "#fff",
     padding: "10px 12px",
     fontSize: 14,
@@ -201,7 +214,7 @@ function AdminPage() {
     display: "block",
     fontSize: 11,
     letterSpacing: "0.15em",
-    color: "rgba(245,166,35,0.6)",
+    color: "rgba(255,106,26,0.6)",
     marginBottom: 8,
   };
 
@@ -213,7 +226,7 @@ function AdminPage() {
         style={{
           fontSize: "clamp(3rem, 6vw, 5rem)",
           fontWeight: 300,
-          color: "#f5a623",
+          color: "#ff6a1a",
           letterSpacing: "-0.02em",
           margin: 0,
         }}
@@ -224,8 +237,8 @@ function AdminPage() {
           onClick={signOut}
           style={{
             background: "transparent",
-            color: "rgba(245,166,35,0.7)",
-            border: "1px solid rgba(245,166,35,0.3)",
+            color: "rgba(255,106,26,0.7)",
+            border: "1px solid rgba(255,106,26,0.3)",
             padding: "8px 16px",
             fontSize: 12,
             letterSpacing: "0.15em",
@@ -259,10 +272,10 @@ function AdminPage() {
                 onClick={() => setSelectedId(p.id)}
                 style={{
                   textAlign: "left",
-                  background: p.id === selectedId ? "rgba(245,166,35,0.12)" : "transparent",
+                  background: p.id === selectedId ? "rgba(255,106,26,0.12)" : "transparent",
                   border: "1px solid",
-                  borderColor: p.id === selectedId ? "rgba(245,166,35,0.4)" : "rgba(255,255,255,0.08)",
-                  color: p.id === selectedId ? "#f5a623" : "rgba(255,255,255,0.75)",
+                  borderColor: p.id === selectedId ? "rgba(255,106,26,0.4)" : "rgba(255,255,255,0.08)",
+                  color: p.id === selectedId ? "#ff6a1a" : "rgba(255,255,255,0.75)",
                   padding: "10px 12px",
                   fontSize: 14,
                   cursor: "pointer",
@@ -286,15 +299,15 @@ function AdminPage() {
                 htmlFor="admin-file"
                 style={{
                   display: "block",
-                  border: "1px dashed rgba(245,166,35,0.4)",
+                  border: "1px dashed rgba(255,106,26,0.4)",
                   borderRadius: 4,
                   padding: "48px 24px",
                   textAlign: "center",
-                  color: "rgba(245,166,35,0.7)",
+                  color: "rgba(255,106,26,0.7)",
                   cursor: "pointer",
                   fontSize: 14,
                   letterSpacing: "0.05em",
-                  background: "rgba(245,166,35,0.03)",
+                  background: "rgba(255,106,26,0.03)",
                 }}
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={(e) => {
@@ -317,7 +330,10 @@ function AdminPage() {
 
             {/* current images */}
             <div>
-              <div style={labelStyle}>Current images ({selected.images?.length ?? 0})</div>
+              <div style={labelStyle}>
+                Current images ({selected.images?.length ?? 0}). The first one is the cover; the order here is
+                the order on the project page.
+              </div>
               <div
                 style={{
                   display: "grid",
@@ -325,13 +341,13 @@ function AdminPage() {
                   gap: 12,
                 }}
               >
-                {(selected.images ?? []).map((path) => (
+                {(selected.images ?? []).map((path, idx) => (
                   <div
                     key={path}
                     style={{
                       position: "relative",
-                      aspectRatio: "16 / 9",
-                      background: "#1a0d05",
+                      aspectRatio: "4 / 5",
+                      background: "#121211",
                       borderRadius: 4,
                       overflow: "hidden",
                     }}
@@ -340,9 +356,51 @@ function AdminPage() {
                       <img
                         src={signedMap[path]}
                         alt=""
-                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                        style={{ width: "100%", height: "100%", objectFit: "contain" }}
                       />
                     )}
+                    {idx === 0 && (
+                      <span
+                        style={{
+                          position: "absolute",
+                          left: 6,
+                          top: 6,
+                          background: "#ff6a1a",
+                          color: "#000",
+                          fontSize: 11,
+                          padding: "3px 6px",
+                        }}
+                      >
+                        Cover
+                      </span>
+                    )}
+                    <div style={{ position: "absolute", left: 6, bottom: 6, display: "flex", gap: 4 }}>
+                      {[
+                        { label: "←", title: "Move earlier", to: idx - 1, show: idx > 0 },
+                        { label: "→", title: "Move later", to: idx + 1, show: idx < (selected.images?.length ?? 0) - 1 },
+                        { label: "Make cover", title: "Make this the cover", to: 0, show: idx > 0 },
+                      ]
+                        .filter((b) => b.show)
+                        .map((b) => (
+                          <button
+                            key={b.title}
+                            onClick={() => moveImage(path, b.to)}
+                            title={b.title}
+                            aria-label={b.title}
+                            style={{
+                              background: "rgba(0,0,0,0.75)",
+                              color: "#f1f0ec",
+                              border: "1px solid rgba(255,255,255,0.25)",
+                              padding: "2px 7px",
+                              fontSize: 12,
+                              cursor: "pointer",
+                              fontFamily: "inherit",
+                            }}
+                          >
+                            {b.label}
+                          </button>
+                        ))}
+                    </div>
                     <button
                       onClick={() => deleteImage(path)}
                       aria-label="Delete"
@@ -354,8 +412,8 @@ function AdminPage() {
                         height: 24,
                         borderRadius: "50%",
                         background: "rgba(0,0,0,0.7)",
-                        color: "#f5a623",
-                        border: "1px solid rgba(245,166,35,0.5)",
+                        color: "#ff6a1a",
+                        border: "1px solid rgba(255,106,26,0.5)",
                         cursor: "pointer",
                         fontSize: 14,
                         lineHeight: 1,
@@ -418,8 +476,8 @@ function AdminPage() {
                 onClick={saveMeta}
                 style={{
                   marginTop: 20,
-                  background: "#f5a623",
-                  color: "#0a0503",
+                  background: "#ff6a1a",
+                  color: "#000",
                   border: "none",
                   padding: "12px 28px",
                   fontSize: 13,

@@ -1,130 +1,120 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion, useReducedMotion } from "framer-motion";
-import { fadeUp, fadeUpContainer } from "@/lib/motion";
-import logoAcMilan from "@/assets/clients/ac-milan.png";
-import logoAstonVilla from "@/assets/clients/aston-villa.webp";
-import logoGiro from "@/assets/clients/giro.webp";
-import logoFirs1 from "@/assets/clients/firs1.webp";
-import logoArenteiro from "@/assets/clients/arenteiro.webp";
-import logoCorgomo from "@/assets/clients/corgomo.webp";
+import { createFileRoute } from "@tanstack/react-router";
+import { CONTACT } from "@/data/projects";
+import { CopyEmail } from "@/components/CopyEmail";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — IMCICC" },
-      { name: "description", content: "Let's work together. Visual systems, sports identities and campaigns by Francesco Carpino." },
-      { property: "og:title", content: "Contact — IMCICC" },
-      { property: "og:description", content: "Let's work together." },
-      { property: "og:url", content: "/contact" },
+      { title: "Contact | IMCICC, Francesco Carpino" },
+      {
+        name: "description",
+        content:
+          "Start a project with Francesco Carpino (IMCICC), freelance sports designer in Milan. Email, LinkedIn and Instagram.",
+      },
+      { property: "og:title", content: "Contact | IMCICC, Francesco Carpino" },
+      {
+        property: "og:description",
+        content: "Start a project with Francesco Carpino, freelance sports designer in Milan.",
+      },
+      { property: "og:url", content: "https://imcicc.com/contact" },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: "https://imcicc.com/contact" }],
   }),
   component: ContactPage,
 });
 
-const CLIENTS = [
-  { name: "ac milan", logo: logoAcMilan, slug: "ac-milan" },
-  { name: "aston villa", logo: logoAstonVilla, slug: "aston-villa" },
-  { name: "giro d'italia", logo: logoGiro, slug: "giro-ditalia" },
-  { name: "firs1", logo: logoFirs1, slug: "first" },
-  { name: "arenteiro", logo: logoArenteiro, slug: "arenteiro" },
-  { name: "còrgomo", logo: logoCorgomo, slug: "corgomo" },
+const BRIEF = [
+  "Who it's for: the club, competition or brand",
+  "What you need: a single piece, ongoing content or a series",
+  "When you need it, and how often",
 ];
 
-const headlineStyle = {
-  fontFamily: "var(--font-display)",
-  fontSize: "clamp(8vw, 11vw, 150px)",
-  fontWeight: 300,
-  color: "#f5a623",
-  letterSpacing: "-0.02em",
-  lineHeight: 1.1,
-  display: "block" as const,
-};
-
-const labelStyle = {
-  fontSize: 16,
-  letterSpacing: "-0.02em",
-  color: "rgba(255,255,255,0.4)",
-  marginBottom: 20,
-};
-
 function ContactPage() {
-  const reduced = useReducedMotion();
   return (
     <section
-      className="relative min-h-screen overflow-hidden"
-      style={{ paddingBottom: 80, letterSpacing: "-0.02em" }}
+      aria-labelledby="contact-title"
+      className="bg-signal text-night"
+      style={{
+        paddingTop: "calc(var(--nav-h) + clamp(2.5rem, 6vw, 5.5rem))",
+        paddingBottom: "var(--space-section)",
+      }}
     >
-      {/* Headline */}
-      <motion.div
-        initial={reduced ? "show" : "hidden"}
-        animate="show"
-        variants={fadeUpContainer}
-        style={{ paddingTop: 140, paddingLeft: 48 }}
-      >
-        <motion.span variants={fadeUp} style={headlineStyle}>Let's work</motion.span>
-        <motion.span variants={fadeUp} style={headlineStyle}>together.</motion.span>
-      </motion.div>
+      <div className="frame">
+        <p className="flex items-center gap-2.5 font-medium wdth-label text-[0.8125rem] mb-8">
+          <span className="inline-block h-2 w-2 rounded-full bg-night" aria-hidden /> Available for
+          freelance projects
+        </p>
+        <h1
+          id="contact-title"
+          className="voice max-w-[13ch]"
+          style={{ fontSize: "var(--step-4)", lineHeight: 0.86 }}
+        >
+          Tell me about your project.
+        </h1>
 
-      {/* Two columns */}
-      <motion.div
-        initial={reduced ? "show" : "hidden"}
-        animate="show"
-        variants={fadeUpContainer}
-        transition={{ delayChildren: reduced ? 0 : 0.3 }}
-        className="flex flex-col md:flex-row gap-12 md:gap-24"
-        style={{ marginTop: 64, padding: "0 48px" }}
-      >
-        {/* Left column */}
-        <div>
-          <motion.p variants={fadeUp} style={labelStyle}>Drop me a line:</motion.p>
-          <ul
-            style={{
-              fontSize: 22,
-              fontWeight: 300,
-              color: "rgba(245,166,35,0.85)",
-              lineHeight: 1.8,
-            }}
-          >
-            <motion.li variants={fadeUp}>
-              <a className="glow-hover hover:text-primary-glow" href="mailto:francesco.carpino33@gmail.com">
-                Mail
+        <div className="grid-12 gap-y-14 mt-14 md:mt-20">
+          <div className="col-span-4 md:col-span-7">
+            <p className="text-[0.8125rem] font-medium wdth-label mb-3">Email</p>
+            <a
+              href={`mailto:${CONTACT.email}`}
+              className="voice block break-all underline decoration-1 underline-offset-[0.12em] decoration-night/40 hover:decoration-night"
+              style={{ fontSize: "clamp(1.75rem, 4.2vw, 4.25rem)", lineHeight: 1 }}
+            >
+              {CONTACT.email}
+            </a>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href={`mailto:${CONTACT.email}`}
+                className="btn !bg-night !text-chalk hover:!bg-chalk hover:!text-night"
+              >
+                Email me
               </a>
-            </motion.li>
-            <motion.li variants={fadeUp}>
-              <a className="glow-hover hover:text-primary-glow" href="https://www.linkedin.com/in/francesco-carpino-b4852a1a4/">
-                Linkedin
-              </a>
-            </motion.li>
-            <motion.li variants={fadeUp}>
-              <a className="glow-hover hover:text-primary-glow" href="https://www.instagram.com/imcicc">
-                Instagram
-              </a>
-            </motion.li>
-          </ul>
-        </div>
+              <CopyEmail className="btn !bg-transparent !text-night shadow-[inset_0_0_0_1px_rgba(0,0,0,0.35)] hover:shadow-[inset_0_0_0_1px_#000]" />
+            </div>
+          </div>
 
-        {/* Right column */}
-        <div>
-          <motion.p variants={fadeUp} style={labelStyle}>Clients & collaborations:</motion.p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "32px 40px" }}>
-            {CLIENTS.map((c) => (
-              <motion.div key={c.slug} variants={fadeUp} style={{ display: "inline-flex" }}>
-                <Link to="/work/$slug" params={{ slug: c.slug }} className="contact-logo-link" aria-label={c.name}>
-                  <img
-                    src={c.logo}
-                    alt={c.name}
-                    loading="lazy"
-                    decoding="async"
-                    className="contact-logo-img"
-                    style={{ maxHeight: 56, maxWidth: 100, objectFit: "contain" }}
-                  />
-                </Link>
-              </motion.div>
-            ))}
+          <div className="col-span-4 md:col-span-4 md:col-start-9 flex flex-col gap-10">
+            <div>
+              <p className="text-[0.8125rem] font-medium wdth-label mb-3">Useful to include</p>
+              <ul className="flex flex-col">
+                {BRIEF.map((b) => (
+                  <li key={b} className="border-t border-night/25 py-3 leading-snug">
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="text-[0.8125rem] font-medium wdth-label mb-3">Elsewhere</p>
+              <ul className="flex flex-col">
+                <li className="border-t border-night/25 py-3">
+                  <a
+                    className="underline decoration-1 underline-offset-4 decoration-night/40 hover:decoration-night"
+                    href={CONTACT.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    LinkedIn
+                  </a>
+                </li>
+                <li className="border-t border-night/25 py-3">
+                  <a
+                    className="underline decoration-1 underline-offset-4 decoration-night/40 hover:decoration-night"
+                    href={CONTACT.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Instagram
+                  </a>
+                </li>
+                <li className="border-t border-night/25 py-3">
+                  Milan, Italy (Central European Time)
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

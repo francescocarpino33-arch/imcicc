@@ -4,10 +4,10 @@ import type { Transition, Variants } from "framer-motion";
 export const EASE_STANDARD = [0.22, 1, 0.36, 1] as const;
 
 export const DURATION = {
-  hover: 0.3,
-  entrance: 0.5,
-  page: 0.6,
-  hero: 0.8,
+  hover: 0.35,
+  entrance: 0.6,
+  page: 0.4,
+  hero: 0.9,
 } as const;
 
 /** Stagger applied between sibling elements on scroll-reveal. */
@@ -52,15 +52,15 @@ export const fadeScaleIn: Variants = {
   },
 };
 
+/** Route change: a short cross-fade. The work, not the transition, is the show. */
 export const pageEnter: Variants = {
-  initial: { opacity: 0, y: 16 },
+  initial: { opacity: 0 },
   animate: {
     opacity: 1,
-    y: 0,
     transition: { duration: DURATION.page, ease: EASE_STANDARD },
   },
   exit: {
     opacity: 0,
-    transition: { duration: 0.2, ease: EASE_STANDARD },
+    transition: { duration: 0.15, ease: EASE_STANDARD },
   },
 };
