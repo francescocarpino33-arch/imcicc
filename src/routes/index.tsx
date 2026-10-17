@@ -93,46 +93,52 @@ function Index() {
         </div>
 
         {/* Real work, shown at full strength */}
-        <motion.figure
-          className="mt-14 md:mt-20"
-          initial={reduced ? false : { clipPath: "inset(18% 0% 0% 0%)", opacity: 0 }}
-          animate={{ clipPath: "inset(0% 0% 0% 0%)", opacity: 1 }}
-          transition={{ duration: 1.1, delay: 0.55, ease: EASE_STANDARD }}
+        {/* The poster wall, mounted on the orange plate, with the client list beneath it */}
+        <div
+          className="plate mt-14 md:mt-20"
+          style={{ paddingTop: "var(--gutter)", paddingBottom: "var(--space-5)" }}
         >
-          {/* On phones the wall becomes a swipeable strip so the posters stay legible. */}
-          <div
-            className="well overflow-x-auto md:overflow-visible snap-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            tabIndex={0}
-            role="region"
-            aria-label="Poster wall"
+          <motion.figure
+            className="frame"
+            initial={reduced ? false : { clipPath: "inset(18% 0% 0% 0%)", opacity: 0 }}
+            animate={{ clipPath: "inset(0% 0% 0% 0%)", opacity: 1 }}
+            transition={{ duration: 1.1, delay: 0.55, ease: EASE_STANDARD }}
           >
-            <img
-              src="/hero-collage.webp"
-              alt="A wall of Francesco's sports posters, including player milestones, Giro d'Italia stage graphics and matchday visuals."
-              width={1920}
-              height={1080}
-              fetchPriority="high"
-              decoding="async"
-              className="block h-[min(62svh,26rem)] w-auto max-w-none md:h-auto md:w-full md:max-w-full"
-            />
-          </div>
-          <figcaption className="frame label mt-3">
-            A selection of posters from the archive.
-            <span className="md:hidden"> Swipe to see more.</span>
-          </figcaption>
-        </motion.figure>
-
-        <div className="frame" style={{ marginTop: "var(--space-6)" }}>
-          <div className="grid-12 gap-y-4 rule pt-6">
-            <h2 className="label col-span-4 md:col-span-3">Clients and collaborations</h2>
-            <ul
-              className="col-span-4 md:col-span-9 flex flex-wrap gap-x-8 gap-y-2 voice"
-              style={{ fontSize: "var(--step-2)", lineHeight: 1.1 }}
+            {/* On phones the wall becomes a swipeable strip so the posters stay legible. */}
+            <div
+              className="bg-night overflow-x-auto md:overflow-visible snap-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              tabIndex={0}
+              role="region"
+              aria-label="Poster wall"
             >
-              {CLIENT_NAMES.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
-            </ul>
+              <img
+                src="/hero-collage.webp"
+                alt="A wall of Francesco's sports posters, including player milestones, Giro d'Italia stage graphics and matchday visuals."
+                width={1920}
+                height={1080}
+                fetchPriority="high"
+                decoding="async"
+                className="block h-[min(58svh,24rem)] w-auto max-w-none md:h-auto md:w-full md:max-w-full"
+              />
+            </div>
+            <figcaption className="label mt-3">
+              A selection of posters from the archive.
+              <span className="md:hidden"> Swipe to see more.</span>
+            </figcaption>
+          </motion.figure>
+
+          <div className="frame" style={{ marginTop: "var(--space-5)" }}>
+            <div className="grid-12 gap-y-4 border-t border-night/25 pt-6">
+              <h2 className="label col-span-4 md:col-span-3">Clients and collaborations</h2>
+              <ul
+                className="col-span-4 md:col-span-9 flex flex-wrap gap-x-8 gap-y-2 voice"
+                style={{ fontSize: "var(--step-2)", lineHeight: 1.1 }}
+              >
+                {CLIENT_NAMES.map((c) => (
+                  <li key={c}>{c}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -172,7 +178,7 @@ function Index() {
                     const p = projects.find((x) => x.slug === slug)!;
                     return (
                       <span key={slug}>
-                        <Link to="/work/$slug" params={{ slug }} className="link !text-chalk">
+                        <Link to="/work/$slug" params={{ slug }} className="link project-name">
                           {p.title}
                         </Link>
                         {i < c.seenIn.length - 2 ? ", " : i === c.seenIn.length - 2 ? " and " : ""}

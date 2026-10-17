@@ -70,12 +70,12 @@
 
 :root {
   /* ── Palette ─────────────────────────────────────────────── */
-  --night: #000000;      /* page */
-  --stand: #121211;      /* raised surfaces, image wells */
-  --line: #2b2b29;       /* hairlines */
-  --concrete: #94938d;   /* secondary text — 6.8:1 on night */
-  --chalk: #f1f0ec;      /* primary text */
-  --signal: #ff6a1a;     /* IMCICC orange — one plate, availability, focus */
+  --night: #000000; /* page */
+  --stand: #121211; /* raised surfaces, image wells */
+  --line: #2b2b29; /* hairlines */
+  --concrete: #94938d; /* secondary text — 6.8:1 on night */
+  --chalk: #f1f0ec; /* primary text */
+  --signal: #ff6a1a; /* IMCICC orange — one plate, availability, focus */
 
   --radius: 0;
   --background: var(--night);
@@ -99,18 +99,18 @@
   --ring: var(--signal);
 
   /* ── Type scale (fluid; ratio ≈ 1.333 at body, opens up above) ── */
-  --step--1: 0.8125rem;                                   /* 13 labels  */
-  --step-0: 1rem;                                         /* 16 body    */
-  --step-1: clamp(1.125rem, 0.4vw + 1rem, 1.3125rem);     /* 18–21 lead */
-  --step-2: clamp(1.5rem, 1.1vw + 1.15rem, 2.125rem);     /* 24–34 h3   */
-  --step-3: clamp(2.25rem, 3.2vw + 1.2rem, 4.5rem);       /* 36–72 h2   */
-  --step-4: clamp(3rem, 7.4vw + 0.6rem, 9.5rem);          /* 48–152 h1  */
-  --step-5: clamp(3.25rem, 10.2vw, 12.5rem);              /* hero       */
+  --step--1: 0.8125rem; /* 13 labels  */
+  --step-0: 1rem; /* 16 body    */
+  --step-1: clamp(1.125rem, 0.4vw + 1rem, 1.3125rem); /* 18–21 lead */
+  --step-2: clamp(1.5rem, 1.1vw + 1.15rem, 2.125rem); /* 24–34 h3   */
+  --step-3: clamp(2.25rem, 3.2vw + 1.2rem, 4.5rem); /* 36–72 h2   */
+  --step-4: clamp(3rem, 7.4vw + 0.6rem, 9.5rem); /* 48–152 h1  */
+  --step-5: clamp(3.25rem, 10.2vw, 12.5rem); /* hero       */
 
   /* Width axis — the identity lives here */
-  --wdth-voice: 72%;     /* condensed display */
+  --wdth-voice: 72%; /* condensed display */
   --wdth-body: 100%;
-  --wdth-label: 118%;    /* expanded small labels */
+  --wdth-label: 118%; /* expanded small labels */
 
   /* ── Space & layout ─────────────────────────────────────── */
   --gutter: clamp(1rem, 2.6vw, 2.5rem);
@@ -170,7 +170,11 @@
     text-rendering: optimizeLegibility;
   }
 
-  h1, h2, h3, h4, h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     font-family: var(--font-display);
     font-stretch: var(--wdth-voice);
     font-weight: 600;
@@ -210,7 +214,9 @@
     column-gap: var(--gutter);
   }
   @media (min-width: 768px) {
-    .grid-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .grid-12 {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
   }
 
   /* The voice: condensed display */
@@ -250,18 +256,18 @@
     border-top: 1px solid var(--line);
   }
 
-  /* Text link: underline sits under the baseline and thickens on hover */
+  /* Text link: orange underline under the baseline; the text turns orange on hover */
   .link {
     text-decoration-line: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.22em;
-    text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+    text-decoration-color: var(--signal);
     transition:
       text-decoration-color var(--duration-hover) var(--ease-standard),
       color var(--duration-hover) var(--ease-standard);
   }
   .link:hover {
-    text-decoration-color: currentColor;
+    color: var(--signal);
   }
 
   /* Navigation link: quiet until hovered or current */
@@ -269,9 +275,11 @@
     color: var(--concrete);
     transition: color var(--duration-hover) var(--ease-standard);
   }
-  .nav-link:hover,
-  .nav-link.active {
+  .nav-link:hover {
     color: var(--chalk);
+  }
+  .nav-link.active {
+    color: var(--signal);
   }
 
   /* Image well: the neutral ground artwork sits on */
@@ -282,18 +290,25 @@
 
   /* Work tile — the image breathes on hover, nothing else moves */
   .tile-media img {
-    transition: transform 1.1s var(--ease-standard), opacity 0.5s var(--ease-standard);
+    transition:
+      transform 1.1s var(--ease-standard),
+      opacity 0.5s var(--ease-standard);
   }
   .tile:hover .tile-media img,
   .tile:focus-visible .tile-media img {
     transform: scale(1.025);
+  }
+  /* Project names are always set in IMCICC orange; they go chalk on hover */
+  .tile-title,
+  .project-name {
+    color: var(--signal);
   }
   .tile-title {
     transition: color var(--duration-hover) var(--ease-standard);
   }
   .tile:hover .tile-title,
   .tile:focus-visible .tile-title {
-    color: var(--signal);
+    color: var(--chalk);
   }
 
   /* Availability dot */
@@ -317,7 +332,7 @@
     font-stretch: var(--wdth-label);
     font-size: 0.875rem;
     font-weight: 500;
-    background: var(--chalk);
+    background: var(--signal);
     color: var(--night);
     cursor: pointer;
     transition:
@@ -325,7 +340,7 @@
       color var(--duration-hover) var(--ease-standard);
   }
   .btn:hover {
-    background: var(--signal);
+    background: var(--chalk);
   }
   .btn-ghost {
     background: transparent;
@@ -334,7 +349,21 @@
   }
   .btn-ghost:hover {
     background: transparent;
-    box-shadow: inset 0 0 0 1px var(--chalk);
+    color: var(--signal);
+    box-shadow: inset 0 0 0 1px var(--signal);
+  }
+
+  /* The orange plate: a full-bleed field in IMCICC orange with ink-black type */
+  .plate {
+    background: var(--signal);
+    color: var(--night);
+  }
+  .plate .label {
+    color: color-mix(in srgb, var(--night) 72%, transparent);
+  }
+  .plate ::selection {
+    background: var(--night);
+    color: var(--signal);
   }
 }
 
@@ -362,17 +391,33 @@
 }
 
 @keyframes live-pulse {
-  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--signal) 55%, transparent); }
-  70%  { box-shadow: 0 0 0 0.55rem transparent; }
-  100% { box-shadow: 0 0 0 0 transparent; }
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--signal) 55%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 0.55rem transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
 }
 
 @layer utilities {
-  .font-display { font-family: var(--font-display); }
-  .font-sans { font-family: var(--font-sans); }
-  .font-mono { font-family: var(--font-mono); }
-  .wdth-voice { font-stretch: var(--wdth-voice); }
-  .wdth-label { font-stretch: var(--wdth-label); }
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+  .wdth-voice {
+    font-stretch: var(--wdth-voice);
+  }
+  .wdth-label {
+    font-stretch: var(--wdth-label);
+  }
   .transition-standard {
     transition-duration: var(--duration-hover);
     transition-timing-function: var(--ease-standard);
@@ -380,11 +425,15 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+  *,
+  ::before,
+  ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

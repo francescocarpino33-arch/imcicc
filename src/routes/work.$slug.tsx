@@ -58,7 +58,7 @@ function ProjectPage() {
         </nav>
 
         <motion.h1
-          className="voice"
+          className="voice project-name"
           style={{ fontSize: "var(--step-4)", lineHeight: 0.86, letterSpacing: "-0.03em" }}
           initial={reduced ? false : { opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
