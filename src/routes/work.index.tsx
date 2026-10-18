@@ -59,6 +59,8 @@ function WorkPage() {
                 pending={pending}
                 ratio={4 / 5}
                 adapt={false}
+                openBar
+                count={records.data?.[p.slug]?.images.length}
                 eager={i < 2}
                 sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
               />

@@ -252,6 +252,7 @@ function SelectedWork() {
               project={p}
               layout={LAYOUT[i % LAYOUT.length]}
               cover={covers.data?.[p.slug]}
+              count={records.data?.[p.slug]?.images.length}
               pending={pending}
               eager={i === 0}
             />
@@ -266,12 +267,14 @@ function FeaturedRow({
   project,
   layout,
   cover,
+  count,
   pending,
   eager,
 }: {
   project: Project;
   layout: (typeof LAYOUT)[number];
   cover?: string;
+  count?: number;
   pending: boolean;
   eager?: boolean;
 }) {
@@ -290,6 +293,8 @@ function FeaturedRow({
           src={cover}
           pending={pending}
           ratio={4 / 5}
+          openBar
+          count={count}
           eager={eager}
           sizes="(min-width: 768px) 58vw, 100vw"
         />
@@ -302,6 +307,17 @@ function FeaturedRow({
         </Link>
         <p className="body-copy mt-4 max-w-[30em]">{text.summary}</p>
         <ProjectFacts project={project} withClient={false} className="mt-6" />
+        <Link
+          to="/work/$slug"
+          params={{ slug: project.slug }}
+          className="btn btn-ghost mt-7"
+          aria-label={t.viewProject(project.title)}
+        >
+          {project.nda ? t.tile.openNda : t.tile.open}
+          {count ? (
+            <span className="text-concrete tabular-nums">{t.tile.images(count)}</span>
+          ) : null}
+        </Link>
       </div>
     </article>
   );

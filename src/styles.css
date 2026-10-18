@@ -312,6 +312,52 @@
     color: var(--chalk);
   }
 
+  /* The open bar: always visible directly under the cover (never over the
+     artwork), so a cover reads as a door into the project, not as a picture.
+     It turns orange when the tile is hovered or focused. */
+  .tile-open {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.8rem 1rem;
+    background: var(--stand);
+    border-top: 1px solid var(--line);
+    color: var(--chalk);
+    font-stretch: var(--wdth-label);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1;
+    transition:
+      background-color var(--duration-hover) var(--ease-standard),
+      color var(--duration-hover) var(--ease-standard);
+  }
+  .tile-open-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+  .tile-open-icon {
+    transition: transform var(--duration-hover) var(--ease-standard);
+  }
+  .tile-open-meta {
+    color: var(--concrete);
+    transition: color var(--duration-hover) var(--ease-standard);
+  }
+  .tile:hover .tile-open,
+  .tile:focus-visible .tile-open {
+    background: var(--signal);
+    color: var(--night);
+  }
+  .tile:hover .tile-open-meta,
+  .tile:focus-visible .tile-open-meta {
+    color: color-mix(in srgb, var(--night) 70%, transparent);
+  }
+  .tile:hover .tile-open-icon,
+  .tile:focus-visible .tile-open-icon {
+    transform: translateX(3px);
+  }
+
   /* Availability dot */
   .live-dot {
     display: inline-block;

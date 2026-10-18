@@ -24,6 +24,12 @@ const en = {
   available: "Available for freelance projects",
   emailMe: "Email me",
   viewProject: (title: string) => `${title}, view project`,
+  tile: {
+    open: "View project",
+    openNda: "View details",
+    images: (n: number) => (n === 1 ? "1 image" : `${n} images`),
+    nda: "Under NDA",
+  },
   and: "and",
 
   home: {
@@ -199,6 +205,12 @@ const it: Copy = {
   available: "Disponibile per progetti freelance",
   emailMe: "Scrivimi",
   viewProject: (title: string) => `${title}, apri il progetto`,
+  tile: {
+    open: "Apri il progetto",
+    openNda: "Vedi i dettagli",
+    images: (n: number) => (n === 1 ? "1 immagine" : `${n} immagini`),
+    nda: "Sotto NDA",
+  },
   and: "e",
 
   home: {

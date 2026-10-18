@@ -193,6 +193,8 @@ function NextProject({ slug, position }: { slug: string; position: number }) {
             pending={records.isPending || (!!records.data && covers.isPending)}
             ratio={4 / 5}
             adapt={false}
+            openBar
+            count={records.data?.[slug]?.images.length}
             sizes="25vw"
           />
         </div>

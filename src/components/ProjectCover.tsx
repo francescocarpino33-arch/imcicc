@@ -14,6 +14,13 @@ type Props = {
   eager?: boolean;
   /** Let the frame take the artwork's proportions (default). Off for uniform grids. */
   adapt?: boolean;
+  /**
+   * Show the "open" bar along the bottom of the cover: what clicking does,
+   * and how many pieces are inside. Use it wherever the cover is a link.
+   */
+  openBar?: boolean;
+  /** Number of images in the project, shown in the open bar. */
+  count?: number;
   className?: string;
 };
 
@@ -35,15 +42,18 @@ export function ProjectCover({
   sizes,
   eager,
   adapt = true,
+  openBar = false,
+  count,
   className = "",
 }: Props) {
-  const t = useCopy().project;
+  const copy = useCopy();
+  const t = copy.project;
   const text = projectText(project, useLang());
   const [frame, setFrame] = useState(ratio);
   const [fit, setFit] = useState<"cover" | "contain">("cover");
   const [loaded, setLoaded] = useState(false);
 
-  return (
+  const cover = (
     <div className={`tile-media well relative ${className}`} style={{ aspectRatio: String(frame) }}>
       {src ? (
         <img
@@ -87,11 +97,29 @@ export function ProjectCover({
           />
         </div>
       )}
-      {project.nda && (
+      {project.nda && !openBar && (
         <span className="absolute left-3 top-3 bg-night/85 px-2.5 py-1.5 label !text-chalk backdrop-blur">
           {t.underNda}
         </span>
       )}
+    </div>
+  );
+
+  if (!openBar) return cover;
+  return (
+    <div>
+      {cover}
+      <span className="tile-open" aria-hidden>
+        <span className="tile-open-label">
+          {project.nda ? copy.tile.openNda : copy.tile.open}
+          <svg viewBox="0 0 16 16" width="14" height="14" className="tile-open-icon">
+            <path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.6" />
+          </svg>
+        </span>
+        <span className="tile-open-meta tabular-nums">
+          {project.nda ? copy.tile.nda : count ? copy.tile.images(count) : ""}
+        </span>
+      </span>
     </div>
   );
 }
