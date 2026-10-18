@@ -1,42 +1,37 @@
 import { createIsomorphicFn } from "@tanstack/react-start";
-import { getCookie, getRequestHeader, setCookie } from "@tanstack/react-start/server";
+import { getCookie, setCookie } from "@tanstack/react-start/server";
 import { useRouter, useRouterState } from "@tanstack/react-router";
 import { useCallback } from "react";
 import { COPY, type Copy } from "./copy";
 
 export type Lang = "en" | "it";
 export const LANGS: Lang[] = ["en", "it"];
-const COOKIE = "lang";
-const ONE_YEAR = 60 * 60 * 24 * 365;
+
+/**
+ * The site always opens in English. Italian is shown only after the visitor
+ * picks IT, and only for that visit: the choice lives in a session cookie that
+ * the browser drops when it closes, so the next visit starts in English again.
+ */
+const COOKIE = "site_lang";
+/** Cookie used by the first version of the switch (kept a year, set from the browser language). */
+const LEGACY_COOKIE = "lang";
 
 const isLang = (v: unknown): v is Lang => v === "en" || v === "it";
 
-/**
- * Which language to render.
- * 1. The visitor's own choice, remembered in a cookie.
- * 2. Otherwise the browser's preferred language: Italian browsers get Italian.
- * 3. Otherwise English.
- * On the server the decision is also written to the cookie, so the browser
- * hydrates in the same language the page was rendered in.
- */
 export const detectLang = createIsomorphicFn()
   .server((): Lang => {
-    const saved = getCookie(COOKIE);
-    if (isLang(saved)) return saved;
-    const accept = (getRequestHeader("accept-language") ?? "").toLowerCase();
-    const first = accept.split(",")[0]?.trim() ?? "";
-    const lang: Lang = first.startsWith("it") ? "it" : "en";
-    try {
-      setCookie(COOKIE, lang, { path: "/", maxAge: ONE_YEAR, sameSite: "lax" });
-    } catch {
-      // headers already sent: the client will fall back to the same detection
+    if (getCookie(LEGACY_COOKIE)) {
+      try {
+        setCookie(LEGACY_COOKIE, "", { path: "/", maxAge: 0 });
+      } catch {
+        // headers already sent
+      }
     }
-    return lang;
+    return getCookie(COOKIE) === "it" ? "it" : "en";
   })
   .client((): Lang => {
-    const match = document.cookie.match(/(?:^|;\s*)lang=(en|it)/);
-    if (match && isLang(match[1])) return match[1];
-    return (navigator.language || "").toLowerCase().startsWith("it") ? "it" : "en";
+    const match = document.cookie.match(/(?:^|;\s*)site_lang=(en|it)/);
+    return match && isLang(match[1]) ? match[1] : "en";
   });
 
 /** The current language, as decided in the root route's beforeLoad. */
@@ -57,7 +52,9 @@ export function useSetLang() {
   const router = useRouter();
   return useCallback(
     (lang: Lang) => {
-      document.cookie = `${COOKIE}=${lang}; path=/; max-age=${ONE_YEAR}; samesite=lax`;
+      // No max-age: a session cookie, forgotten when the browser closes.
+      document.cookie = `${COOKIE}=${lang}; path=/; samesite=lax`;
+      document.cookie = `${LEGACY_COOKIE}=; path=/; max-age=0`;
       document.documentElement.lang = lang;
       router.invalidate();
     },

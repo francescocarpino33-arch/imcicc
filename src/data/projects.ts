@@ -57,10 +57,10 @@ export const projects: Project[] = [
     fallbackCover: giro,
     fallbackTone: "#ff266e",
     it: {
-      discipline: "Grafiche Editoriali",
+      discipline: "Grafiche editoriali",
       format: "Serie di 25 grafiche",
       summary:
-        "Una serie di 25 grafiche che segue la corsa tappa dopo tappa, ognuna costruita sul contesto di quel giorno.",
+        "Una serie di 25 grafiche che accompagna la corsa tappa per tappa, ognuna costruita sul contesto di quella giornata.",
     },
     featured: true,
   },
@@ -76,10 +76,10 @@ export const projects: Project[] = [
     fallbackCover: firs1,
     fallbackTone: "#151515",
     it: {
-      discipline: "Storytelling degli Atleti",
+      discipline: "Storytelling degli atleti",
       format: "Serie settimanale",
       summary:
-        "Una serie settimanale di contenuti costruita attorno ai giocatori e ai momenti che li definiscono, tra Champions League, Europa League e Mondiali FIFA.",
+        "Una serie settimanale di contenuti costruita intorno ai giocatori e ai momenti che li definiscono, tra Champions League, Europa League e Mondiali FIFA.",
     },
     featured: true,
   },
@@ -95,10 +95,9 @@ export const projects: Project[] = [
     fallbackTone: "#490024",
     fallbackScale: 1.15,
     it: {
-      discipline: "Key Visual",
+      discipline: "Key visual",
       format: "Poster singolo",
-      summary:
-        "Un key visual di Premier League per la partita dell'Aston Villa contro il Brighton.",
+      summary: "Il key visual per la partita di Premier League tra Aston Villa e Brighton.",
     },
     featured: true,
   },
@@ -114,10 +113,10 @@ export const projects: Project[] = [
     fallbackCover: arenteiro,
     fallbackTone: "#1f8d44",
     it: {
-      discipline: "Contenuti Editoriali e per il Club",
+      discipline: "Contenuti editoriali",
       format: "Serie",
       summary:
-        "Contenuti editoriali e per il club di una squadra di calcio galiziana, pensati come un'unica serie coerente.",
+        "Contenuti editoriali per un club di calcio galiziano, pensati come un'unica serie coerente.",
     },
     featured: true,
   },
@@ -132,9 +131,9 @@ export const projects: Project[] = [
     fallbackCover: "/corgomo.webp",
     fallbackTone: "#30b15f",
     it: {
-      discipline: "Contenuti Editoriali e per il Club",
+      discipline: "Contenuti editoriali",
       format: "Serie",
-      summary: "Contenuti editoriali e per il club di un piccolo grande club.",
+      summary: "Contenuti editoriali per un piccolo grande club.",
     },
   },
   {
@@ -148,9 +147,9 @@ export const projects: Project[] = [
     fallbackCover: acMilan,
     fallbackTone: "#000000",
     it: {
-      discipline: "Design Digitale e Social",
-      format: "Asset di brand",
-      summary: "Asset digitali e social per il club.",
+      discipline: "Design digitale e social",
+      format: "Materiali di brand",
+      summary: "Materiali digitali e social per il club.",
     },
     nda: true,
   },

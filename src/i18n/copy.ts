@@ -184,186 +184,188 @@ const en = {
 
 export type Copy = typeof en;
 
+/**
+ * Italian. Written for Italian clients and agencies, not translated word for word:
+ * sentence case (Italian doesn't capitalise every word), and the English terms
+ * the Italian creative industry actually uses (art direction, brief, key visual,
+ * storytelling, brand, NDA) are kept in English.
+ */
 const it: Copy = {
   langName: "Italiano",
   switchTo: "Switch to English",
 
   nav: {
     home: "Home",
-    work: "Lavori",
+    work: "Progetti",
     about: "Chi sono",
     contact: "Contatti",
     role: "Sports Designer",
-    cta: "Inizia un progetto",
+    cta: "Lavoriamo insieme",
     menu: "Menu",
     close: "Chiudi",
     skip: "Vai al contenuto",
     homeLabel: "IMCICC, home",
-    mainLabel: "Principale",
-    mobileLabel: "Menu mobile",
+    mainLabel: "Navigazione principale",
+    mobileLabel: "Menu",
   },
-  available: "Disponibile per progetti freelance",
+  available: "Disponibile per nuovi progetti",
   emailMe: "Scrivimi",
-  viewProject: (title: string) => `${title}, apri il progetto`,
+  viewProject: (title: string) => `${title}, guarda il progetto`,
   tile: {
-    open: "Apri il progetto",
-    openNda: "Vedi i dettagli",
+    open: "Guarda il progetto",
+    openNda: "Scopri di più",
     images: (n: number) => (n === 1 ? "1 immagine" : `${n} immagini`),
-    nda: "Sotto NDA",
+    nda: "Coperto da NDA",
   },
   and: "e",
 
   home: {
     title: "IMCICC | Francesco Carpino, sports designer freelance",
     description:
-      "Francesco Carpino (IMCICC) è uno sports designer freelance a Milano: art direction, sistemi visivi e contenuti per club, competizioni e brand.",
+      "Francesco Carpino (IMCICC) è uno sports designer freelance di base a Milano. Si occupa di art direction, sistemi visivi e contenuti per club, competizioni e brand.",
     ogDescription:
-      "Art direction, sistemi visivi e contenuti per il calcio, il ciclismo e i brand che li circondano.",
-    headline: "Design sportivo per club, competizioni e la cultura che li circonda.",
-    lead: "Sono Francesco Carpino, sports designer freelance. Mi occupo di art direction, sistemi visivi e contenuti per club, competizioni e brand dello sport, dalla prima idea alla serie completa.",
-    seeWork: "Guarda i lavori",
+      "Art direction, sistemi visivi e contenuti per il calcio, il ciclismo e i brand che ruotano intorno allo sport.",
+    headline: "Design per lo sport: club, competizioni e la cultura che li circonda.",
+    lead: "Sono Francesco Carpino, sports designer freelance. Curo art direction, sistemi visivi e contenuti per club, competizioni e brand dello sport, dall'idea iniziale alla serie completa.",
+    seeWork: "Guarda i progetti",
     portraitAlt: "Ritratto di Francesco Carpino",
     portraitCaption: "Francesco Carpino, Milano",
-    wallLabel: "Muro di poster",
+    wallLabel: "Selezione di poster",
     wallAlt:
-      "Un muro di poster sportivi di Francesco: traguardi di giocatori, grafiche di tappa del Giro d'Italia e visual per club.",
+      "Una selezione di poster sportivi di Francesco: traguardi dei giocatori, grafiche di tappa del Giro d'Italia e contenuti per i club.",
     wallCaption: "Una selezione di poster dall'archivio.",
     wallSwipe: " Scorri per vederne altri.",
     clients: "Clienti e collaborazioni",
-    selectedWork: "Lavori selezionati",
-    allProjects: (n: number) => `Tutti i ${n} progetti`,
+    selectedWork: "Progetti selezionati",
+    allProjects: (n: number) => `Vedi tutti i progetti (${n})`,
     whatIDo: "Cosa faccio",
     whatIDoIntro:
-      "Il pensiero conta quanto la realizzazione: capire il brief, scegliere una direzione e trasformarla in un lavoro coerente.",
-    seenIn: "Si vede in",
+      "Il ragionamento conta quanto l'esecuzione: capire il brief, scegliere una direzione e tradurla in un lavoro coerente dall'inizio alla fine.",
+    seenIn: "Ad esempio in",
   },
 
   facts: {
     client: "Cliente",
     sport: "Sport",
-    discipline: "Disciplina",
+    discipline: "Ambito",
     format: "Formato",
     role: "Ruolo",
     year: "Anno",
   },
 
   work: {
-    title: "Lavori | IMCICC, Francesco Carpino",
+    title: "Progetti | IMCICC, Francesco Carpino",
     description:
       "Progetti di sports design per Giro d'Italia, FIRS1 Sports, Aston Villa, CD Arenteiro, CD Córgomo e AC Milan: art direction, sistemi visivi e storytelling degli atleti.",
     ogDescription: "Art direction, sistemi visivi e contenuti per club e competizioni.",
-    heading: "Lavori",
+    heading: "Progetti",
     intro:
-      "Sei progetti tra calcio e ciclismo, per club, un Grande Giro e FIRS1 Sports. Aprine uno per vedere tutte le grafiche.",
+      "Sei progetti tra calcio e ciclismo: club, il Giro d'Italia e FIRS1 Sports. Apri un progetto per vedere tutte le grafiche.",
   },
 
   project: {
-    breadcrumb: "Lavori",
+    breadcrumb: "Progetti",
     imagesLabel: "Immagini del progetto",
     loading: "Caricamento delle immagini",
-    ndaNote: "Questo lavoro è coperto da un accordo di riservatezza, quindi non è pubblicato qui.",
-    ndaTitle: "Visibile su richiesta.",
+    ndaNote: "Questo lavoro è coperto da un accordo di riservatezza e non può essere pubblicato.",
+    ndaTitle: "Disponibile in privato.",
     ndaBody: (title: string) =>
-      `Alcuni lavori per i clienti non possono essere mostrati pubblicamente. Se stai valutando una collaborazione, ti mostro volentieri il lavoro per ${title} in una call o te lo invio direttamente.`,
-    ndaCta: "Richiedi una visione privata",
-    ndaSubject: (title: string) => `Lavoro ${title}: visione privata`,
-    otherWork: "Guarda altri lavori",
+      `Alcuni lavori per i clienti non possono essere mostrati pubblicamente. Se stai valutando una collaborazione, posso mostrarti il lavoro per ${title} durante una call o inviartelo direttamente.`,
+    ndaCta: "Chiedi di vederlo",
+    ndaSubject: (title: string) => `Richiesta di visione: progetto ${title}`,
+    otherWork: "Guarda altri progetti",
     emptyFailed:
       "Non è stato possibile caricare le immagini di questo progetto. Ricarica la pagina per riprovare.",
-    emptyPending: "Le immagini di questo progetto sono in preparazione.",
+    emptyPending: "Le immagini di questo progetto saranno disponibili a breve.",
     nextLabel: "Progetto successivo",
     next: (n: number, total: number) => `Progetto successivo, ${n} di ${total}`,
     of: "di",
     viewFull: (title: string, n: number, total: number) =>
-      `Apri ${title}, immagine ${n} di ${total}, a dimensione piena`,
+      `Ingrandisci ${title}, immagine ${n} di ${total}`,
     imageAlt: (title: string, n: number, total: number) => `${title}, immagine ${n} di ${total}`,
-    fullView: (title: string) => `${title}, vista a dimensione piena`,
+    fullView: (title: string) => `${title}, immagine ingrandita`,
     close: "Chiudi",
     previous: "Precedente",
     nextImage: "Successiva",
-    underNda: "Sotto NDA",
+    underNda: "Coperto da NDA",
     crest: (client: string) => `Stemma ${client}`,
   },
 
   about: {
     title: "Chi sono | IMCICC, Francesco Carpino",
     description:
-      "Francesco Carpino è uno sports designer freelance italiano con base a Milano, che lavora come IMCICC con club, competizioni e brand.",
-    ogDescription: "Sports designer freelance italiano con base a Milano, lavora come IMCICC.",
+      "Francesco Carpino è uno sports designer freelance di base a Milano. Con il nome IMCICC lavora per club, competizioni e brand.",
+    ogDescription: "Sports designer freelance di base a Milano. Lavora con il nome IMCICC.",
     heading: "Chi sono",
-    lead: "Sono Francesco Carpino, sports designer italiano con base a Milano. Lavoro come freelance con il nome IMCICC.",
+    lead: "Sono Francesco Carpino, sports designer di base a Milano. Lavoro come freelance con il nome IMCICC.",
     body: [
-      "Sport e design sono sempre state le mie due costanti, e il mio lavoro nasce dove si incontrano. Aiuto club, competizioni e brand a decidere come vogliono apparire e cosa vogliono dire, poi progetto i sistemi visivi e i contenuti che lo comunicano.",
-      "Lavoro come freelance dal 2020, con AC Milan, Aston Villa, Giro d'Italia e FIRS1 Sports, e con i club galiziani CD Arenteiro e CD Córgomo.",
-      "Voglio che ogni lavoro sembri appartenere al suo club e al suo momento: costruito attorno all'atleta, alla storia o al momento per cui è nato, non attorno a un template.",
+      "Lo sport e il design sono sempre stati i miei due punti fermi, e il mio lavoro nasce dove si incontrano. Aiuto club, competizioni e brand a definire come vogliono presentarsi e cosa vogliono comunicare, poi progetto i sistemi visivi e i contenuti che lo raccontano.",
+      "Lavoro come freelance dal 2020 con AC Milan, Aston Villa, Giro d'Italia e FIRS1 Sports, oltre che con i club galiziani CD Arenteiro e CD Córgomo.",
+      "Voglio che ogni lavoro appartenga davvero al suo club e al suo momento: costruito intorno all'atleta, alla storia o all'occasione per cui nasce, non intorno a un template.",
     ],
     portraitAlt: "Ritratto di Francesco Carpino",
     portraitCaption: "Francesco Carpino, Milano",
     clients: "Clienti e collaborazioni",
-    ndaRow: "Sotto NDA, visibile in privato",
+    ndaRow: "Coperto da NDA, visibile su richiesta",
     howTitle: "Come possiamo lavorare insieme",
     howBody:
-      "Lavoro con i team interni di club e competizioni, e con le agenzie che cercano uno specialista dello sport per un progetto. Ho base a Milano e lavoro da remoto con clienti in tutta Europa.",
+      "Collaboro con i team interni di club e competizioni e con le agenzie che cercano uno specialista dello sport. Lavoro da Milano, anche da remoto, con clienti in tutta Europa.",
     ways: [
+      { title: "Progetti singoli", text: "Un poster, un annuncio, una grafica celebrativa." },
       {
-        title: "Lavori Singoli",
-        text: "Un poster chiave, un annuncio, una grafica per un traguardo.",
+        title: "Contenuti continuativi",
+        text: "Grafiche settimanali per tutta la stagione, all'interno di un sistema coerente.",
       },
-      {
-        title: "Contenuti Continuativi",
-        text: "Grafiche settimanali per tutta la stagione, costruite su un sistema coerente.",
-      },
-      { title: "Serie", text: "Un insieme di lavori per un torneo, una corsa o una campagna." },
+      { title: "Serie", text: "Un insieme di grafiche per un torneo, una corsa o una campagna." },
     ],
-    specialisms: "Specializzazioni",
+    specialisms: "Competenze",
   },
 
   contact: {
     title: "Contatti | IMCICC, Francesco Carpino",
     description:
-      "Inizia un progetto con Francesco Carpino (IMCICC), sports designer freelance a Milano. Email, LinkedIn e Instagram.",
-    ogDescription: "Inizia un progetto con Francesco Carpino, sports designer freelance a Milano.",
-    heading: "Raccontami il tuo progetto.",
+      "Contatta Francesco Carpino (IMCICC), sports designer freelance di base a Milano: email, LinkedIn e Instagram.",
+    ogDescription: "Contatta Francesco Carpino, sports designer freelance di base a Milano.",
+    heading: "Parliamo del tuo progetto.",
     email: "Email",
-    usefulTitle: "Cosa è utile includere",
+    usefulTitle: "Cosa includere",
     useful: [
-      "Per chi è: il club, la competizione o il brand",
-      "Di cosa hai bisogno: un lavoro singolo, contenuti continuativi o una serie",
-      "Quando ti serve, e con che frequenza",
+      "Per chi è: club, competizione o brand",
+      "Di cosa hai bisogno: un progetto singolo, contenuti continuativi o una serie",
+      "Tempistiche e frequenza",
     ],
-    elsewhere: "Altri contatti",
-    location: "Milano, Italia (ora dell'Europa centrale)",
+    elsewhere: "Mi trovi anche su",
+    location: "Milano, Italia (fuso orario CET)",
     clients: "Clienti e collaborazioni",
   },
 
   footer: {
     ctaTitle: "Ogni progetto inizia da una conversazione.",
     ctaBody:
-      "Prima capisco i tuoi obiettivi e le persone a cui ti rivolgi. Poi definisco una direzione visiva e la trasformo in un sistema, così ogni lavoro fa parte della stessa storia.",
+      "Prima capisco i tuoi obiettivi e il pubblico a cui parli. Poi definisco una direzione visiva e la sviluppo in un sistema, così ogni contenuto racconta la stessa storia.",
     steps: ["Brief", "Direzione", "Sistema"],
-    getInTouch: "Contattami",
-    studio:
-      "IMCICC è il nome con cui lavora Francesco Carpino, sports designer freelance con base a Milano.",
-    elsewhere: "Altri contatti",
+    getInTouch: "Scrivimi",
+    studio: "IMCICC è lo studio di Francesco Carpino, sports designer freelance di base a Milano.",
+    elsewhere: "Mi trovi anche su",
     backToTop: "Torna su",
   },
 
-  copyEmail: { idle: "Copia l'indirizzo email", done: "Email copiata" },
+  copyEmail: { idle: "Copia l'indirizzo email", done: "Indirizzo copiato" },
 
   notFound: {
     label: "Errore 404",
-    title: "Questa pagina è stata sostituita.",
-    body: "Il link potrebbe essere vecchio, oppure la pagina è stata spostata. I lavori sono ancora qui.",
-    seeWork: "Guarda i lavori",
-    home: "Vai alla home",
+    title: "Questa pagina è finita in panchina.",
+    body: "Il link potrebbe essere vecchio o la pagina è stata spostata. I progetti sono ancora qui.",
+    seeWork: "Guarda i progetti",
+    home: "Torna alla home",
   },
   error: {
     label: "Qualcosa è andato storto",
     title: "Questa pagina non si è caricata.",
     before: "Riprova, oppure scrivi a ",
-    after: " se continua a succedere.",
+    after: " se il problema continua.",
     retry: "Riprova",
-    home: "Vai alla home",
+    home: "Torna alla home",
   },
 };
 

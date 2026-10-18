@@ -18,7 +18,7 @@ export const CAPABILITIES: Capability[] = [
     it: {
       title: "Art Direction",
       description:
-        "Definire la direzione visiva prima di disegnare qualsiasi cosa: il tono, i riferimenti e il modo in cui raccontare la storia.",
+        "Definire la direzione visiva prima di disegnare: il tono, i riferimenti e il modo di raccontare la storia.",
     },
   },
   {
@@ -27,9 +27,9 @@ export const CAPABILITIES: Capability[] = [
       "A consistent visual language that holds together across dozens of pieces, from a weekly series to a whole race.",
     seenIn: ["giro-ditalia", "first", "arenteiro"],
     it: {
-      title: "Sistemi Visivi e Serie",
+      title: "Sistemi visivi e serie",
       description:
-        "Un linguaggio visivo coerente che regge su decine di lavori, da una serie settimanale a un'intera corsa.",
+        "Un linguaggio visivo coerente che tiene insieme decine di contenuti, da una serie settimanale a un'intera corsa.",
     },
   },
   {
@@ -38,9 +38,9 @@ export const CAPABILITIES: Capability[] = [
       "Visuals built around athletes and the moments that define them: milestones, performances and celebrations.",
     seenIn: ["first"],
     it: {
-      title: "Storytelling degli Atleti",
+      title: "Storytelling degli atleti",
       description:
-        "Visual costruiti attorno agli atleti e ai momenti che li definiscono: traguardi, prestazioni e celebrazioni.",
+        "Contenuti costruiti intorno agli atleti e ai momenti che li definiscono: traguardi, prestazioni, celebrazioni.",
     },
   },
   {
@@ -49,7 +49,7 @@ export const CAPABILITIES: Capability[] = [
       "Content for club and competition channels, designed for the formats people actually see and share.",
     seenIn: ["ac-milan", "aston-villa", "arenteiro", "corgomo"],
     it: {
-      title: "Contenuti Social e Digitali",
+      title: "Contenuti social e digitali",
       description:
         "Contenuti per i canali di club e competizioni, pensati per i formati che le persone vedono e condividono davvero.",
     },

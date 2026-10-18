@@ -28,10 +28,12 @@ deployed on Netlify from `main` (`bun run build`, publish `dist`). TanStack Star
 ## Languages (EN / IT)
 - All interface copy lives in `src/i18n/copy.ts` (one object per language, same shape). Project and
   capability text has an `it` block in `src/data/projects.ts` / `src/data/capabilities.ts`.
-- The language is decided in the root route's `beforeLoad` (`detectLang` in `src/i18n/lang.tsx`):
-  the `lang` cookie if set, otherwise the browser's Accept-Language (Italian → `it`), otherwise `en`.
-  URLs are the same in both languages. Use `useCopy()` / `useLang()` in components and
-  `headCopy(match)` in route `head()`.
+- The site always opens in English. Italian only after the visitor picks IT, for that visit only
+  (session cookie `site_lang`, read in the root route's `beforeLoad` via `detectLang` in
+  `src/i18n/lang.tsx`). No browser-language detection. URLs are the same in both languages.
+  Use `useCopy()` / `useLang()` in components and `headCopy(match)` in route `head()`.
+- Italian copy is written for Italian clients, not translated word for word: sentence case, and the
+  English terms the industry uses (art direction, brief, key visual, storytelling, brand, NDA).
 - Project intros written in /admin are shown on the English page only; the Italian page uses the
   Italian summary from `projects.ts`.
 
