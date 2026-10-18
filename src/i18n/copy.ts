@@ -167,8 +167,8 @@ const en = {
 
   notFound: {
     label: "Error 404",
-    title: "This page has been substituted.",
-    body: "The link may be old, or the page has moved. The work is still here.",
+    title: "Page not found.",
+    body: "The page you're looking for doesn't exist or has been moved.",
     seeWork: "See the work",
     home: "Go to the homepage",
   },
@@ -226,7 +226,7 @@ const it: Copy = {
     ogDescription:
       "Art direction, sistemi visivi e contenuti per il calcio, il ciclismo e i brand che ruotano intorno allo sport.",
     headline: "Design per lo sport: club, competizioni e la cultura che li circonda.",
-    lead: "Sono Francesco Carpino, sports designer freelance. Curo art direction, sistemi visivi e contenuti per club, competizioni e brand dello sport, dall'idea iniziale alla serie completa.",
+    lead: "Mi chiamo Francesco Carpino e sono uno sports designer freelance. Curo art direction, sistemi visivi e contenuti per club, competizioni e brand dello sport, dall'idea iniziale alla serie completa.",
     seeWork: "Guarda i progetti",
     portraitAlt: "Ritratto di Francesco Carpino",
     portraitCaption: "Francesco Carpino, Milano",
@@ -297,7 +297,7 @@ const it: Copy = {
       "Francesco Carpino è uno sports designer freelance di base a Milano. Con il nome IMCICC lavora per club, competizioni e brand.",
     ogDescription: "Sports designer freelance di base a Milano. Lavora con il nome IMCICC.",
     heading: "Chi sono",
-    lead: "Sono Francesco Carpino, sports designer di base a Milano. Lavoro come freelance con il nome IMCICC.",
+    lead: "Mi chiamo Francesco Carpino e sono uno sports designer di base a Milano. Lavoro come freelance con il nome IMCICC.",
     body: [
       "Lo sport e il design sono sempre stati i miei due punti fermi, e il mio lavoro nasce dove si incontrano. Aiuto club, competizioni e brand a definire come vogliono presentarsi e cosa vogliono comunicare, poi progetto i sistemi visivi e i contenuti che lo raccontano.",
       "Lavoro come freelance dal 2020 con AC Milan, Aston Villa, Giro d'Italia e FIRS1 Sports, oltre che con i club galiziani CD Arenteiro e CD Córgomo.",
@@ -354,8 +354,8 @@ const it: Copy = {
 
   notFound: {
     label: "Errore 404",
-    title: "Questa pagina è finita in panchina.",
-    body: "Il link potrebbe essere vecchio o la pagina è stata spostata. I progetti sono ancora qui.",
+    title: "Pagina non trovata.",
+    body: "La pagina che stai cercando non esiste o è stata spostata.",
     seeWork: "Guarda i progetti",
     home: "Torna alla home",
   },
