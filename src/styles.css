@@ -314,16 +314,15 @@
 
   /* The open bar: always visible directly under the cover (never over the
      artwork), so a cover reads as a door into the project, not as a picture.
-     It turns orange when the tile is hovered or focused. */
+     Orange at rest; it goes dark when the tile is hovered or focused. */
   .tile-open {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
     padding: 0.8rem 1rem;
-    background: var(--stand);
-    border-top: 1px solid var(--line);
-    color: var(--chalk);
+    background: var(--signal);
+    color: var(--night);
     font-stretch: var(--wdth-label);
     font-size: 0.875rem;
     font-weight: 500;
@@ -341,17 +340,17 @@
     transition: transform var(--duration-hover) var(--ease-standard);
   }
   .tile-open-meta {
-    color: var(--concrete);
+    color: color-mix(in srgb, var(--night) 70%, transparent);
     transition: color var(--duration-hover) var(--ease-standard);
   }
   .tile:hover .tile-open,
   .tile:focus-visible .tile-open {
-    background: var(--signal);
-    color: var(--night);
+    background: var(--stand);
+    color: var(--chalk);
   }
   .tile:hover .tile-open-meta,
   .tile:focus-visible .tile-open-meta {
-    color: color-mix(in srgb, var(--night) 70%, transparent);
+    color: var(--concrete);
   }
   .tile:hover .tile-open-icon,
   .tile:focus-visible .tile-open-icon {

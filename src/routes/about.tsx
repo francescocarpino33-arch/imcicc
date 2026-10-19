@@ -78,7 +78,6 @@ function AboutPage() {
               className="h-full w-full object-cover"
             />
           </div>
-          <figcaption className="label mt-3">{t.portraitCaption}</figcaption>
         </figure>
       </section>
 

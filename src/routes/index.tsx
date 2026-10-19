@@ -97,7 +97,6 @@ function Index() {
                 className="h-full w-full object-cover object-[50%_28%]"
               />
             </div>
-            <figcaption className="label mt-3">{t.home.portraitCaption}</figcaption>
           </motion.figure>
 
           {/* On phones the introduction follows the portrait */}
@@ -310,13 +309,11 @@ function FeaturedRow({
         <Link
           to="/work/$slug"
           params={{ slug: project.slug }}
-          className="btn btn-ghost mt-7"
+          className="btn mt-7"
           aria-label={t.viewProject(project.title)}
         >
           {project.nda ? t.tile.openNda : t.tile.open}
-          {count ? (
-            <span className="text-concrete tabular-nums">{t.tile.images(count)}</span>
-          ) : null}
+          {count ? <span className="opacity-70 tabular-nums">{t.tile.images(count)}</span> : null}
         </Link>
       </div>
     </article>
