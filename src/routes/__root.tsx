@@ -4,11 +4,12 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  useLocation,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { AnimatePresence, motion, MotionConfig } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, MotionConfig } from "framer-motion";
 
 import appCss from "../styles.css?url";
 import archivoLatin from "@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url";
@@ -173,26 +174,35 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const location = useLocation();
+  // Key on the page actually rendered, not the URL: the URL changes as soon as a
+  // link is clicked, while the old page keeps rendering until the new one has loaded.
+  const pageKey = useRouterState({
+    select: (s) => s.matches[s.matches.length - 1]?.pathname ?? s.location.pathname,
+  });
   useRevealObserver();
   useHoverRoll();
+  // No fade on the first page a visitor lands on; every page after that fades in.
+  const navigated = useRef(false);
+  useEffect(() => {
+    navigated.current = true;
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <MotionConfig reducedMotion="user" transition={entranceTransition}>
         <SiteNav />
         <main id="main" tabIndex={-1} className="relative z-[2] outline-none">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={location.pathname}
-              variants={pageEnter}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              <Outlet />
-            </motion.div>
-          </AnimatePresence>
+          {/* The new page fades in over the old one's departure. There is no exit
+              animation: an exiting <Outlet /> re-mounts the old page and replays its
+              entrance during the fade-out. */}
+          <motion.div
+            key={pageKey}
+            variants={pageEnter}
+            initial={navigated.current ? "initial" : false}
+            animate="animate"
+          >
+            <Outlet />
+          </motion.div>
         </main>
         <SiteFooter />
       </MotionConfig>
