@@ -18,6 +18,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { entranceTransition, pageEnter } from "@/lib/motion";
 import { MOTION_BOOT, useRevealObserver } from "@/lib/reveal";
 import { useHoverRoll } from "@/lib/hover-roll";
+import { useHeadlineRoll } from "@/lib/headline-roll";
+import { useCursorBadge } from "@/lib/cursor-badge";
 import { CONTACT } from "@/data/projects";
 import { detectLang, useCopy, useLang } from "@/i18n/lang";
 import { headCopy, langOf } from "@/i18n/head";
@@ -181,11 +183,23 @@ function RootComponent() {
   });
   useRevealObserver();
   useHoverRoll();
+  useHeadlineRoll();
+  useCursorBadge();
   // No fade on the first page a visitor lands on; every page after that fades in.
   const navigated = useRef(false);
   useEffect(() => {
     navigated.current = true;
   }, []);
+  // Entrances that start as a new page appears wait for the orange curtain to
+  // lift; reveals further down the page (started later, on scroll) don't.
+  const firstKey = useRef(pageKey);
+  useEffect(() => {
+    if (pageKey === firstKey.current) return;
+    const root = document.documentElement;
+    root.style.setProperty("--page-delay", "0.4s");
+    const id = window.setTimeout(() => root.style.removeProperty("--page-delay"), 800);
+    return () => window.clearTimeout(id);
+  }, [pageKey]);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -204,6 +218,10 @@ function RootComponent() {
             <Outlet />
           </motion.div>
         </main>
+        {/* Page change: an orange plate lifts off the new page (motion-ok only). */}
+        {navigated.current && (
+          <div key={`curtain-${pageKey}`} className="page-curtain" aria-hidden />
+        )}
         <SiteFooter />
       </MotionConfig>
     </QueryClientProvider>

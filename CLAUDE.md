@@ -33,6 +33,15 @@ deployed on Netlify from `main` (`bun run build`, publish `dist`). TanStack Star
   - Hover roll on `.nav-link`, `.link` (letter by letter), `.btn` and the cover open bar (whole label):
     `src/lib/hover-roll.ts`, one delegated listener; an aria-hidden overlay is built only while hovered.
     Fine pointers only. Add `data-no-roll` to opt an element out.
+  - Interactive headlines (`src/lib/headline-roll.ts`): the word under the pointer in any `.voice`
+    h1/h2/h3 or `.tile-title` rolls letter by letter and lands in orange (chalk on orange or on orange
+    titles). Overlay covers only the word's ink, measured with canvas, so tight leading isn't disturbed.
+  - Cursor label over project covers (`src/lib/cursor-badge.ts`): orange "View project" pill that
+    follows the pointer, text taken from the cover's open bar (so it is translated and NDA-aware).
+  - Page change: orange curtain lifts off the new page (`.page-curtain`, keyed in `__root.tsx`);
+    entrances that start with the page wait for it via `--page-delay` (set on <html> for 800ms).
+  - Rows and lists rise in on scroll (`data-reveal="rise"`): capabilities, about rows, footer steps.
+  - Portraits push in slowly on hover (`.portrait-zoom`); covers scale to 1.06 on hover.
   - Hero portrait/poster wall entrances (`.enter-wipe`, `.enter-wall`), mobile menu stagger, and a fade-in
     of each new page (framer-motion in `__root.tsx`; no exit animation, because an exiting `<Outlet />`
     re-mounts the old page). `prefers-reduced-motion` is respected.

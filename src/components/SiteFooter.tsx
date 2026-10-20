@@ -26,7 +26,7 @@ export function SiteFooter() {
               <p className="text-[1.0625rem] leading-relaxed max-w-[30em]">{t.ctaBody}</p>
               <ol className="grid grid-cols-3 border-t border-night/25">
                 {t.steps.map((step, i) => (
-                  <li key={step} className="pt-3 pr-3">
+                  <li key={step} data-reveal="rise" className="pt-3 pr-3">
                     <span className="block text-[0.8125rem] font-medium wdth-label tabular-nums text-night/60">
                       {String(i + 1).padStart(2, "0")}
                     </span>

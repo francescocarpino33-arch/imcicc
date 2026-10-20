@@ -76,7 +76,7 @@ function Index() {
 
           <figure className="col-span-4 md:col-span-5 md:col-start-8 enter-wipe">
             <div
-              className="well aspect-[4/5]"
+              className="well portrait-zoom aspect-[4/5]"
               style={{ maxHeight: "calc(100svh - var(--nav-h) - 4rem)", width: "100%" }}
             >
               <img
@@ -164,7 +164,11 @@ function Index() {
               const ct = capabilityText(c, lang);
               const names = c.seenIn.map((slug) => projects.find((x) => x.slug === slug)!);
               return (
-                <li key={c.title} className="rule py-8 md:py-10 grid grid-cols-1 gap-3">
+                <li
+                  key={c.title}
+                  data-reveal="rise"
+                  className="rule py-8 md:py-10 grid grid-cols-1 gap-3"
+                >
                   <h3 className="voice" style={{ fontSize: "var(--step-2)" }}>
                     {ct.title}
                   </h3>

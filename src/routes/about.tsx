@@ -67,7 +67,7 @@ function AboutPage() {
         </div>
 
         <figure className="col-span-4 md:col-span-4 lg:col-span-5 md:order-1 md:col-start-1">
-          <div className="well" style={{ aspectRatio: "840 / 1043" }}>
+          <div className="well portrait-zoom" style={{ aspectRatio: "840 / 1043" }}>
             <img
               src="/imcicc.webp"
               srcSet="/imcicc.webp 840w, /francesco-portrait.webp 1200w"
@@ -98,7 +98,7 @@ function AboutPage() {
         </div>
         <ul>
           {projects.map((p) => (
-            <li key={p.slug}>
+            <li key={p.slug} data-reveal="rise">
               <Link
                 to="/work/$slug"
                 params={{ slug: p.slug }}
@@ -140,6 +140,7 @@ function AboutPage() {
           {t.ways.map((w) => (
             <li
               key={w.title}
+              data-reveal="rise"
               className="rule py-5 grid grid-cols-1 sm:grid-cols-[13rem_1fr] gap-x-6 gap-y-1"
             >
               <h3 className="voice" style={{ fontSize: "var(--step-2)", lineHeight: 1 }}>
