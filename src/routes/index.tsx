@@ -1,6 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion, useReducedMotion } from "framer-motion";
-import { EASE_STANDARD } from "@/lib/motion";
 import { CONTACT, projectText, projects, type Project } from "@/data/projects";
 import { ClientLogos } from "@/components/ClientLogos";
 import { useProjectCovers, useProjectRecords } from "@/lib/project-media";
@@ -9,6 +7,7 @@ import { CAPABILITIES, capabilityText } from "@/data/capabilities";
 import { useCopy, useLang } from "@/i18n/lang";
 import { headCopy } from "@/i18n/head";
 import { ProjectFacts } from "@/components/ProjectFacts";
+import { RevealWords } from "@/components/RevealWords";
 
 export const Route = createFileRoute("/")({
   head: ({ match }) => {
@@ -28,7 +27,6 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const reduced = useReducedMotion();
   const t = useCopy();
   const lang = useLang();
   const words = t.home.headline.split(" ");
@@ -46,26 +44,27 @@ function Index() {
               id="hero-title"
               key={lang}
               className="voice max-w-[15ch]"
-              style={{
-                fontSize: "clamp(3rem, min(6.9vw, 14svh), 8.5rem)",
-                lineHeight: 0.86,
-                letterSpacing: "-0.03em",
-              }}
+              data-reveal="words"
+              data-in=""
+              style={
+                {
+                  fontSize: "clamp(3rem, min(6.9vw, 14svh), 8.5rem)",
+                  lineHeight: 0.86,
+                  letterSpacing: "-0.03em",
+                  "--rw-delay": "0.1s",
+                  "--rw-from": "105%",
+                } as React.CSSProperties
+              }
             >
               {words.map((w, i) => (
                 <span
                   key={i}
                   className="inline-block overflow-hidden align-top pb-[0.06em] -mb-[0.06em]"
                 >
-                  <motion.span
-                    className="inline-block"
-                    initial={reduced ? false : { y: "105%" }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 0.9, delay: 0.1 + i * 0.045, ease: EASE_STANDARD }}
-                  >
+                  <span className="rw" style={{ "--i": i } as React.CSSProperties}>
                     {w}
                     {i < words.length - 1 ? "\u00a0" : ""}
-                  </motion.span>
+                  </span>
                   {i < words.length - 1 ? " " : ""}
                 </span>
               ))}
@@ -75,12 +74,7 @@ function Index() {
             <HeroActions className="mt-8 hidden md:flex" />
           </div>
 
-          <motion.figure
-            className="col-span-4 md:col-span-5 md:col-start-8"
-            initial={reduced ? false : { clipPath: "inset(0% 0% 100% 0%)" }}
-            animate={{ clipPath: "inset(0% 0% 0% 0%)" }}
-            transition={{ duration: 1, delay: 0.35, ease: EASE_STANDARD }}
-          >
+          <figure className="col-span-4 md:col-span-5 md:col-start-8 enter-wipe">
             <div
               className="well aspect-[4/5]"
               style={{ maxHeight: "calc(100svh - var(--nav-h) - 4rem)", width: "100%" }}
@@ -97,7 +91,7 @@ function Index() {
                 className="h-full w-full object-cover object-[50%_28%]"
               />
             </div>
-          </motion.figure>
+          </figure>
 
           {/* On phones the introduction follows the portrait */}
           <div className="col-span-4 md:hidden">
@@ -112,12 +106,7 @@ function Index() {
           className="plate mt-14 md:mt-20"
           style={{ paddingTop: "var(--gutter)", paddingBottom: "var(--space-5)" }}
         >
-          <motion.figure
-            className="frame"
-            initial={reduced ? false : { clipPath: "inset(18% 0% 0% 0%)", opacity: 0 }}
-            animate={{ clipPath: "inset(0% 0% 0% 0%)", opacity: 1 }}
-            transition={{ duration: 1.1, delay: 0.55, ease: EASE_STANDARD }}
-          >
+          <figure className="frame enter-wall">
             {/* On phones the wall becomes a swipeable strip so the posters stay legible. */}
             <div
               className="bg-night overflow-x-auto md:overflow-visible snap-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -139,7 +128,7 @@ function Index() {
               {t.home.wallCaption}
               <span className="md:hidden">{t.home.wallSwipe}</span>
             </figcaption>
-          </motion.figure>
+          </figure>
 
           <div className="frame" style={{ marginTop: "var(--space-5)" }}>
             <div className="grid-12 gap-y-4">
@@ -160,13 +149,12 @@ function Index() {
       >
         <div className="frame">
           <div className="grid-12 gap-y-6 mb-12 md:mb-16">
-            <h2
+            <RevealWords
               id="capabilities-title"
               className="voice col-span-4 md:col-span-6"
               style={{ fontSize: "var(--step-3)" }}
-            >
-              {t.home.whatIDo}
-            </h2>
+              text={t.home.whatIDo}
+            />
             <p className="body-copy col-span-4 md:col-span-5 md:col-start-8 md:self-end">
               {t.home.whatIDoIntro}
             </p>
@@ -236,9 +224,12 @@ function SelectedWork() {
     >
       <div className="frame">
         <div className="flex flex-wrap items-end justify-between gap-6 mb-14 md:mb-20">
-          <h2 id="work-title" className="voice" style={{ fontSize: "var(--step-3)" }}>
-            {t.home.selectedWork}
-          </h2>
+          <RevealWords
+            id="work-title"
+            className="voice"
+            style={{ fontSize: "var(--step-3)" }}
+            text={t.home.selectedWork}
+          />
           <Link to="/work" className="link wdth-label font-medium">
             {t.home.allProjects(projects.length)}
           </Link>

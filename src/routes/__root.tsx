@@ -15,6 +15,8 @@ import archivoLatin from "@fontsource-variable/archivo/files/archivo-latin-wdth-
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 import { entranceTransition, pageEnter } from "@/lib/motion";
+import { MOTION_BOOT, useRevealObserver } from "@/lib/reveal";
+import { useHoverRoll } from "@/lib/hover-roll";
 import { CONTACT } from "@/data/projects";
 import { detectLang, useCopy, useLang } from "@/i18n/lang";
 import { headCopy, langOf } from "@/i18n/head";
@@ -155,8 +157,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 function RootShell({ children }: { children: React.ReactNode }) {
   const lang = useLang();
   return (
-    <html lang={lang}>
+    // The boot script adds classes to <html> before hydration.
+    <html lang={lang} suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: MOTION_BOOT }} />
         <HeadContent />
       </head>
       <body className="bg-background text-foreground">
@@ -170,6 +174,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const location = useLocation();
+  useRevealObserver();
+  useHoverRoll();
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -22,8 +22,20 @@ deployed on Netlify from `main` (`bun run build`, publish `dist`). TanStack Star
   buttons, link underlines, active nav and project names.
 - Artwork is never cropped on project pages; covers adapt to the artwork's proportions
   (`ProjectCover`), the gallery pairs portraits and gives landscapes a full row (`ProjectGallery`).
-- Motion: one hero sequence on the homepage, short cross-fade between pages, hover responses.
-  No scroll-triggered fade-ups. `prefers-reduced-motion` is respected.
+- Motion never changes the design at rest: every animation leaves no style behind when it ends.
+  - Hidden/moving states exist only under `html.motion-ok`, set by `MOTION_BOOT` (`src/lib/reveal.ts`,
+    inline in `<head>`) unless reduced motion is on; it removes itself after 4s if the app never hydrates.
+  - Words rising out of masks: `RevealWords` (`on="load"` for page titles, `on="scroll"` for section
+    titles); it returns to plain text once landed, so kerning at rest is untouched. Hero h1 uses the same
+    CSS with its own markup.
+  - Covers: `data-reveal="cover"` (set in `ProjectCover`), short masked rise when they enter the viewport.
+    Reveals are once per element, via `useRevealObserver` in the root (state = `data-in` attribute).
+  - Hover roll on `.nav-link`, `.link` (letter by letter), `.btn` and the cover open bar (whole label):
+    `src/lib/hover-roll.ts`, one delegated listener; an aria-hidden overlay is built only while hovered.
+    Fine pointers only. Add `data-no-roll` to opt an element out.
+  - Hero portrait/poster wall entrances (`.enter-wipe`, `.enter-wall`), mobile menu stagger, cross-fade
+    between pages (framer-motion `AnimatePresence` in `__root.tsx`). `prefers-reduced-motion` is respected.
+  - Regression check: full-page screenshots at rest before/after must be pixel-identical.
 
 ## Languages (EN / IT)
 - All interface copy lives in `src/i18n/copy.ts` (one object per language, same shape). Project and

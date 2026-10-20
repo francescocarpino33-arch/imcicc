@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { RevealWords } from "@/components/RevealWords";
 import { CONTACT } from "@/data/projects";
 import { CopyEmail } from "@/components/CopyEmail";
 import { ClientLogos } from "@/components/ClientLogos";
@@ -39,13 +40,14 @@ function ContactPage() {
           <span className="inline-block h-2 w-2 rounded-full bg-night" aria-hidden />{" "}
           {copy.available}
         </p>
-        <h1
+        <RevealWords
+          as="h1"
+          on="load"
           id="contact-title"
           className="voice max-w-[13ch]"
           style={{ fontSize: "var(--step-4)", lineHeight: 0.86 }}
-        >
-          {t.heading}
-        </h1>
+          text={t.heading}
+        />
 
         <div className="grid-12 gap-y-14 mt-14 md:mt-20">
           <div className="col-span-4 md:col-span-7">

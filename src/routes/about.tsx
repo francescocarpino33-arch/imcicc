@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { RevealWords } from "@/components/RevealWords";
 import { CONTACT, projectText, projects } from "@/data/projects";
 import { CAPABILITIES, capabilityText } from "@/data/capabilities";
 import { useCopy, useLang } from "@/i18n/lang";
@@ -34,13 +35,14 @@ function AboutPage() {
     >
       <section className="frame grid-12 gap-y-10" aria-labelledby="about-title">
         <div className="col-span-4 md:col-span-7 lg:col-span-6 md:order-2 md:col-start-6 lg:col-start-7">
-          <h1
+          <RevealWords
+            as="h1"
+            on="load"
             id="about-title"
             className="voice"
             style={{ fontSize: "var(--step-4)", lineHeight: 0.86 }}
-          >
-            {t.heading}
-          </h1>
+            text={t.heading}
+          />
           <div className="mt-10 flex flex-col gap-5">
             <p className="lead">{t.lead}</p>
             {t.body.map((para) => (
@@ -87,13 +89,12 @@ function AboutPage() {
         aria-labelledby="clients-title"
       >
         <div className="grid-12 gap-y-6 mb-10">
-          <h2
+          <RevealWords
             id="clients-title"
             className="voice col-span-4 md:col-span-6"
             style={{ fontSize: "var(--step-3)" }}
-          >
-            {t.clients}
-          </h2>
+            text={t.clients}
+          />
         </div>
         <ul>
           {projects.map((p) => (
@@ -127,9 +128,12 @@ function AboutPage() {
         aria-labelledby="how-title"
       >
         <div className="col-span-4 md:col-span-5">
-          <h2 id="how-title" className="voice" style={{ fontSize: "var(--step-3)" }}>
-            {t.howTitle}
-          </h2>
+          <RevealWords
+            id="how-title"
+            className="voice"
+            style={{ fontSize: "var(--step-3)" }}
+            text={t.howTitle}
+          />
           <p className="body-copy mt-6">{t.howBody}</p>
         </div>
         <ul className="col-span-4 md:col-span-6 md:col-start-7">

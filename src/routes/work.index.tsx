@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { RevealWords } from "@/components/RevealWords";
 import { projectText, projects } from "@/data/projects";
 import { useCopy, useLang } from "@/i18n/lang";
 import { headCopy } from "@/i18n/head";
@@ -37,12 +38,13 @@ function WorkPage() {
       }}
     >
       <header className="frame grid-12 gap-y-8 mb-16 md:mb-24">
-        <h1
+        <RevealWords
+          as="h1"
+          on="load"
           className="voice col-span-4 md:col-span-7"
           style={{ fontSize: "var(--step-4)", lineHeight: 0.86 }}
-        >
-          {t.heading}
-        </h1>
+          text={t.heading}
+        />
         <p className="body-copy col-span-4 md:col-span-4 md:col-start-9 md:self-end">{t.intro}</p>
       </header>
 

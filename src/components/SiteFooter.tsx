@@ -2,6 +2,7 @@ import { useLocation } from "@tanstack/react-router";
 import { CONTACT } from "@/data/projects";
 import { useCopy } from "@/i18n/lang";
 import { CopyEmail } from "@/components/CopyEmail";
+import { RevealWords } from "@/components/RevealWords";
 
 export function SiteFooter() {
   const { pathname } = useLocation();
@@ -15,13 +16,12 @@ export function SiteFooter() {
       {showPlate && (
         <section aria-labelledby="footer-cta" className="bg-signal text-night">
           <div className="frame grid-12 gap-y-10" style={{ paddingBlock: "var(--space-6)" }}>
-            <h2
+            <RevealWords
               id="footer-cta"
               className="voice col-span-4 md:col-span-8"
               style={{ fontSize: "var(--step-4)" }}
-            >
-              {t.ctaTitle}
-            </h2>
+              text={t.ctaTitle}
+            />
             <div className="col-span-4 md:col-span-4 md:self-end flex flex-col gap-6">
               <p className="text-[1.0625rem] leading-relaxed max-w-[30em]">{t.ctaBody}</p>
               <ol className="grid grid-cols-3 border-t border-night/25">

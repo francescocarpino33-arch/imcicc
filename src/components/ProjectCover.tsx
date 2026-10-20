@@ -54,7 +54,11 @@ export function ProjectCover({
   const [loaded, setLoaded] = useState(false);
 
   const cover = (
-    <div className={`tile-media well relative ${className}`} style={{ aspectRatio: String(frame) }}>
+    <div
+      className={`tile-media well relative ${className}`}
+      style={{ aspectRatio: String(frame) }}
+      data-reveal={openBar ? undefined : "cover"}
+    >
       {src ? (
         <img
           src={src}
@@ -107,7 +111,7 @@ export function ProjectCover({
 
   if (!openBar) return cover;
   return (
-    <div>
+    <div data-reveal="cover">
       {cover}
       <span className="tile-open" aria-hidden>
         <span className="tile-open-label">

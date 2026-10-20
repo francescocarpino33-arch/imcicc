@@ -130,6 +130,7 @@ export function SiteNav() {
           open ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
         aria-hidden={!open}
+        data-open={open ? "" : undefined}
       >
         <nav
           aria-label={t.nav.mobileLabel}
@@ -137,8 +138,8 @@ export function SiteNav() {
           style={{ paddingTop: "calc(var(--nav-h) + 2rem)", paddingBottom: "2rem" }}
         >
           <ul className="flex flex-col gap-1">
-            {[{ to: "/", label: t.nav.home }, ...LINKS].map((l) => (
-              <li key={l.to}>
+            {[{ to: "/", label: t.nav.home }, ...LINKS].map((l, i) => (
+              <li key={l.to} className="menu-item" style={{ "--i": i } as React.CSSProperties}>
                 <Link
                   to={l.to}
                   tabIndex={open ? 0 : -1}
@@ -152,7 +153,7 @@ export function SiteNav() {
               </li>
             ))}
           </ul>
-          <div className="flex flex-col gap-4">
+          <div className="menu-foot flex flex-col gap-4">
             <p className="label flex items-center gap-2.5">
               <span className="live-dot" aria-hidden /> {t.available}
             </p>

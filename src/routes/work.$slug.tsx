@@ -1,6 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { motion, useReducedMotion } from "framer-motion";
-import { EASE_STANDARD } from "@/lib/motion";
+import { RevealWords } from "@/components/RevealWords";
 import { CONTACT, getAdjacentProjects, getProject, projectText, projects } from "@/data/projects";
 import { useCopy, useLang } from "@/i18n/lang";
 import { langOf } from "@/i18n/head";
@@ -41,7 +40,6 @@ export const Route = createFileRoute("/work/$slug")({
 function ProjectPage() {
   const { project } = Route.useLoaderData();
   const { record, images, loading, failed } = useProjectDetail(project.slug);
-  const reduced = useReducedMotion();
   const { next } = getAdjacentProjects(project.slug);
   const position = projects.findIndex((p) => p.slug === project.slug) + 1;
   const t = useCopy().project;
@@ -65,15 +63,13 @@ function ProjectPage() {
           </span>
         </nav>
 
-        <motion.h1
+        <RevealWords
+          as="h1"
+          on="load"
           className="voice project-name"
           style={{ fontSize: "var(--step-4)", lineHeight: 0.86, letterSpacing: "-0.03em" }}
-          initial={reduced ? false : { opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE_STANDARD }}
-        >
-          {project.title}
-        </motion.h1>
+          text={project.title}
+        />
 
         <div className="grid-12 gap-y-10 mt-10 md:mt-14">
           <div className="col-span-4 md:col-span-6 lg:col-span-6">
